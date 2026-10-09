@@ -51,7 +51,7 @@ subtitle:
     showCursor: true            # 是否显示闪烁的字符
     cursorChar: "|"             # 字符
     smartBackspace: false       # 智能退格，只删除不同的部分
-  text: "Back to library..."        # 当 typing.enable = false 时使用
+  text: "Welcome to my library ♡⸜(˶˃ ᵕ ˂˶)⸝♡ "        # 当 typing.enable = false 时使用
 
 banner: "images/kujou-banner.jpeg"
 # You can also write it in the form of the following url
@@ -125,11 +125,11 @@ sidebar:
 
 social:
   # email: mailto:xxx@gmail.com
-  # github: https://github.com/yourname
+  github: https://github.com/lunathewanderer
   # google: https://plus.google.com/yourname
   # twitter: https://twitter.com/yourname
   # bluesky: https://bsky.app/profile/yourname
-  # facebook: https://www.facebook.com/yourname
+  facebook: https://www.facebook.com/annikefg.1802
   # instagram: https://www.instagram.com/yourname
   # linkedin: https://www.linkedin.com/in/yourname
   # pinterest: https://www.pinterest.com/yourname
@@ -157,7 +157,6 @@ social:
 widgets:
   - category
   - tag
-  - tagcloud
   - recent_posts
 
 # Widget behavior
