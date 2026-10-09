@@ -30,10 +30,10 @@ monthFormat: "2006-01"
 dateFormat: "2006-01-02"
 timeFormat: "2006-01-02 15:04:05"
 
-author: D-Sketon
-email: xxx@example.com
-description: "少女祈祷中..."
-# subtitle: "少女祈祷中..."
+author: lunathewanderer
+email: kienvn18022008@gmail.com
+description: "life is ephemeral"
+# subtitle: "..."
 subtitle:
   typing:
     enable: false
@@ -51,9 +51,9 @@ subtitle:
     showCursor: true            # 是否显示闪烁的字符
     cursorChar: "|"             # 字符
     smartBackspace: false       # 智能退格，只删除不同的部分
-  text: "少女祈祷中..."        # 当 typing.enable = false 时使用
+  text: "Back to library..."        # 当 typing.enable = false 时使用
 
-banner: "kujou-banner.jpeg"
+banner: "images/kujou-banner.jpeg"
 # You can also write it in the form of the following url
 # banner: "https://example.com"
 
