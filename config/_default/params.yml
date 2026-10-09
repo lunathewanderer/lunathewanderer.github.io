@@ -652,7 +652,38 @@ home_categories:
 # Make sure your code snippet is safeHTML
 injector:
   head_begin: # Inject code snippet right after <head>
-  head_end: # Inject code snippet right before </head>
+  head_end: |-
+    <style>
+      :root {
+        --color-background: #fafafa;
+        --color-default: #111111;
+        --color-border: #d4d4d8;
+        --color-link: #0057ff;
+        --color-header-background: rgba(255, 255, 255, 0.92);
+        --color-footer-background: #ffffff;
+        --color-mobile-nav-background: #ffffff;
+        --color-wrap: #ffffff;
+        --color-sticky: #ffffff;
+        --color-h2-border: #e4e4e7;
+      }
+
+      [data-theme="dark"] {
+        --color-background: #000000;
+        --color-default: #ededed;
+        --color-border: #292929;
+        --color-link: #70a5ff;
+        --color-header-background: rgba(0, 0, 0, 0.92);
+        --color-footer-background: #050505;
+        --color-mobile-nav-background: #050505;
+        --color-wrap: #0a0a0a;
+        --color-sticky: #0a0a0a;
+        --color-h2-border: #262626;
+      }
+
+      a:hover {
+        color: #22d3ee;
+      }
+    </style>  
   body_begin: # Inject code snippet right after <body>
   body_end: # Inject code snippet right before </body>
   sidebar_begin: # Inject code snippet right after <aside>
@@ -746,37 +777,35 @@ material_theme:
 
 internal_theme:
   light:
-    --red-0: '#0f172a'
-    --red-1: '#0e7490'
-    --red-2: '#0891b2'
-    --red-3: '#38bdf8'
-    --red-4: '#bae6fd'
-    --red-5: '#f8fafc'
-    --red-5-5: '#e0f2fe'
-    --red-6: '#cbd5e1'
-    --color-red-6-shadow: 'rgba(15, 23, 42, 0.18)'
-    --color-red-3-shadow: 'rgba(8, 145, 178, 0.16)'
+    --red-0: '#0057ff'
+    --red-1: '#0068ff'
+    --red-2: '#3291ff'
+    --red-3: '#93c5fd'
+    --red-4: '#dbeafe'
+    --red-5: '#eff6ff'
+    --red-5-5: '#f8fbff'
+    --red-6: '#ffffff'
+    --color-red-6-shadow: 'rgba(0, 87, 255, 0.18)'
+    --color-red-3-shadow: 'rgba(0, 112, 243, 0.16)'
     --highlight-nav: '#ffffff'
-    --highlight-scrollbar: '#0891b2'
-    --highlight-background: '#f1f5f9'
-    --highlight-selection: '#cffafe'
-    --highlight-foreground: '#0f172a'
+    --highlight-scrollbar: '#94a3b8'
+    --highlight-background: '#f8fafc'
+    --highlight-selection: '#dbeafe'
+    --highlight-foreground: '#111827'
     --highlight-comment: '#64748b'
+    --highlight-aqua: '#0891b2'
+    --highlight-blue: '#0057ff'
 
   dark:
-    --red-0: '#e2e8f0'
-    --red-1: '#67e8f9'
-    --red-2: '#22d3ee'
-    --red-3: '#0891b2'
-    --red-4: '#164e63'
-    --red-5: '#0b1220'
-    --red-5-5: '#0f1b2d'
-    --red-6: '#163344'
-    --color-red-6-shadow: 'rgba(0, 0, 0, 0.45)'
-    --color-red-3-shadow: 'rgba(34, 211, 238, 0.20)'
-    --highlight-nav: '#0f1b2d'
-    --highlight-scrollbar: '#22d3ee'
-    --highlight-background: '#08111f'
-    --highlight-selection: '#164e63'
-    --highlight-foreground: '#e2e8f0'
-    --highlight-comment: '#94a3b8'
+    --red-4: 'rgba(50, 145, 255, 0.26)'
+    --red-5: '#292929'
+    --red-5-5: '#171717'
+    --red-6: 'rgba(50, 145, 255, 0.20)'
+    --highlight-nav: '#050505'
+    --highlight-scrollbar: '#3f3f46'
+    --highlight-background: '#09090b'
+    --highlight-selection: 'rgba(0, 112, 243, 0.30)'
+    --highlight-foreground: '#ededed'
+    --highlight-comment: '#a1a1aa'
+    --highlight-aqua: '#67e8f9'
+    --highlight-blue: '#60a5fa'
