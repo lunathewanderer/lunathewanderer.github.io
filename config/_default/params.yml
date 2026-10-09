@@ -683,6 +683,12 @@ injector:
       a:hover {
         color: #22d3ee;
       }
+    #main .post-wrapper:first-of-type .post-wrap {
+      box-shadow:
+        0 0 0 1px #22d3ee,
+        0 0 10px rgba(34, 211, 238, 0.65),
+        0 0 28px rgba(34, 211, 238, 0.35);
+    }
     </style>  
   body_begin: # Inject code snippet right after <body>
   body_end: # Inject code snippet right before </body>
