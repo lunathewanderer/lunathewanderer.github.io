@@ -7,16 +7,16 @@
 menu:
   - name: home
     url: ""
-    icon: 🌟
+    icon: '1f3e1'
   - name: archives
     url: "archives"
-    icon: 🌟
+    icon: '1f31f'
   - name: about
     url: "about"
-    icon: 🌟
+    icon: '1f319'
   - name: friend
     url: "friend"
-    icon: 🌟
+    icon: '1f60e'
 
 # friend links
 friends:
