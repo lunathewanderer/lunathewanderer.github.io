@@ -7,7 +7,7 @@ tags:
   - Network Forensics
   - Disk Forensics
   - Memory Forensics
-  - Stegnography
+  - Steganography
 categories:
   - Writeup
 cover: "/images/kujou-banner.jpeg"
