@@ -1,6 +1,6 @@
 ---
 title: "BrunnerCTF 2026: Rubik's Cube"
-description: "high dif rizz."
+description: "high dif rizz ૮(˶ㅠ︿ㅠ)ა"
 draft: false
 date: 2026-08-23
 tags:
@@ -40,7 +40,7 @@ Protocol Hierarchy:
 
 <img width="1519" height="361" alt="image" src="https://github.com/user-attachments/assets/90b3d4a9-8a57-4fe6-a52d-968c604d330a" />
 
-> In Wireshark, a frame is one numbered item in the captureâ€™s packet list.
+> In Wireshark, a frame is one numbered item in the capture's packet list.
 
 The HCLs are just filler for this challenge, playing the role of initialization. What we should focus on is the ATT frames, where the real data hidden. Once the computer is connected to the cube, ATT lets it read a value, write a value, or receive an update. GATT is the system that organizes those values into services and characteristics; ATT carries the individual messages. To understand more about the relationship about ATT, GATT, and Bluetooth in general, read this [article](https://medium.com/@QuarkAndCode/bluetooth-ble-protocol-stack-gatt-streaming-and-wi-ble-explained-9103d6e94572).
 
@@ -60,11 +60,11 @@ Filter out the main content with `btatt.opcode == 0x1b && btatt.handle == 0x001a
 
 <img width="1918" height="1126" alt="image" src="https://github.com/user-attachments/assets/b4eae98d-e981-4f51-b563-b98c847d165a" />
 
-> In Bluetooth terms, â€œreceivedâ€ means received by the computer from the cube. A Handle Value Notification is the cube telling the computer that a characteristicâ€™s value has changed. In this capture, that characteristic is addressed by handle 0x001A. The ATT specification defines notifications as server to client; its packet contains an opcode, a handle, and a value.
+> In Bluetooth terms, "received" means received by the computer from the cube. A Handle Value Notification is the cube telling the computer that a characteristic's value has changed. In this capture, that characteristic is addressed by handle 0x001A. The ATT specification defines notifications as server to client; its packet contains an opcode, a handle, and a value.
 
 In the "Source" and "Destination" of the ATT packets, we can see the conversation from and to a device with the name QY-QYSC-S-0D1E. This is the name of the label QiYi Smart Cube, so we know that this is the data from the rubik cube itself. Extract the message (a.k.a. the `value` row, or `bttat.value`) with tshark:
 
-```
+```bash
 tshark -r rubiks.pcapng \
   -Y 'btatt.opcode == 0x1b && btatt.handle == 0x001a && len(btatt.value) == 96' \
   -T fields -e frame.number -e btatt.value
