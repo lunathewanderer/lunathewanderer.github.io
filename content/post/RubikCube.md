@@ -101,7 +101,7 @@ To understand the message of the Cube Update, we need to break down the componen
 
 **`WSL`**
 
-```
+```bash
 python3 - "rubiks.pcapng" << 'PY'
 import subprocess
 import sys
@@ -139,7 +139,7 @@ PY
 
 **`notifications.txt` and `sol.py`**
 
-```
+```bash
 import re
 from pathlib import Path
 from Crypto.Cipher import AES
