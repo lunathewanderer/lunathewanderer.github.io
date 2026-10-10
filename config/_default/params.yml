@@ -220,7 +220,7 @@ reimu_cursor:
   cursor:
     default: ../images/arya1.jpg  # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
     pointer: ../images/arya2.jpg
-    text: ../images/cursor.jpg
+    text: ../images/arya2.jpg
 
 icon_font: 4552607_ex15nbittbh
 
