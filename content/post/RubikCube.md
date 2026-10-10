@@ -139,7 +139,7 @@ PY
 
 **`notifications.txt` and `sol.py`**
 
-```py
+```python
 import re
 from pathlib import Path
 from Crypto.Cipher import AES
