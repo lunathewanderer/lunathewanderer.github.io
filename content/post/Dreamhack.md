@@ -2,7 +2,7 @@
 title: "Dreamhack Wargames: Digital Forensics"
 description: "1%"
 draft: false
-date: 2026-08-23
+date: 2026-10-01
 tags:
   - Network Forensics
   - Disk Forensics
