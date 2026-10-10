@@ -17,7 +17,7 @@ The challenge presented us with a packet capture, seemingly from a Bluetooth sma
 
 Upon initial inspection, we can see that in the packet, there are only a few distinct types of protocols, mostly `HCI_CMD`, `HCI_EVT`, `HCI_MON`, and `ATT`.
 
-![IMG](images/posts/0014.png)
+![IMG](/images/posts/0014.png)
 
 Let's take a dive into some of the terminologies:
 
@@ -38,7 +38,7 @@ Let's take a dive into some of the terminologies:
 
 Protocol Hierarchy:
 
-![IMG](images/posts/0026.png)
+![IMG](/images/posts/0026.png)
 
 > In Wireshark, a frame is one numbered item in the capture's packet list.
 
@@ -58,7 +58,7 @@ Filter out the main content with `btatt.opcode == 0x1b && btatt.handle == 0x001a
 - `btatt.opcode == 0x1b` isolates Bluetooth Low Energy (BLE) Handle Value Notification packets.
 - `btatt.handle == 0x001a` filters for the handle in the packet capture.
 
-![IMG](images/posts/0027.png)
+![IMG](/images/posts/0027.png)
 
 > In Bluetooth terms, "received" means received by the computer from the cube. A Handle Value Notification is the cube telling the computer that a characteristic's value has changed. In this capture, that characteristic is addressed by handle 0x001A. The ATT specification defines notifications as server to client; its packet contains an opcode, a handle, and a value.
 
@@ -70,7 +70,7 @@ tshark -r rubiks.pcapng \
   -T fields -e frame.number -e btatt.value
 ```
 
-![IMG](images/posts/0029.png)
+![IMG](/images/posts/0029.png)
 
 However, we can not read it directly since QiYi encrypts the message. [With some researching](https://www.reddit.com/r/Cubers/comments/1dkgu8b/i_reverse_engineered_the_qiyi_smartcube_protocol/), we know that all messages sent to/received from the cube are encrypted using AES-128 in ECB mode with the fixed key `57b1f9abcd5ae8a79cb98ce7578c5108`. 
 
@@ -78,7 +78,7 @@ However, we can not read it directly since QiYi encrypts the message. [With some
 
 Upon trying to decrypt a message with CyberChef:
 
-![IMG](images/posts/0028.png)
+![IMG](/images/posts/0028.png)
 
 To understand the message of the Cube Update, we need to break down the components of [Qiyi's smartcube protocol: ](https://codeberg.org/Flying-Toast/qiyi_smartcube_protocol).
 
@@ -93,7 +93,7 @@ To understand the message of the Cube Update, we need to break down the componen
 - `[91]`: Solved or Not solved
 - `[92:93]`: Checksum
 
-![IMG](images/posts/0030.png)
+![IMG](/images/posts/0030.png)
 
 > In the example I tried to decode using CyberChef, its byte number 34 is `0x0a`, or `F`. 
 
