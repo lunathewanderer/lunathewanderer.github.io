@@ -2,7 +2,7 @@
 title: "101: Bash Scripting & Tshark"
 description: "The truth is, you know... I never went to school either."
 draft: false
-date: 2026-08-23
+date: 2026-10-06
 tags:
   - Programming
 categories:
