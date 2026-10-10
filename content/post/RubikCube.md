@@ -38,7 +38,7 @@ Let's take a dive into some of the terminologies:
 
 Protocol Hierarchy:
 
-<img width="1519" height="361" alt="image" src="https://github.com/user-attachments/assets/90b3d4a9-8a57-4fe6-a52d-968c604d330a" />
+<img width="1519" height="361" alt="image" src="https://github.com/user-attachments/assets/707e72c5-9dc1-49d1-9bea-efa58318f8d3" />
 
 > In Wireshark, a frame is one numbered item in the capture's packet list.
 
