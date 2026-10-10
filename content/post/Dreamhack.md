@@ -1,6 +1,6 @@
 ---
 title: "Dreamhack Wargames: Digital Forensics"
-description: "1%"
+description: "What are you afraid of losing, when nothing in the world actually belongs to you?"
 draft: false
 date: 2026-10-01
 tags:
