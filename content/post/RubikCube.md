@@ -17,7 +17,7 @@ The challenge presented us with a packet capture, seemingly from a Bluetooth sma
 
 Upon initial inspection, we can see that in the packet, there are only a few distinct types of protocols, mostly `HCI_CMD`, `HCI_EVT`, `HCI_MON`, and `ATT`.
 
-<img width="1917" height="1126" alt="image" src="https://github.com/user-attachments/assets/2382f8e6-3c67-4b5f-8bec-91d5af70b710" />
+![IMG](images/posts/0014.png)
 
 Let's take a dive into some of the terminologies:
 
@@ -38,7 +38,7 @@ Let's take a dive into some of the terminologies:
 
 Protocol Hierarchy:
 
-<img width="1519" height="361" alt="image" src="https://github.com/user-attachments/assets/707e72c5-9dc1-49d1-9bea-efa58318f8d3" />
+![IMG](images/posts/0026.png)
 
 > In Wireshark, a frame is one numbered item in the capture's packet list.
 
@@ -58,7 +58,7 @@ Filter out the main content with `btatt.opcode == 0x1b && btatt.handle == 0x001a
 - `btatt.opcode == 0x1b` isolates Bluetooth Low Energy (BLE) Handle Value Notification packets.
 - `btatt.handle == 0x001a` filters for the handle in the packet capture.
 
-<img width="1918" height="1126" alt="image" src="https://github.com/user-attachments/assets/b4eae98d-e981-4f51-b563-b98c847d165a" />
+![IMG](images/posts/0027.png)
 
 > In Bluetooth terms, "received" means received by the computer from the cube. A Handle Value Notification is the cube telling the computer that a characteristic's value has changed. In this capture, that characteristic is addressed by handle 0x001A. The ATT specification defines notifications as server to client; its packet contains an opcode, a handle, and a value.
 
@@ -70,7 +70,7 @@ tshark -r rubiks.pcapng \
   -T fields -e frame.number -e btatt.value
 ```
 
-<img width="1540" height="594" alt="image" src="https://github.com/user-attachments/assets/2cd88e90-af0f-4f34-9c21-d6858f3b4f3d" />
+![IMG](images/posts/0029.png)
 
 However, we can not read it directly since QiYi encrypts the message. [With some researching](https://www.reddit.com/r/Cubers/comments/1dkgu8b/i_reverse_engineered_the_qiyi_smartcube_protocol/), we know that all messages sent to/received from the cube are encrypted using AES-128 in ECB mode with the fixed key `57b1f9abcd5ae8a79cb98ce7578c5108`. 
 
@@ -78,7 +78,7 @@ However, we can not read it directly since QiYi encrypts the message. [With some
 
 Upon trying to decrypt a message with CyberChef:
 
-<img width="1101" height="808" alt="image" src="https://github.com/user-attachments/assets/a1e245ec-f29c-440b-b0c3-69afd7efaa43" />
+![IMG](images/posts/0028.png)
 
 To understand the message of the Cube Update, we need to break down the components of [Qiyi's smartcube protocol: ](https://codeberg.org/Flying-Toast/qiyi_smartcube_protocol).
 
@@ -93,7 +93,7 @@ To understand the message of the Cube Update, we need to break down the componen
 - `[91]`: Solved or Not solved
 - `[92:93]`: Checksum
 
-<img width="1906" height="1074" alt="image" src="https://github.com/user-attachments/assets/9791858c-906a-46c2-a79a-0c0eeb9193d3" />
+![IMG](images/posts/0030.png)
 
 > In the example I tried to decode using CyberChef, its byte number 34 is `0x0a`, or `F`. 
 
