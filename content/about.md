@@ -1,7 +1,9 @@
 ---
 title: About me
+description: 
 
 date: 2026-10-11
+lastmod: 2026-10-11
 ---
 
 Hi, **lunathewanderer** here! You can call me by **Luna** or **Snorlax**.
