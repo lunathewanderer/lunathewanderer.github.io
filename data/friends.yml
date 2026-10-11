@@ -1,19 +1,24 @@
+- name: "Ahrial The Trash"
+  url: "https://ahrial-notes.onrender.com/#/"
+  desc: "“There is no prize to perfection. Only an end to pursuit.”"
+  image: "https://i.pinimg.com/736x/63/2a/14/632a14464992e67f307686726027a7a2.jpg"
+
+- name: "devobass"
+  url: "https://devobass.neocities.org/"
+  desc: "nananananananamimanamaminamanaminanamin"
+  image: "https://scontent.fhan4-5.fna.fbcdn.net/v/t39.30808-6/798042000_3212264352497660_3082011232466027926_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x1546&ctp=s1536x1546&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeHvzlkcvSEWmxvfJFEcUmAIDchYHtlF6joNyFge2UXqOsf3eIgYuT5I4dnLIZYV5QNkiAKzmhziUW4KjwUTRh3x&_nc_ohc=8gjUx1GgLo4Q7kNvwECqmgu&_nc_oc=AdqyHUR4zdoKoVo7Nd59BclTlbZd4-EwiUhSr080muX9n6D9SpOvUEsnSpxJRFrZ8uc&_nc_zt=23&_nc_ht=scontent.fhan4-5.fna&_nc_gid=Fz8KRSNngFwOF4aw0C72SQ&_nc_ss=7b2a8&oh=00_AQM1651vbubR_EOPtX2PcTcSCojJT1CDUvOFc2LqkCn4sg&oe=6AD0F524"
+
 - name: "lunuyennhi"
   url: "https://lunuyennhi-dev.github.io/"
+  desc: "an intrinsically-curious-and-unfathomably-happy-go-lucky-and-chaotically-friendly-and-emotionally-delayed-kinda-girl"
   image: "https://lunuyennhi-dev.github.io/avatar/avatar.webp"
 
 - name: "Drakie14"
   url: "https://drakie14-ctf-wu.pages.dev/"
+  desc: "i feel the camaraderie but idk this guy chill af and another weird lucario the pokemon whatever"
   image: "https://i.pinimg.com/736x/9c/0b/03/9c0b03dcad86850c874d7a7f3fb601ae.jpg"
-
-- name: "devobass"
-  url: "https://devobass.neocities.org/"
-  image: "https://scontent.fhan4-5.fna.fbcdn.net/v/t39.30808-6/798042000_3212264352497660_3082011232466027926_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x1546&ctp=s1536x1546&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeHvzlkcvSEWmxvfJFEcUmAIDchYHtlF6joNyFge2UXqOsf3eIgYuT5I4dnLIZYV5QNkiAKzmhziUW4KjwUTRh3x&_nc_ohc=8gjUx1GgLo4Q7kNvwECqmgu&_nc_oc=AdqyHUR4zdoKoVo7Nd59BclTlbZd4-EwiUhSr080muX9n6D9SpOvUEsnSpxJRFrZ8uc&_nc_zt=23&_nc_ht=scontent.fhan4-5.fna&_nc_gid=Fz8KRSNngFwOF4aw0C72SQ&_nc_ss=7b2a8&oh=00_AQM1651vbubR_EOPtX2PcTcSCojJT1CDUvOFc2LqkCn4sg&oe=6AD0F524"
-
-- name: "Ahrial The Trash"
-  url: "https://ahrial-notes.onrender.com/#/"
-  image: "https://i.pinimg.com/736x/63/2a/14/632a14464992e67f307686726027a7a2.jpg"
 
 - name: "vtnam"
   url: "https://vtnam207.vercel.app/"
+  desc: "slow and steady putting all his effort into re and a warm-hearted chill bro"
   image: "https://vtnam207.vercel.app/assets/images/avatar-vtnam.webp"
