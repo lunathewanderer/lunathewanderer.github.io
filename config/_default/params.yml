@@ -651,62 +651,66 @@ injector:
   head_end: |-
     <style>
       :root {
-        --color-background: #fafafa;
-        --color-default: #18181b;
-        --color-border: #e4e4e7;
-        --color-link: #7c3aed;
-        --color-header-background: rgba(250, 250, 250, 0.94);
+        --color-background: #fff8fb;
+        --color-default: #241820;
+        --color-border: #f1dbe5;
+        --color-link: #db2777;
+        --color-header-background: rgba(255, 255, 255, 0.95);
         --color-footer-background: #ffffff;
         --color-mobile-nav-background: #ffffff;
         --color-wrap: #ffffff;
         --color-sticky: #ffffff;
-        --color-h2-border: #e4e4e7;
+        --color-h2-border: #f1dbe5;
 
-        --red-0: #6d28d9;
-        --red-1: #7c3aed;
-        --red-2: #8b5cf6;
-        --red-3: #a78bfa;
-        --red-4: #c4b5fd;
-        --red-5: #ede9fe;
-        --red-5-5: #f5f3ff;
-        --red-6: #faf5ff;
-        --color-red-6-shadow: rgba(124, 58, 237, 0.28);
-        --color-red-3-shadow: rgba(124, 58, 237, 0.18);
+        --red-0: #be185d;
+        --red-1: #db2777;
+        --red-2: #ec4899;
+        --red-3: #f472b6;
+        --red-4: #f9a8d4;
+        --red-5: #fce7f3;
+        --red-5-5: #fdf2f8;
+        --red-6: #fff7fb;
+        --color-red-6-shadow: rgba(219, 39, 119, 0.25);
+        --color-red-3-shadow: rgba(219, 39, 119, 0.16);
       }
 
       [data-theme="dark"] {
-        --color-background: #050505;
-        --color-default: #f4f4f5;
-        --color-border: #27272a;
-        --color-link: #c4b5fd;
-        --color-header-background: rgba(5, 5, 5, 0.94);
-        --color-footer-background: #050505;
-        --color-mobile-nav-background: #050505;
-        --color-wrap: #0a0a0b;
-        --color-sticky: #0a0a0b;
-        --color-h2-border: #27272a;
+        --color-background: #0b070a;
+        --color-default: #f8eef3;
+        --color-border: #33232d;
+        --color-link: #f9a8d4;
+        --color-header-background: rgba(11, 7, 10, 0.95);
+        --color-footer-background: #0b070a;
+        --color-mobile-nav-background: #0b070a;
+        --color-wrap: #151016;
+        --color-sticky: #151016;
+        --color-h2-border: #33232d;
 
-        --red-0: #6d28d9;
-        --red-1: #7c3aed;
-        --red-2: #8b5cf6;
-        --red-3: #a78bfa;
-        --red-4: rgba(196, 181, 253, 0.45);
-        --red-5: rgba(196, 181, 253, 0.15);
-        --red-5-5: rgba(196, 181, 253, 0.07);
-        --red-6: rgba(196, 181, 253, 0.12);
-        --color-red-6-shadow: rgba(139, 92, 246, 0.3);
-        --color-red-3-shadow: rgba(139, 92, 246, 0.18);
+        --red-0: #be185d;
+        --red-1: #db2777;
+        --red-2: #ec4899;
+        --red-3: #f472b6;
+        --red-4: rgba(249, 168, 212, 0.45);
+        --red-5: rgba(249, 168, 212, 0.15);
+        --red-5-5: rgba(249, 168, 212, 0.07);
+        --red-6: rgba(249, 168, 212, 0.12);
+        --color-red-6-shadow: rgba(236, 72, 153, 0.28);
+        --color-red-3-shadow: rgba(236, 72, 153, 0.18);
       }
 
       a:hover {
-        color: #facc15;
+        color: #be185d;
+      }
+
+      [data-theme="dark"] a:hover {
+        color: #f9a8d4;
       }
 
       #main .post-wrap {
         box-shadow:
-          0 0 0 1px rgba(167, 139, 250, 0.42),
-          0 0 16px rgba(139, 92, 246, 0.15),
-          0 0 20px rgba(250, 204, 21, 0.08);
+          0 0 0 1px rgba(244, 114, 182, 0.4),
+          0 0 14px rgba(236, 72, 153, 0.16),
+          0 0 20px rgba(255, 182, 193, 0.1);
       }
     </style>
   body_begin: # Inject code snippet right after <body>
