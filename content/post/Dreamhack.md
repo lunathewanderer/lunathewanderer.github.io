@@ -10,8 +10,8 @@ tags:
   - Steganography
 categories:
   - Writeup
-cover: "/images/kujou-banner.jpeg"
-banner: "/images/kujou-banner.jpeg"
+cover: "https://i.pinimg.com/736x/7f/4a/ae/7f4aae4f0641a7eeb311013c0d97d041.jpg"
+banner: "https://i.pinimg.com/736x/7f/4a/ae/7f4aae4f0641a7eeb311013c0d97d041.jpg"
 ---
 
 ## 1. sleepingshark
