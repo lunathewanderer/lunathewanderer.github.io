@@ -10,8 +10,8 @@ tags:
   - Steganography
 categories:
   - Writeup
-cover: "https://i.pinimg.com/736x/7f/4a/ae/7f4aae4f0641a7eeb311013c0d97d041.jpg"
-banner: "https://i.pinimg.com/736x/7f/4a/ae/7f4aae4f0641a7eeb311013c0d97d041.jpg"
+cover: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
+banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
 ---
 
 ## 1. sleepingshark
