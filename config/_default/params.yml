@@ -652,47 +652,63 @@ injector:
     <style>
       :root {
         --color-background: #fafafa;
-        --color-default: #111111;
-        --color-border: #d4d4d8;
-        --color-link: #0057ff;
-        --color-header-background: rgba(255, 255, 255, 0.92);
+        --color-default: #18181b;
+        --color-border: #e4e4e7;
+        --color-link: #7c3aed;
+        --color-header-background: rgba(250, 250, 250, 0.94);
         --color-footer-background: #ffffff;
         --color-mobile-nav-background: #ffffff;
         --color-wrap: #ffffff;
         --color-sticky: #ffffff;
         --color-h2-border: #e4e4e7;
+
+        --red-0: #6d28d9;
+        --red-1: #7c3aed;
+        --red-2: #8b5cf6;
+        --red-3: #a78bfa;
+        --red-4: #c4b5fd;
+        --red-5: #ede9fe;
+        --red-5-5: #f5f3ff;
+        --red-6: #faf5ff;
+        --color-red-6-shadow: rgba(124, 58, 237, 0.28);
+        --color-red-3-shadow: rgba(124, 58, 237, 0.18);
       }
 
       [data-theme="dark"] {
         --color-background: #000000;
         --color-default: #ededed;
-        --color-border: #292929;
-        --color-link: #70a5ff;
-        --color-header-background: rgba(0, 0, 0, 0.92);
+        --color-border: #27272a;
+        --color-link: #c4b5fd;
+        --color-header-background: rgba(0, 0, 0, 0.94);
         --color-footer-background: #050505;
         --color-mobile-nav-background: #050505;
-        --color-wrap: #0a0a0a;
-        --color-sticky: #0a0a0a;
-        --color-h2-border: #262626;
+        --color-wrap: #09090b;
+        --color-sticky: #09090b;
+        --color-h2-border: #27272a;
+
+        --red-0: #d8b4fe;
+        --red-1: #c084fc;
+        --red-2: #a855f7;
+        --red-3: #9333ea;
+        --red-4: rgba(216, 180, 254, 0.5);
+        --red-5: rgba(216, 180, 254, 0.15);
+        --red-5-5: rgba(216, 180, 254, 0.06);
+        --red-6: rgba(216, 180, 254, 0.12);
+        --color-red-6-shadow: rgba(168, 85, 247, 0.35);
+        --color-red-3-shadow: rgba(168, 85, 247, 0.2);
       }
 
       a:hover {
-        color: #22d3ee;
+        color: #facc15;
       }
-    #main .post-wrap {
-      box-shadow:
-        0 0 0 1px #22d3ee,
-        0 0 10px rgba(34, 211, 238, 0.65),
-        0 0 28px rgba(34, 211, 238, 0.35);
+
+      #main .post-wrap {
+        box-shadow:
+          0 0 0 1px rgba(167, 139, 250, 0.7),
+          0 0 12px rgba(139, 92, 246, 0.25),
+          0 0 24px rgba(250, 204, 21, 0.12);
       }
-    #sidebar .sidebar-wrap,
-    #sidebar .widget-wrap {
-      box-shadow:
-        0 0 0 1px rgba(255, 55, 65, 0.7),
-        0 0 12px rgba(255, 30, 40, 0.45),
-        0 0 28px rgba(255, 30, 40, 0.25);
-      }
-    </style>  
+    </style>
   body_begin: # Inject code snippet right after <body>
   body_end: # Inject code snippet right before </body>
   sidebar_begin: # Inject code snippet right after <aside>
