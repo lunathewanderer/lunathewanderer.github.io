@@ -53,7 +53,7 @@ subtitle:
     smartBackspace: false       # 智能退格，只删除不同的部分
   text: "Welcome to my library ♡⸜(˶˃ ᵕ ˂˶)⸝♡ "        # 当 typing.enable = false 时使用
 
-banner: "images/kujou-banner.jpeg"
+banner: "images/abyss1.jpg"
 # You can also write it in the form of the following url
 # banner: "https://example.com"
 
@@ -68,7 +68,7 @@ banner_srcset:
     - src: "images/banner.webp"
       media: "(min-width: 800px)"
 
-avatar: "pfp.jpg"
+avatar: "nanachi.jpg"
 
 # Control the display of the post cover
 # If not set, the banner image will be displayed by default
