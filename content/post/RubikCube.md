@@ -7,8 +7,8 @@ tags:
   - Network Forensics
 categories:
   - Writeup
-cover: "/images/kujou-banner.jpeg"
-banner: "/images/kujou-banner.jpeg"
+cover: "/images/covers/rubik.jpg"
+banner: "/images/covers/rubik.jpg"
 ---
 
 > Figure out what moves they executed and write them in standard notation separated by underscores and wrapped in `brunner{}`. Example: If the sequence was R B B U F' F' D', the flag would be `brunner{R_B2_U_F2_D'}`.
