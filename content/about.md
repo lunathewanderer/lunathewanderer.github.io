@@ -2,7 +2,7 @@
 title: About me
 description: 
 
-date: 2026-10-11
+date: 2026-10-10
 lastmod: 2026-10-11
 ---
 
