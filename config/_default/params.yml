@@ -675,27 +675,27 @@ injector:
       }
 
       [data-theme="dark"] {
-        --color-background: #000000;
-        --color-default: #ededed;
+        --color-background: #050505;
+        --color-default: #f4f4f5;
         --color-border: #27272a;
         --color-link: #c4b5fd;
-        --color-header-background: rgba(0, 0, 0, 0.94);
+        --color-header-background: rgba(5, 5, 5, 0.94);
         --color-footer-background: #050505;
         --color-mobile-nav-background: #050505;
-        --color-wrap: #09090b;
-        --color-sticky: #09090b;
+        --color-wrap: #0a0a0b;
+        --color-sticky: #0a0a0b;
         --color-h2-border: #27272a;
 
-        --red-0: #d8b4fe;
-        --red-1: #c084fc;
-        --red-2: #a855f7;
-        --red-3: #9333ea;
-        --red-4: rgba(216, 180, 254, 0.5);
-        --red-5: rgba(216, 180, 254, 0.15);
-        --red-5-5: rgba(216, 180, 254, 0.06);
-        --red-6: rgba(216, 180, 254, 0.12);
-        --color-red-6-shadow: rgba(168, 85, 247, 0.35);
-        --color-red-3-shadow: rgba(168, 85, 247, 0.2);
+        --red-0: #6d28d9;
+        --red-1: #7c3aed;
+        --red-2: #8b5cf6;
+        --red-3: #a78bfa;
+        --red-4: rgba(196, 181, 253, 0.45);
+        --red-5: rgba(196, 181, 253, 0.15);
+        --red-5-5: rgba(196, 181, 253, 0.07);
+        --red-6: rgba(196, 181, 253, 0.12);
+        --color-red-6-shadow: rgba(139, 92, 246, 0.3);
+        --color-red-3-shadow: rgba(139, 92, 246, 0.18);
       }
 
       a:hover {
@@ -704,9 +704,9 @@ injector:
 
       #main .post-wrap {
         box-shadow:
-          0 0 0 1px rgba(167, 139, 250, 0.7),
-          0 0 12px rgba(139, 92, 246, 0.25),
-          0 0 24px rgba(250, 204, 21, 0.12);
+          0 0 0 1px rgba(167, 139, 250, 0.42),
+          0 0 16px rgba(139, 92, 246, 0.15),
+          0 0 20px rgba(250, 204, 21, 0.08);
       }
     </style>
   body_begin: # Inject code snippet right after <body>
