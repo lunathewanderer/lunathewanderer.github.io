@@ -7,8 +7,8 @@ tags:
   - Network Forensics
 categories:
   - Writeup
-cover: "/images/kujou-banner.jpeg"
-banner: "/images/kujou-banner.jpeg"
+cover: "/images/covers/duck.avif"
+banner: "/images/covers/duck.avif"
 ---
 
 > Connect to [https://basicqna.v1t.site/](https://basicqna.v1t.site/) and answer the questions pertaining to the packet capture.
