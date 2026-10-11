@@ -499,7 +499,7 @@ preloader:
   enable: true
   text: 
     en: Loading...
-  icon: https://i.pinimg.com/736x/58/5d/b7/585db79e9787753fd14a85aa4ddc1ebb.jpg
+  icon: "/images/abyss2.jpg"
   rotate: false # whether to rotate the icon
 
 # see https://github.com/D-Sketon/aos.js
