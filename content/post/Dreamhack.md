@@ -21,17 +21,17 @@ banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg
 
 We are presented with a packet capture. At first glance, there are a lot of HTTP requests with the same structure.
 
-![.](images/0000.png)
+![.](/images/posts/0000.png)
 
 For example: 
 
-```
+```sql
 SELECT%20IF%28ASCII%28SUBSTRING%28%28SELECT%20flag%20FROM%20s3cr3t%20LIMIT%201%29%2C35%2C1%29%29%3D156%2C%20SLEEP%283%29%2C%200%29
 ``` 
 
 With an URL decoder, this is translated into
 
-```
+```sql
 SELECT IF(ASCII(SUBSTRING((SELECT flag FROM s3cr3t LIMIT 1),35,1))=156, SLEEP(3), 0)
 ```
 
@@ -39,11 +39,11 @@ This is a typical example of an SQL injection payload used for blind time-based 
 
 To visualize, let's take a closer look at the timestamps:
 
-![.](images/0001.png)
+![.](/images/posts/0001.png)
 
 All of the requests go by the structure:
 
-```
+```sql
 SELECT IF(ASCII(SUBSTRING((SELECT flag FROM s3cr3t LIMIT 1),x,1))=y, SLEEP(3), 0)
 ```
 
@@ -51,14 +51,14 @@ This query test if the letter in position x equals the value y. If correct, it w
 
 For example,
 
-```
+```sql
 SELECT IF(ASCII(SUBSTRING((SELECT flag FROM s3cr3t LIMIT 1),1,1))=71, SLEEP(3), 0)
 ``` 
 cause the time leap, therefore flag's letter #1 has the ASCII value of 71 (G).
 
 Or we can automate the process with tshark commands:
 
-```
+```bash
 tshark -2 -r dump.pcap -Y 'http.request or http.response' \
   -T fields -e tcp.stream -e http.request.uri -e http.time |
 awk -F '\t' '$2 ~ /SUBSTRING/ {q[$1]=$2} $3+0 > 2.75 {
@@ -67,7 +67,7 @@ awk -F '\t' '$2 ~ /SUBSTRING/ {q[$1]=$2} $3+0 > 2.75 {
 }' | sort -n
 ```
 
-```
+```text
 First part: tshark/extract data from .pcap
 
 1/ Two-pass analysis in tshark is enabled using the -2 flag, which processes a capture file in two sequential passes to calculate reassembly dependencies and resolve future-looking packet fields correctly.
@@ -124,7 +124,7 @@ x[2] is the flag index, x[4] is the ASCII value, and then print the equivalent c
 
 ```
 
-![.](images/0002.png)
+![.](/images/posts/0002.png)
 
 **`GoN{T1mE_B4s3d_5QL_Inj3c7i0n_wI7h_Pc4p}`**
 
@@ -135,7 +135,7 @@ x[2] is the flag index, x[4] is the ASCII value, and then print the equivalent c
 
 We are presented with a packet capture. At first glance, there is DNS exfiltration of a ZIP file, as we can see `50 4b...`
 
-![.](images/0060.png)
+![.](/images/posts/0060.png)
 
 Retrieve the ZIP with this shell script:
 
@@ -186,7 +186,7 @@ xxd -l 8 "$output"
 
 Extract the ZIP file, we get images of a bunch of animals, as well as the hint: "Animals that receive hearts are hiding something." 
 
-![.](images/0061.png)
+![.](/images/posts/0061.png)
 
 In the images, the animals that received the hearts are dog, squirrel, and hamster. And the cat image has a drawing of a "flag". The next step should be steganography, I suppose. 
 
@@ -194,7 +194,7 @@ And then, in an autopilot manner, I tried a plethora of steganography decoding t
 
 Except for one: OpenStego. An ancient technique that receded into the mist of time. Too bad I forget about this đŸ˜­
 
-![.](images/0062.png)
+![.](/images/posts/0062.png)
 
 Extract without password those three images, we get another 3 sussy file: giraffe.png, hint2.png, and parrot.png
 
@@ -202,19 +202,15 @@ Extract without password those three images, we get another 3 sussy file: giraff
 - The parrot image also contains 2 parrots and a message: "XOR"
 - and hint2.txt: ( cat's hidden ) ( squirrel's hidden ) ( dog's hidden ) = FLAG
 
-We've already known that squirrel's hidden is **XOR**, and dog's hidden is the total amount of animals. Count them all and we have 10 original + 2 giraffes + 2 parrots = 14. So now the flag is 
-
-```
-(cat's hidden) XOR 0x14
-```
+We've already known that squirrel's hidden is **XOR**, and dog's hidden is the total amount of animals. Count them all and we have 10 original + 2 giraffes + 2 parrots = 14. So now the flag is `(cat's hidden) XOR 0x14`
 
 Initially, I don't know what (cat's hidden) could possibly mean. After a while, it's dawned on me that I am supposed to utilize OpenStego, again. Extract `cat.png` using OpenStego, and we retrieve `flag.txt` (so aptly named) as followed:
 
-```
+```text
 JFu:l`>|c:bQj`}Q~:me=zQb=:e}Qj:z:s
 ```
 
-![.](images/0063.png)
+![.](/images/posts/0063.png)
 
 **`DH{4bn0rm4l_dns_p4ck3t_l34ks_d4t4}`**
 
@@ -237,11 +233,11 @@ Wandering around, I noticed that the files in here are relating to the original 
 
 Upon inspecting its metadata, there seems to be a ZIP archive hidden within. 
 
-![.](images/0032.png)
+![.](/images/posts/0032.png)
 
 However, there is a corruption when I try to extract the hidden ZIP. 
 
-![.](images/0031.png)
+![.](/images/posts/0031.png)
 
 
 **Solve script**
@@ -262,21 +258,21 @@ printf '\x50\x4b\x05\x06' | dd of="$file" bs=1 seek=491 conv=notrunc status=none
 
 After successfully decompress the ZIP file, we are presented with yet another problem: the secret memo file requires a password.
 
-![.](images/0033.png)
+![.](/images/posts/0033.png)
 
 > Any file starts with ~WRD (typically with a .tmp extension) is a hidden temporary work file automatically created by Microsoft Word while a document is actively open.
 
 Wandering in the folder system, I stumbled upon a seemingly base64 "keyWrap" with a very sussy name "Top Secret".
 
-![.](images/0034.png)
+![.](/images/posts/0034.png)
 
 This encoding `nTyxMTIhK0EuqTR=` seems like a base64, but CyberChef can not decode that, not even the Magic mode. It ends up to be a `ROT13 --> Base64` with some brute-forcing.
 
-![.](images/0036.png)
+![.](/images/posts/0036.png)
 
 We retrieve the passphrase `hidden_Data` to open the temporary memo file.
 
-![.](images/0035.png)
+![.](/images/posts/0035.png)
 
 This time around, this base64 is simply the flag we are looking for.
 
