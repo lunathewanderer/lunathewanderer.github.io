@@ -21,6 +21,7 @@ banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jp
 
 The most basic function is `grep 'pattern' filename` to search for a pattern in a file. However, while sharing the same functionality, piping commands into `grep` is preferred.
 
+Flags:
 - `grep -i` ignores case differences, rendering the output case-insensitive.
 - `grep -r` searches "recursively" through all files in a directory, including its subdirectories.
 - `grep -v` finds lines that do not match the pattern, the inverse.
@@ -38,8 +39,9 @@ Moreover, there are mode of Regex Dialects in grep:
 > Example: `grep 'a\{2,3\}' file` matches `aa` and `aaa`
 - ERE - Extended Regular Expression (flag = -E): Equivalent to egrep. Meta-characters work natively without backslashes.
 > Example: `grep -E 'a{2,3}' file` matches `aa` and `aaa`
-- PCRE - Perl Compatible Regular Expressions (flag = -P): Unlocks Perl-Compatible syntax. Supports advanced shorthand concepts like `\d`, `\s`, and lookarounds.
+- PCRE - Perl Compatible Regular Expressions (flag = -P): Unlocks Perl-Compatible syntax. Supports advanced shorthand concepts like `\d`, `\s`, and [lookarounds](https://www.linkedin.com/pulse/mastering-lookaround-assertions-regular-expressions-abodunrin-).
 
+There is a dedicated documentation about `Regex in grep` [here](https://www.cyberciti.biz/faq/grep-regular-expressions/).
 
 ### awk
 
@@ -84,3 +86,13 @@ The `sed` command is a non-interactive "stream editor" used to perform basic tex
 
 - `sed -n` to suppresses automatic printing of the pattern space.
 - 
+
+https://www.w3schools.com/bash/bash_cut.php
+
+### sort
+
+
+### tail
+
+
+### head
