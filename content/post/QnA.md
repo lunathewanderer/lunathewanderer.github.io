@@ -83,7 +83,7 @@ Searching around, we can see that the attacker has accessed root privilege, exec
 
 ![.](/images/posts/0018.png)
 
-I tried to search for `cat` , applying the â€œMultiple occurencesâ€ filter.
+I tried to search for `cat` , applying the "Multiple occurences" filter.
 
 ![.](/images/posts/0019.png)
 
