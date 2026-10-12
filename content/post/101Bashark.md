@@ -34,11 +34,11 @@ The most basic function is `grep 'pattern' filename` to search for a pattern in 
 - For wildcards, substitutes * into the parameter you want to sweep.
 
 Moreover, there are mode of Regex Dialects in grep:
-- BRE - Basic Regular Expression (flag = None): Default engine. Meta-characters like ?, +, {, |, (, and ) are treated as literal text unless escaped with a backslash (\).
+- BRE - Basic Regular Expression (flag = None): Default engine. Meta-characters like `?`, `+`, `{`, `|`, `(`, and `)` are treated as literal text unless escaped with a backslash `\`
 > Example: `grep 'a\{2,3\}' file` matches `aa` and `aaa`
 - ERE - Extended Regular Expression (flag = -E): Equivalent to egrep. Meta-characters work natively without backslashes.
 > Example: `grep -E 'a{2,3}' file` matches `aa` and `aaa`
-- PCRE - Perl Compatible Regular Expressions (grep -P):
+- PCRE - Perl Compatible Regular Expressions (flag = -P): Unlocks Perl-Compatible syntax. Supports advanced shorthand concepts like `\d`, `\s`, and lookarounds.
 
 
 ### awk
