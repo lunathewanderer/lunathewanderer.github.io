@@ -51,7 +51,7 @@ I tried to `Ctrl + F` and try to search for sussy keywords (by sussy, I mean "af
 
 ![.](/images/posts/0010.png)
 
-Look below the `"role": "admin", "success": true,...` we can see the line `â€œuserâ€:...` 
+Look below the `"role": "admin", "success": true,...` we can see the line `"user":...` 
 
 `Answer Q5: support_c30cde@corpvault.local`
 
