@@ -32,7 +32,6 @@ Flags:
 - `grep -x` forces grep to match only exact, whole lines.
 - `grep -l` output only filenames containing matches (stops reading file on first match).
 - `grep -L` output only filenames that do not contain matches.
-- For wildcards, substitutes * into the parameter you want to sweep.
 
 Moreover, there are mode of Regex Dialects in grep:
 - BRE - Basic Regular Expression (flag = None): Default engine. Meta-characters like `?`, `+`, `{`, `|`, `(`, and `)` are treated as literal text unless escaped with a backslash `\`
@@ -41,7 +40,7 @@ Moreover, there are mode of Regex Dialects in grep:
 > Example: `grep -E 'a{2,3}' file` matches `aa` and `aaa`
 - PCRE - Perl Compatible Regular Expressions (flag = -P): Unlocks Perl-Compatible syntax. Supports advanced shorthand concepts like `\d`, `\s`, and [lookarounds](https://www.linkedin.com/pulse/mastering-lookaround-assertions-regular-expressions-abodunrin-).
 
-There is a dedicated documentation about `Regex in grep` [here](https://www.cyberciti.biz/faq/grep-regular-expressions/).
+There is a dedicated documentation about Regex in `grep` [here](https://www.cyberciti.biz/faq/grep-regular-expressions/).
 
 ### awk
 
