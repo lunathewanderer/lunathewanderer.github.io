@@ -15,7 +15,7 @@ banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jp
 
 ### Regex
 
-(Regex, Regexp, or Regular Expression)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions], is a sequence of characters that specifies a match pattern in text. Usually (such patterns)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet] are used by string-searching algorithms for "find" or "find and replace" operations on strings, or for input validation.
+[Regex, Regexp, or Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions), is a sequence of characters that specifies a match pattern in text. Usually [such patterns](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet) are used by string-searching algorithms for "find" or "find and replace" operations on strings, or for input validation.
 
 ### grep
 
@@ -31,10 +31,15 @@ The most basic function is `grep 'pattern' filename` to search for a pattern in 
 - `grep -x` forces grep to match only exact, whole lines.
 - `grep -l` output only filenames containing matches (stops reading file on first match).
 - `grep -L` output only filenames that do not contain matches.
+- For wildcards, substitutes * into the parameter you want to sweep.
 
-For wildcards, substitutes * into the parameter you want to sweep.
+Moreover, there are mode of Regex Dialects in grep:
+- BRE - Basic Regular Expression (flag = None): Default engine. Meta-characters like ?, +, {, |, (, and ) are treated as literal text unless escaped with a backslash (\).
+> Example: `grep 'a\{2,3\}' file` matches `aa` and `aaa`
+- ERE - Extended Regular Expression (flag = -E): Equivalent to egrep. Meta-characters work natively without backslashes.
+> Example: `grep -E 'a{2,3}' file` matches `aa` and `aaa`
+- PCRE - Perl Compatible Regular Expressions (grep -P):
 
-Regular Expression, or Regex/Regexp
 
 ### awk
 
