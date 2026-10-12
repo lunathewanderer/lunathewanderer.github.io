@@ -87,7 +87,7 @@ Regular Expression, or Regex/Regexp
 - `awk` comes in the form of `awk 'PATTERN {ACTION}' filename`. Simply put, PATTERN is the IF, and ACTION is the THEN.
 
 For example:
-```
+```bash
 awk '$2 == "Math" { print $1 }' class.txt 
 --> IF field 2 is "Math" THEN print field 1
 
@@ -107,7 +107,7 @@ The `awk` command has options to change how it works:
 
 Regular Expression, or Regex/Regexp
 
-```
+```bash
 awk '$5 ~ /^\/api\/v[12]/ { print $0 }' file.txt
      │  │  │             │
      │  │  │             └─> ACTION: Print the whole line ($0) if it matches
