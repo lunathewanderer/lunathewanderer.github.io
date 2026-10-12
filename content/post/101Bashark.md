@@ -11,54 +11,11 @@ cover: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jpg
 banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jpg"
 ---
 
-## Regex
-
-Regex, Regexp, or Regular Expression, is a sequence of characters that specifies a match pattern in text. Usually such patterns are used by string-searching algorithms for "find" or "find and replace" operations on strings, or for input validation.
-
-### Anchor & Validation
-
-- `^` indicates the start of string/line. For example, `^HTTP` matches lines starting with "HTTP".
-- `$` indicates the end of string/line.
-- `\A` indicates the start of the entire input, ignoring multiline modes.
-- `\Z` indicates the end of the entire input, ignoring multine modes.
-
-### Character Classes & Sets
-
-- `.` matches any character except newline. For example, `c.t` matches cat, cut, c4t,...
-- `[abc]` the explicit set that match any one character inside.
-- `[^abc]` the negated set that match any character NOT inside.
-- `\d` = `[0-9]`
-- `\D` = `[^0-9]`
-- `\w` = `[a-zA-Z0-9_]`
-- `\W` = `[^a-zA-Z0-9_]`
-- `\s` matches whitespace, including: [space ( ), tab (\t), newline (\n), carriage-return (\r), form-feed (\f), vertical-tab (\v)]
-- `\S` matches non-whitespace shorthand, be it letters, digits, punctuations,..., anything but a break.
-
-### Quantifiers
-
-- `*` matches 0 or more times (equivalent to {0,}).
-- `+` matches 1 or more times (equivalent to {1,}).
-- `?` matches 0 or 1 time (makes the preceding element optional).
-- `{n}` Matches exacty n times.
-- `{n,}` Matches at least n times (no upper limit).
-- `{n,m}` Matches between n and m times inclusively.
-
-### Groups, Alternation & Lookarounds
-
-- `(abc)` Capturing Group (saves match into \1, \2, etc.)
-- `(?:abc)` Non-Capturing Group (groups logic without saving memory)
-
-a|b — Alternation / OR (cat|dog matches "cat" OR "dog")
-
-(?=abc) — Positive Lookahead (matches if followed by "abc")
-
-(?!abc) — Negative Lookahead (matches if NOT followed by "abc")
-
-(?<=abc) — Positive Lookbehind (matches if preceded by "abc")
-
-(?<!abc) — Negative Lookbehind (matches if NOT preceded by "abc")
-
 ## Bash Scripting: Text Processing
+
+### Regex
+
+(Regex, Regexp, or Regular Expression)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions], is a sequence of characters that specifies a match pattern in text. Usually (such patterns)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet] are used by string-searching algorithms for "find" or "find and replace" operations on strings, or for input validation.
 
 ### grep
 
