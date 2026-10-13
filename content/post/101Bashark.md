@@ -100,7 +100,7 @@ $ tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed 's/firefl
 > 
 > - `g` the global flag, matches every instances, not just the first.
 - `| base64 -d > hello.jpg` decodes the extracted data and write them into the image.
-- `file -` tells file to read from the stdin.
+- `file -` tells `file` to read from the stdin.
 
 
 
