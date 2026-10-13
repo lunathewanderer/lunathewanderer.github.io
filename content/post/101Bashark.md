@@ -21,10 +21,9 @@ banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jp
 Data exfiltration via ICMP tunneling:
 
 ```bash
-tshark -r challenge.pcap -Y "icmp" -T fields -e data.data | cut -c1-2 | uniq > exfil.txt
+$ tshark -r challenge.pcap -Y "icmp" -T fields -e data.data | cut -c1-2 | uniq > exfil.txt
 
-cat exfil.txt
-
+$ cat exfil.txt
 73
 6e
 65
@@ -56,8 +55,7 @@ For a hex payload, that 2 characters exfiltrated from the tunneling construct on
 Expansion: if it were to be decimal, such that:
 
 ```bash
-cat exfil.txt
-
+$ cat exfil.txt
 115
 110
 101
@@ -87,10 +85,10 @@ Data exfiltration via HTTP Auth Request.
 Multiple HTTP Auth Reuqests (GET method, followed by ACK) consist of abnormally lengthy, seemingly base64 credentials (in the basic credentials field).
 
 ```bash
-tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed -e 's/firefly\://g' | base64 -d | file -
+$ tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed -e 's/firefly\://g' | base64 -d | file -
 /dev/stdin: JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, baseline, precision 8, 544x600, components 3
 
-tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed 's/firefly\://g' | base64 -d > hello.jpg
+$ tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed 's/firefly\://g' | base64 -d > hello.jpg
 ```
 - This time we inspect "http" > "http.authbasic".
 - `sed 's/firefly\://g'`: deletes every instances of `firefly:`
@@ -102,6 +100,7 @@ tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed 's/firefly\
 > 
 > - `g` the global flag, matches every instances, not just the first.
 - `| base64 -d > hello.jpg` decodes the extracted data and write them into the image.
+- `file -` tells file to read from the stdin.
 
 
 
