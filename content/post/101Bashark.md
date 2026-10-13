@@ -94,14 +94,14 @@ tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed 's/firefly\
 ```
 - This time we inspect "http" > "http.authbasic".
 - `sed 's/firefly\://g'`: deletes every instances of `firefly:`
-> `sed 's/.../.../'` the substitution command.
+> - `sed 's/.../.../'` the substitution command.
 > 
-> `firefly\:` the pattern we are searching for, the backlash being used to escape the colon (rendering them literally `firefly:`)
+> - `firefly\:` the pattern we are searching for, the backlash being used to escape the colon (rendering them literally `firefly:`)
 > 
-> `//` the replacement section being empty, whatever matches the search pattern will be deleted.
+> - `//` the replacement section being empty, whatever matches the search pattern will be deleted.
 > 
-> `g` the global flag, matches every instances, not just the first.
-- `base64 -d > hello.jpg` decodes the extracted data and write them into the image.
+> - `g` the global flag, matches every instances, not just the first.
+- `| base64 -d > hello.jpg` decodes the extracted data and write them into the image.
 
 
 
