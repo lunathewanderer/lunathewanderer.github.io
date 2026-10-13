@@ -18,7 +18,7 @@ banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jp
 
 ## Part 1
 
-Data exfiltration via ICMP tunneling:
+**Data exfiltration via ICMP tunneling**
 
 ```bash
 $ tshark -r challenge.pcap -Y "icmp" -T fields -e data.data | cut -c1-2 | uniq > exfil.txt
@@ -80,7 +80,7 @@ $ cat exfil.txt
 
 ## Part 2
 
-Data exfiltration via HTTP Auth Request.
+**Data exfiltration via HTTP Auth Request**
 
 Multiple HTTP Auth Reuqests (GET method, followed by ACK) consist of abnormally lengthy, seemingly base64 credentials (in the basic credentials field).
 
