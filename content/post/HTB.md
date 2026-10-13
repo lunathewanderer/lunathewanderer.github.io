@@ -20,8 +20,8 @@ banner: "https://i.pinimg.com/1200x/68/a8/38/68a8382cda827a9e12f0d080ecf81f59.jp
 
 We are presented with `sshd.log`, `bash_history.txt`, and a few questions about it.
 
-`sshd.log`
-```text
+
+```sshd.log
 [2024-01-19 12:59:11] Server listening on 0.0.0.0 port 2221.
 [2024-01-19 12:59:11] Server listening on :: port 2221.
 [2024-01-28 15:24:23] Connection from 100.72.1.95 port 47721 on 100.107.36.130 port 2221 rdomain ""
@@ -83,8 +83,7 @@ We are presented with `sshd.log`, `bash_history.txt`, and a few questions about 
 [2024-02-21 18:17:49] Failed publickey for softdev from 100.7.98.129 port 47765 ssh2: ECDSA SHA256:gwOkY9JclDklolqWwycTCwWEJyR20ym_jCi2_bZxl6I
 ```
 
-`bash_history.txt`
-```text
+```bash_history.txt
 [2024-02-13 11:31:01] useradd -mG sudo softdev
 [2024-02-13 11:32:12] passwd softdev
 [2024-02-13 11:33:13] apt update && apt install wget gpg
