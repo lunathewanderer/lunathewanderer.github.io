@@ -12,7 +12,7 @@ cover: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jpg
 banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jpg"
 ---
 
-1. `WannaGame Recruit 2026 - enum or exfil?`
+# 1. `WannaGame Recruit 2026 - enum or exfil?`
 
 Reference: https://blog.devobass-will.win/posts/wannagame-recruit-2026/#enum-or-exfil
 
@@ -42,7 +42,7 @@ cat exfil.txt
 Since these are hexadecimal bytes, `cat exfil.txt | xxd -r -p` to decode it into `sneaky_network`. 
 
 If it were to be decimal, such that:
-```
+```bash
 cat exfil.txt
 
 115
