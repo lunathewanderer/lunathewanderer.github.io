@@ -1,5 +1,5 @@
 ---
-title: "HackTheBox & CyberDefenders: Digital Forensics"
+title: "HackTheBox & CyberDefenders"
 description: "https://youtu.be/Vbu8maontzU"
 draft: false
 date: 2026-10-06
