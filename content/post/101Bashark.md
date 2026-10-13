@@ -12,7 +12,7 @@ cover: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jpg
 banner: "https://i.pinimg.com/1200x/e6/b0/0b/e6b00bd9c0abc5abb852644c81fcfee0.jpg"
 ---
 
-# 1. WannaGame Recruit 2026 - enum or exfil?
+# WannaGame Recruit 2026 - enum or exfil?
 
 Reference: https://blog.devobass-will.win/posts/wannagame-recruit-2026/#enum-or-exfil
 
