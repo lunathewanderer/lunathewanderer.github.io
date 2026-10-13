@@ -84,7 +84,7 @@ cat exfil.txt
 
 Data exfiltration via HTTP Auth Request.
 
-Multiple HTTP Auth Reuqest (GET method, followed by ACK) consists of abnormally lengthy, seemingly base64 in the basic credentials field.
+Multiple HTTP Auth Reuqests (GET method, followed by ACK) consist of abnormally lengthy, seemingly base64 credentials (in the basic credentials field).
 
 ```bash
 tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed -e 's/firefly\://g' | base64 -d | file -
