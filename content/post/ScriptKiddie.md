@@ -1,5 +1,5 @@
 ---
-title: "Digital Forensics Script Kiddie"
+title: "Am I a Script Kiddie?"
 description: "The truth is, you know... I never went to school either."
 draft: false
 date: 2026-10-06
