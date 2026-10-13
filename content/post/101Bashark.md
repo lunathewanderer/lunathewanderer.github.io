@@ -52,7 +52,7 @@ For a hex payload, that 2 characters exfiltrated from the tunneling construct on
 > 
 > Read devobass's writeup to understand the structure of the ICMP tunneling!
 
-Expansion: if it were to be decimal, such that:
+**Food for thought**: If it were to be decimal, such that:
 
 ```bash
 $ cat exfil.txt
@@ -102,5 +102,59 @@ $ tshark -r challenge.pcap -Y "http" -T fields -e http.authbasic | sed 's/firefl
 - `| base64 -d > hello.jpg` decodes the extracted data and write them into the image.
 - `file -` tells `file` to read from the stdin.
 
+# WannaGame Freshmen 2025
+
+## Free Flag on Network
+
+To reverse the `.png`, loop processes lines in ascending order, but reverses the bytes within each line.
+
+```bash
+#!/usr/bin/sh
+for i in `seq 1 100`
+do
+	sed -n "$i"p flag-reverse.png | base64 -d | xxd -p -c1 | tac | xxd -p -r >> flag.png
+done
+```
+- `for i in ...` starts a loop; i takes each value produced by the command inside the backticks.
+- `seq 1 100` runs seq and substitutes its output: the numbers 1 through 100, inclusive. Its equivalent in Python is `for i in range (1, 101)
+- `do ... done` mark the beginning and end of the loop body.
+- `sed -n "$i"p flag-reverse.png` prints line number `i` from the file while suppressing normal output.
+- `base64 -d` decodes that line from Base64 into bytes.
+- `xxd -p -c1` displays the bytes as plain hexadecimal, with one byte per line. For example, ABC becomes 41, 42, 43, each on its own line.
+- `tac` reverses the line order. Since each line is one byte, this reverses the byte order for the current input line.
+- `xxd -p -r` converts those hex bytes back into raw bytes.
+
+> **`tac`** is the reverse of **`cat`**
+
+```python
+from pathlib import Path
+import base64
+
+chunks = []
+for i in range(100):
+    encoded = Path(f"flag{i}.txt").read_text().splitlines()[3]
+    chunks.append(base64.b64decode(encoded)[::-1])
+
+Path("recovered_flag.png").write_bytes(b"".join(chunks))
+```
+- `from pathlib import Path` imports Python's path and file-handling class.
+- `import base64` imports functions for decoding and encoding Base64 data.
+- First, we create an empty list to store reversed byte chunk
+- `encoded = Path(f"flag{i}.txt").read_text().splitlines()[3]`
+> This line finds and reads one file, then selects one line from it:
+> - `f"flag{i}.txt"` is an f-string. Python substitutes the current value of i into the filename, so it checks flag0.txt, flag1.txt, …, flag99.txt.
+> - `Path(...)` represents that filename as a path.
+> - `.read_text()` reads the file as text.
+> - `.splitlines()` splits the text into a list of lines.
+> - `[3]` selects the item at index 3. Python indexes from zero, so this is the fourth line, the line containing Base64.
+> - The selected line is assigned to encoded.
+- `chunks.append(base64.b64decode(encoded)[::-1])`
+> - `base64.b64decode(encoded)` decodes the Base64 text into raw bytes.
+> - `[::-1]` reverses the byte sequence. It reverses the bytes inside this chunk; it does not change the order of the chunks.
+> - `chunks.append(...)` adds the reversed bytes to the end of the list.
+- `Path("recovered_flag.png").write_bytes(b"".join(chunks))`
+> - `b""` is an empty byte string.
+> - `b"".join(chunks)` combines all byte chunks in list order, with no separator between them.
+> - `Path(...).write_bytes(...)` writes the combined bytes to `recovered_flag.png`. It creates the file or overwrites it if it already exists.
 
 
