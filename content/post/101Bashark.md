@@ -61,9 +61,11 @@ cat exfil.txt
 107
 ```
 
-`cat exfil.txt | awk '{printf "%c", $1} END {print ""}'` would return `sneaky_network`.
+`cat exfil.txt | awk '{printf "%c", $1}` would return `sneaky_network`.
 
-> `awk '{printf "%c", $1} END {print ""}' exfil.txt` is a slightly cleaner version.
+> To add a newline, append `END {print ""}'`.
+> 
+> In the same vein, `awk '{printf "%c", $1} END {print ""}' exfil.txt` is a slightly cleaner version.
 
 
 
