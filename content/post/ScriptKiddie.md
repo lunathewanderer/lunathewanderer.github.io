@@ -157,4 +157,51 @@ Path("recovered_flag.png").write_bytes(b"".join(chunks))
 > - `b"".join(chunks)` combines all byte chunks in list order, with no separator between them.
 > - `Path(...).write_bytes(...)` writes the combined bytes to `recovered_flag.png`. It creates the file or overwrites it if it already exists.
 
+# BrunnerCTF 2026: Rubik's Cube
+
+## Script 1: WSL & Python
+
+``` bash
+python3 - "rubiks.pcapng" << 'PY'
+import subprocess
+import sys
+
+pcap = sys.argv[1]
+key = "57b1f9abcd5ae8a79cb98ce7578c5108"
+display_filter = (
+    "btatt.opcode == 0x1b && "
+    "btatt.handle == 0x001a && "
+    "len(btatt.value) == 96"
+)
+
+result = subprocess.run(
+    [
+        "tshark", "-r", pcap, "-Y", display_filter,
+        "-T", "fields", "-E", "separator=/t", "-E", "occurrence=f",
+        "-e", "frame.number", "-e", "btatt.value",
+    ],
+    capture_output=True, text=True, check=True,
+)
+
+for line in result.stdout.splitlines():
+    frame, hex_value = line.split("\t", 1)
+    ciphertext = bytes.fromhex(hex_value.replace(":", "").replace(" ", ""))
+
+    plaintext = subprocess.run(
+        ["openssl", "enc", "-aes-128-ecb", "-d", "-nopad", "-K", key],
+        input=ciphertext, capture_output=True, check=True,
+    ).stdout
+
+    if plaintext[0] == 0xFE and plaintext[2] == 0x03:
+        print(f"Frame {frame}: byte[34] = 0x{plaintext[34]:02x}")
+PY
+```
+
+- `python3` invokes Python 3 interpreter to run the code that follows.
+- `-` reads from stdin rather from a file path.
+- `<< 'PY'` Here-Document Operator (send to stdin, stop upon "PY").
+- `rubiks.pcapng` is the argument passed on the cmdline, combining via `pcap = sys.argv[1]`.
+- `key` and `display_filter` stores the parameters.
+- `subprocess.run()` built-in function to run external commands in a Python script, `tshark` in this context (shell commands or other exec can do).
+> "tshark" -r pcap -Y 
 
