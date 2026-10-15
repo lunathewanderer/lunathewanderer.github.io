@@ -202,6 +202,27 @@ PY
 - `<< 'PY'` Here-Document Operator (send to stdin, stop upon "PY").
 - `rubiks.pcapng` is the argument passed on the cmdline, combining via `pcap = sys.argv[1]`.
 - `key` and `display_filter` stores the parameters.
-- `subprocess.run()` built-in function to run external commands in a Python script, `tshark` in this context (shell commands or other exec can do).
-> "tshark" -r pcap -Y 
+> Technically, `display_filter` = `"btatt.opcode == 0x1b && btatt.handle == 0x001a && len(btatt.value) == 96"`
+- `subprocess.run()` built-in function to run external commands in a Python script, which is `tshark` in this context.
+```bash
+tshark -r pcap \
+-Y "btatt.opcode == 0x1b && btatt.handle == 0x001a && len(btatt.value) == 96" \
+-T fields \
+-E seperator =/t \
+-E occurence = f \
+-e frame.number \
+-e btatt.value
+```
+- `capture_output=True` tells Python to capture the output data for further execution.
+- `text=True` turns that output into text.
+- `check=True` monitors the external command exit code.
+> If the external command fails (meaning it returns anything other than 0, such as a file not found or a tshark syntax error), Python will immediately crash the script by raising a subprocess.CalledProcessError exception.
+- `result.stdout` holds the text printed by tshark (which contains our tab-separated packet numbers and hex values).
+- `.splitlines()` splits that text block into a list of individual lines so Python can process them one packet at a time.
+
+
+
+
+
+
 
