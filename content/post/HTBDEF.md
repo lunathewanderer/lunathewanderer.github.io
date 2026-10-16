@@ -146,18 +146,41 @@ We are presented with `sshd.log`, `bash_history.txt`, and a few questions about 
 [2024-02-26 15:07:18] source ./cms/bin/activate
 ```
 
-> What is the IP Address and Port of the SSH Server?
+**1. What is the IP Address and Port of the SSH Server?**
+
+> "Connection from 100.72.1.95 port 47721 on 100.107.36.130 port 2221"
+>
+> In network architecture, a server can be conceptualized as a physical facility where the IP address functions as the primary location, and the port number serves as a specific access point or door. The origin of a connection ("from") identifies the visiting entity, whereas the destination ("on") specifies the particular interface that received the request (the server).
+>
+> Additionally, the address 0.0.0.0 denotes a binding configuration to all available IPv4 network interfaces concurrently, rather than acting as a unique, host-specific address.
 
 **`Answer: 100.107.36.130:2221`**
 
-> What time is the first successful login?
+**2. What time is the first successful login?**
+
+> "[2024-02-13 11:29:50] Accepted password for root from 100.81.51.199"
+>
+> Earlier attempts failed, this is the first accepted one.
 
 **`Answer: 2024-02-13 11:29:50`**
 
-> What is the time of the unusual login?
+**3. What is the time of the unusual login?**
 
+> "[2024-02-19 04:00:14] Accepted password for root from 2.67.182.119 port 60071 ssh2"
+>
+> The unusual login happened at 4 a.m. (outside observed time pattern); using root (the account with full control), and from a different IP.
+>
+> "[2024-02-13 11:29:50] Accepted password for root from 100.81.51.199" also using root, but in observed time pattern and IP address.
 
+**`Answer: 2024-02-19 04:00:14`**
 
+**4. What is the fingerprint of the attacker's public key?**
+
+> Knowing the suspicious login, we would like to find the Failed Publickey (for root) right after `04:00:14`
+>
+> "Failed publickey for root from 2.67.182.119 port 60071 ssh2: ECDSA SHA256:OPkBSS6okUKraq8pYo4XwwBg55QSo210F09FCe1-yj4"
+>
+> It appears in the Failed publickey entry for 2.67.182.119 at the same time. A fingerprint is like a name tag for a key. Their key was rejected, but their password was accepted immediately afterward.
 
 
 
