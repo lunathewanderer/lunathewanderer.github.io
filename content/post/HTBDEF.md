@@ -15,6 +15,7 @@ banner: "https://i.pinimg.com/1200x/68/a8/38/68a8382cda827a9e12f0d080ecf81f59.jp
 
 # An unusual sighting
 > Platform: HackTheBox (VIP+)
+> 
 > Difficulty: Very Easy
 > 
 > As the preparations come to an end, and The Fray draws near each day, our newly established team has started work on refactoring the new CMS application for the competition. However, after some time we noticed that a lot of our work mysteriously has been disappearing! We managed to extract the SSH Logs and the Bash History from our dev server in question. The faction that manages to uncover the perpetrator will have a massive bonus come the competition!
@@ -150,9 +151,9 @@ We are presented with `sshd.log`, `bash_history.txt`, and a few questions about 
 
 > `Connection from 100.72.1.95 port 47721 on 100.107.36.130 port 2221`
 
-In network architecture, a server can be conceptualized as a physical facility where the IP address functions as the primary location, and the port number serves as a specific access point or door. The origin of a connection ("from") identifies the visiting entity, whereas the destination ("on") specifies the particular interface that received the request (the server).
-
-Additionally, the address 0.0.0.0 denotes a binding configuration to all available IPv4 network interfaces concurrently, rather than acting as a unique, host-specific address.
+A few side note:
+- In network architecture, a server can be conceptualized as a physical facility where the IP address functions as the primary location, and the port number serves as a specific access point or door. The origin of a connection ("from") identifies the visiting entity, whereas the destination ("on") specifies the particular interface that received the request (the server).
+- Additionally, the address 0.0.0.0 denotes a binding configuration to all available IPv4 network interfaces concurrently, rather than acting as a unique, host-specific address.
 
 **`Answer: 100.107.36.130:2221`**
 
@@ -184,6 +185,26 @@ In public-key cryptography, a public key fingerprint is a short sequence of byte
 
 **`Answer: OPkBSS6okUKraq8pYo4XwwBg55QSo210F09FCe1-yj4`**
  
+**5. What is the first command the attacker executed after logging in?**
+
+The attacker successfully logged in at `[2024-02-19 04:00:17]`, and in the bash history we can see `[2024-02-19 04:00:18] whoami`.
+
+**`Answer: whoami`**
+
+**5. What is the first command the attacker executed before logging out?**
+
+The attacker logged out at `[2024-02-19 04:38:17]`, and the last command before that timeline is `./setup`
+
+**`Answer: ./setup`**
+
+
+
+
+
+
+
+
+
 
 
 
