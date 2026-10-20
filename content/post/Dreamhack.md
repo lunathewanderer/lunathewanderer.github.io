@@ -1,5 +1,5 @@
 ---
-title: "Dreamhack Wargames: Digital Forensics"
+title: "Digital Forensics: Dreamhack Wargames, HackTheBox, CyberDefenders"
 description: "What are you afraid of losing, when nothing in the world actually belongs to you?"
 draft: false
 date: 2026-10-01
