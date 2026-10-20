@@ -17,7 +17,7 @@ banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg
 ## 1. sleepingshark
 
 - **Date**: Oct 2, 2026
-- **Difficulty**: Gold
+- **Difficulty**: Dreamhack - Gold
 
 We are presented with a packet capture. At first glance, there are a lot of HTTP requests with the same structure.
 
@@ -131,7 +131,7 @@ x[2] is the flag index, x[4] is the ASCII value, and then print the equivalent c
 ## 2. Dream Zoo
 
 - **Date**: Oct 5, 2026
-- **Difficulty**: Gold
+- **Difficulty**: Dreamhack - Gold
 
 We are presented with a packet capture. At first glance, there is DNS exfiltration of a ZIP file, as we can see `50 4b...`
 
@@ -217,7 +217,7 @@ JFu:l`>|c:bQj`}Q~:me=zQb=:e}Qj:z:s
 ## 3. Don't miss the data
 
 - **Date**: Oct 6, 2026
-- **Difficulty**: Platinum
+- **Difficulty**: Dreamhack - Platinum
 
 We are presented with a `.docx` file. Its content is of little significance, so as usual, I inspected the metadata. After spamming `xxd` and `binwalk`, I've extracted a ZIP file containing a lot of `.xml`. At first, I thought I was discovering something abnormally important. Little did I know, I was just reinventing the wheel. `xxd` and `binwalk` is kinda extra in this context, truly a "spam vs. skill" moment đŸ˜“
 
