@@ -1,20 +1,6 @@
 ---
 title: "..."
-description: "I wish that I could lie
-
-But my mind gets in the way
-
-I know you think that I'm
-
-Always way too self-aware
-
-Oh, we could never be together
-
-But it's nice to play pretend
-
-I wish that I could lie
-
-But I'm way too self-aware"
+description: "I wish that I could lie, but I'm way too self-aware."
 draft: false
 date: 2026-10-20
 tags:
