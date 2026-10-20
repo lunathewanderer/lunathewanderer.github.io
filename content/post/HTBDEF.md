@@ -1,8 +1,8 @@
 ---
-title: "HackTheBox & CyberDefenders"
-description: "https://youtu.be/Vbu8maontzU"
+title: "..."
+description: "cuz i'm in a field of dandelions..."
 draft: false
-date: 2026-10-06
+date: 2026-10-20
 tags:
   - Network Forensics
   - Memory Forensics
