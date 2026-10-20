@@ -1,6 +1,6 @@
 ---
 title: "..."
-description: "cuz i'm in a field of dandelions..."
+description: "I wish that I could lie..."
 draft: false
 date: 2026-10-20
 tags:
