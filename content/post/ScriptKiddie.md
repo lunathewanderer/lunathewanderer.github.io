@@ -159,6 +159,8 @@ Path("recovered_flag.png").write_bytes(b"".join(chunks))
 
 # BrunnerCTF 2026: Rubik's Cube
 
+**Reference**: https://lunathewanderer.github.io/post/rubikcube/
+
 ## Script 1: WSL & Python
 
 ``` bash
