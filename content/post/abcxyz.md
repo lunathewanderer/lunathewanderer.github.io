@@ -1,7 +1,7 @@
 ---
 title: "..."
 description: "I wish that I could lie, but I'm way too self-aware."
-draft: false
+draft: true
 date: 2026-10-20
 tags:
   - Network Forensics
