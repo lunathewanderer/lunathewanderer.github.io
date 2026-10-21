@@ -19,7 +19,7 @@ Go to Statistics > Conversations > TCP.
 
 ![.](/images/posts/0004.png)
 
-Our answer is unfold, since it was packed with 172.29.9.159 as adress A and 13.212.67.96 as address B. 
+Our answer is unfold, since it was packed with 172.29.9.159 as address A and 13.212.67.96 as address B. 
 
 `Answer Q1: 172.29.9.159,13.212.67.96`
 
