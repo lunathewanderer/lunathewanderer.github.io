@@ -219,7 +219,7 @@ JFu:l`>|c:bQj`}Q~:me=zQb=:e}Qj:z:s
 - **Date**: Oct 6, 2026
 - **Difficulty**: Dreamhack - Platinum
 
-We are presented with a `.docx` file. Its content is of little significance, so as usual, I inspected the metadata. After spamming `xxd` and `binwalk`, I've extracted a ZIP file containing a lot of `.xml`. At first, I thought I was discovering something abnormally important. Little did I know, I was just reinventing the wheel. `xxd` and `binwalk` is kinda extra in this context, truly a "spam vs. skill" moment đŸ˜“
+We are presented with a `.docx` file. Its content is of little significance, so as usual, I inspected the metadata. After spamming `xxd` and `binwalk`, I've extracted a ZIP file containing a lot of `.xml`. At first, I thought I was discovering something abnormally important. Little did I know, I was just reinventing the wheel. `xxd` and `binwalk` is kinda extra in this context, truly a "spam vs. skill" moment :(
 
 > The `.docx` itself, intrinsically, is a `.zip` archive containing XML files, images, and other structural components. According to this [article](https://www.reddit.com/r/LifeProTips/comments/36taq3/lpt_a_word_file_is_a_zip_in_disguise/), you can access or inspect the hidden contents of any modern Microsoft Word file by changing its file extension. 
 
