@@ -1,7 +1,7 @@
 ---
 title: "..."
 description: "The truth is, you know... I never went to school either."
-draft: false
+draft: true
 date: 2026-10-06
 tags:
   - Programming
