@@ -67,63 +67,6 @@ awk -F '\t' '$2 ~ /SUBSTRING/ {q[$1]=$2} $3+0 > 2.75 {
 }' | sort -n
 ```
 
-```text
-First part: tshark/extract data from .pcap
-
-1/ Two-pass analysis in tshark is enabled using the -2 flag, which processes a capture file in two sequential passes to calculate reassembly dependencies and resolve future-looking packet fields correctly.
-
-2/ -r dump.pcap: reads data from the packet capture.
-
-3/ -Y 'http.request or http.response': display filter, only takes HTTP requests or HTTP response.
-
-4/ -T fields: configure the output to (table-like) fields, with the below properties: 
-
-5/ -e tcp.stream: extract the ID of TCP stream (to distinguish the stream)
-
-6/ -e http.request.uri: extract the URI/URL of HTTP requests (exclusive to HTTP requests)
-
-7/ -e http.time: extract the response time of HTTP responses (exclusive to HTTP responses)
-
-Hence the output,
-
-<tcp.stream>    <http.request.uri>    <http.time>
-0               /index.php?id=1%2C1   
-0                                     1.8542
-1               /index.php?id=1%2C2   
-1                                     0.0211
-
-which will then be piped into the second part:
-
-Second part: awk command/text processing
-
-8/ -F '\t': define the delimiter of fields to (\t, or "tab"). This result in: $1 = tcp.stream | $2 = http.request.uri | $3 = http.time
-
-9/ $2 ~ /SUBSTRING/ {q[$1]=$2}:
-
-Inspect if the second column (http.request.uri) contains the keyword SUBSTRING (indicating Time-based Blind SQL Injection). 
-If containing SUBSTRING, save that URI into dictionary q with the key of tcp.stream $1.
-
-10/ $3+0 > 2.75 { ... }
-
-Inspect http.time. The +0 part is to turn it into an integer. > 2.75 indicates the time leap, of a successfully executed SQLi payload.
-
-11/ split(q[$1], x, /%2C|%3D/)
-
-Take the saved URI in the corresponding TCP stream, cut the strings with URL-encode such as %2C (,) or %3D (=), and save the result in array x.
-Since the normal payload will look like "SELECT IF(ASCII(SUBSTRING((SELECT flag FROM s3cr3t LIMIT 1),1,1))=71, SLEEP(3), 0)", we will get: 
-
-x[1] = SELECT...
-x[2] = 1 (string index)
-x[3] = 1 (string length, always 1)
-x[4] = 71 (ASCII value)
-x[5] = SLEEP...
-
-12/ print x[2], x[4], sprintf("%c", x[4])
-
-x[2] is the flag index, x[4] is the ASCII value, and then print the equivalent char of the ASCII, which is then sort -n (based on x[2], the flag index) to retrieve the full flag.
-
-```
-
 ![.](/images/posts/0002.png)
 
 **`GoN{T1mE_B4s3d_5QL_Inj3c7i0n_wI7h_Pc4p}`**
