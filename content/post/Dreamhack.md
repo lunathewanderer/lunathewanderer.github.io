@@ -277,3 +277,73 @@ We retrieve the passphrase `hidden_Data` to open the temporary memo file.
 This time around, this base64 is simply the flag we are looking for.
 
 **`INCOGNITO{Orphan3d_Obj3cts_R3v3al_Tru3_Int3nt}`**
+
+## 4. Jetbrains Lab
+
+We are presented with a packet capture and nine questions pertaining to it.
+
+**Q1: Identifying the attacker's IP address helps trace the source and stop further attacks. What is the attacker's IP address?**
+
+
+
+**Q2: To identify potential vulnerability exploitation, what version of our web server service is running?**
+
+
+
+**Q3: After identifying the version of our web server service, what CVE number corresponds to the vulnerability the attacker exploited?**
+
+
+
+**Q4: What credentials did the attacker successfully use for Basic Auth against the TeamCity server?**
+
+
+
+
+**Q5: The attacker uploaded a webshell to ensure his access to the system. What is the name of the file that the attacker uploaded?**
+
+
+
+
+**Q6: When did the attacker execute their first command via the web shell?**
+
+
+**Q7: The attacker tampered with a text file that contained the credentials of the admin user of the webserver. What new username and password did the attacker write in the file?**
+
+
+**Q8: Q7 showed the attacker writing false credentials into Creds.txt. Which MITRE ATT&CK sub-technique (Data Manipulation family) describes that specific file-write action?**
+
+
+
+**Q9: Immediately after gaining a shell, the attacker executed a docker command that mounted the host filesystem and chrooted into it — providing full host access. What was that exact command?**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
