@@ -192,7 +192,7 @@ In the images, the animals that received the hearts are dog, squirrel, and hamst
 
 And then, in an autopilot manner, I tried a plethora of steganography decoding techniques, ranging from spamming WSL commands to Online Stegnography Decoder, but sadly, none of them carve out any hidden messages... 
 
-Except for one: OpenStego. An ancient technique that receded into the mist of time. Too bad I forget about this đŸ˜­
+Except for one: OpenStego. An ancient technique that receded into the mist of time. Too bad I forget about this :(˜­
 
 ![.](/images/posts/0062.png)
 
