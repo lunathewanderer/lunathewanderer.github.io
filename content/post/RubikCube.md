@@ -136,68 +136,6 @@ for line in result.stdout.splitlines():
         print(f"Frame {frame}: byte[34] = 0x{plaintext[34]:02x}")
 PY
 ```
-
-**`notifications.txt` and `sol.py`**
-
-```python
-import re
-from pathlib import Path
-from Crypto.Cipher import AES
-
-KEY = bytes([
-    87, 177, 249, 171, 205, 90, 232, 167,
-    156, 185, 140, 231, 87, 140, 81, 8
-])
-
-MOVES = {
-    0x01: "L'", 0x02: "L",
-    0x03: "R'", 0x04: "R",
-    0x05: "D'", 0x06: "D",
-    0x07: "U'", 0x08: "U",
-    0x09: "F'", 0x0A: "F",
-    0x0B: "B'", 0x0C: "B",
-}
-
-def simplify(moves):
-    result = []
-    i = 0
-    while i < len(moves):
-        face = moves[i][0]
-        amount = 0
-        while i < len(moves) and moves[i][0] == face:
-            amount += 3 if moves[i].endswith("'") else 1
-            i += 1
-
-        amount %= 4
-        if amount == 1:
-            result.append(face)
-        elif amount == 2:
-            result.append(face + "2")
-        elif amount == 3:
-            result.append(face + "'")
-    return result
-
-cipher = AES.new(KEY, AES.MODE_ECB)
-seen = set()
-moves = []
-
-for line in (Path(__file__).resolve().parent / "notifications.txt").read_text().splitlines():
-    encrypted = bytes.fromhex(re.sub(r"[^0-9a-fA-F]", "", line))
-    if not encrypted or len(encrypted) % 16:
-        continue
-
-    plain = cipher.decrypt(encrypted)
-
-    if plain[0] != 0xFE or plain[2] != 0x03:
-        continue
-
-    timestamp = int.from_bytes(plain[3:7], "big")
-    move = MOVES.get(plain[34])
-
-    if move and (timestamp, move) not in seen:
-        seen.add((timestamp, move))
-        moves.append(move)
-
 print("Raw moves:", " ".join(moves))
 print("Flag:", "brunner{" + "_".join(simplify(moves)) + "}")
 ```
