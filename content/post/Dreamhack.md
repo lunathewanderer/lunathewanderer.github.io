@@ -246,7 +246,7 @@ To list a few suspicious HTTP payload in the packet:
 - `GET /authenticationTest.html?csrf HTTP/1.1`
 - `POST /generateId.html HTTP/1.1\r\n (application/x-www-form-urlencoded)`
 - `POST /ajax.html HTTP/1.1\r\n (application/x-www-form-urlencoded)`
-- `HTTP/1.1 200 (text/plain)
+- `HTTP/1.1 200 (text/plain)`
 - `GET /app/oauth/space/connections/project/_Root?fullMatch=false&capability=CREATE_SUB_CONNECTION&capability=ISSUE_USER_TOKEN&unwantedCapability=IS_SUB_CONNECTION&queryUserTokens=true&queryPendingType=true HTTP/1.1\r\n`
 - `GET /admin/createProject.html?init=1&parentId=_Root&embedded=true&cameFromUrl=%2Ffavorite%2Fprojects HTTP/1.1\r\n`
 - `POST /hax?jsp=/app/rest/users/id:2/tokens/mD5r0yemB0;.jsp HTTP/1.1\r\n`
