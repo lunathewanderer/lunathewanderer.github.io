@@ -1,14 +1,12 @@
 ---
-title: "..."
+title: "FixFixFix"
 description: "I wish that I could lie, but I'm way too self-aware."
 draft: true
 date: 2026-10-20
 tags:
-  - Network Forensics
-  - Memory Forensics
-  - Disk Forensics
+  - DFIR
 categories:
-  - Learning
+  - Writeup
 cover: "https://i.pinimg.com/1200x/68/a8/38/68a8382cda827a9e12f0d080ecf81f59.jpg"
 banner: "https://i.pinimg.com/1200x/68/a8/38/68a8382cda827a9e12f0d080ecf81f59.jpg"
 ---
