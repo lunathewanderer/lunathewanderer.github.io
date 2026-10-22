@@ -253,7 +253,7 @@ To list a few suspicious HTTP payload in the packet:
 
 ![.](/images/posts/0067.png)
 
-These are evidence of CSRF, (the Cross-Site Request Forgery attack)[https://portswigger.net/web-security/csrf].
+These are evidence of CSRF, [the Cross-Site Request Forgery attack](https://portswigger.net/web-security/csrf).
 
 And they all coming from the aforementioned IP address, further reinforcing that it is indeed the attacker's.
 
