@@ -280,6 +280,9 @@ This time around, this base64 is simply the flag we are looking for.
 
 ## 4. Jetbrains Lab
 
+- **Date**: Oct 22, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 1
+
 We are presented with a packet capture and nine questions pertaining to it.
 
 **Q1: Identifying the attacker's IP address helps trace the source and stop further attacks. What is the attacker's IP address?**
