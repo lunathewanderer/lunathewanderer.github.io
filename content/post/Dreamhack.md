@@ -1,5 +1,5 @@
 ---
-title: "Digital Forensics: Dreamhack Wargames, HackTheBox, CyberDefenders"
+title: "Digital Forensics: Dreamhack Wargames, CyberDefenders, HackTheBox"
 description: "What are you afraid of losing, when nothing in the world actually belongs to you?"
 draft: false
 date: 2026-10-01
@@ -314,7 +314,7 @@ We are presented with a packet capture and nine questions pertaining to it.
 
 
 
-**Q9: Immediately after gaining a shell, the attacker executed a docker command that mounted the host filesystem and chrooted into it — providing full host access. What was that exact command?**
+**Q9: Immediately after gaining a shell, the attacker executed a docker command that mounted the host filesystem and chrooted into it - providing full host access. What was that exact command?**
 
 
 
