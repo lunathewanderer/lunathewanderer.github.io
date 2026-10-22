@@ -230,37 +230,51 @@ We are presented with a packet capture and nine questions pertaining to it.
 
 **Q1: Identifying the attacker's IP address helps trace the source and stop further attacks. What is the attacker's IP address?**
 
+At first glance, the packet is fraught with a multitude of suspicious HTTP requests.
 
+![.](/images/posts/0064.png)
+
+The conversations of those HTTP stream reveals that there is an influx of requests from the IP `23.158.56.196`
+
+![.](/images/posts/0065.png)
+
+Moreover, those requests come in all sizes and shapes.
+
+![.](/images/posts/0066.png)
+
+To list a few suspicious HTTP payload in the packet:
+- `GET /authenticationTest.html?csrf HTTP/1.1`
+- `POST /generateId.html HTTP/1.1\r\n (application/x-www-form-urlencoded)`
+- `POST /ajax.html HTTP/1.1\r\n (application/x-www-form-urlencoded)`
+- `HTTP/1.1 200 (text/plain)
+- `GET /app/oauth/space/connections/project/_Root?fullMatch=false&capability=CREATE_SUB_CONNECTION&capability=ISSUE_USER_TOKEN&unwantedCapability=IS_SUB_CONNECTION&queryUserTokens=true&queryPendingType=true HTTP/1.1\r\n`
+- `GET /admin/createProject.html?init=1&parentId=_Root&embedded=true&cameFromUrl=%2Ffavorite%2Fprojects HTTP/1.1\r\n`
+- `POST /hax?jsp=/app/rest/users/id:2/tokens/mD5r0yemB0;.jsp HTTP/1.1\r\n`
+
+![.](/images/posts/0067.png)
+
+These are evidence of CSRF, (the Cross-Site Request Forgery attack)[https://portswigger.net/web-security/csrf].
+
+And they all coming from the aforementioned IP address, further reinforcing that it is indeed the attacker's.
+
+`Answer: 23.158.56.196`
 
 **Q2: To identify potential vulnerability exploitation, what version of our web server service is running?**
 
-
-
 **Q3: After identifying the version of our web server service, what CVE number corresponds to the vulnerability the attacker exploited?**
-
-
 
 **Q4: What credentials did the attacker successfully use for Basic Auth against the TeamCity server?**
 
-
-
-
 **Q5: The attacker uploaded a webshell to ensure his access to the system. What is the name of the file that the attacker uploaded?**
-
-
-
 
 **Q6: When did the attacker execute their first command via the web shell?**
 
-
 **Q7: The attacker tampered with a text file that contained the credentials of the admin user of the webserver. What new username and password did the attacker write in the file?**
-
 
 **Q8: Q7 showed the attacker writing false credentials into Creds.txt. Which MITRE ATT&CK sub-technique (Data Manipulation family) describes that specific file-write action?**
 
-
-
 **Q9: Immediately after gaining a shell, the attacker executed a docker command that mounted the host filesystem and chrooted into it - providing full host access. What was that exact command?**
+
 
 
 
