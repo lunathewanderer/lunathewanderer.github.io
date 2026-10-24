@@ -12,7 +12,7 @@ categories:
   - Writeup
 cover: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
 banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
-lastmod: 2026-10-24T13:45:09.625Z
+lastmod: 2026-10-24T17:17:15.123Z
 ---
 
 ## 1. sleepingshark
@@ -231,7 +231,7 @@ We are presented with a packet capture and nine questions pertaining to it.
 
 **Q1: Identifying the attacker's IP address helps trace the source and stop further attacks. What is the attacker's IP address?**
 
-At first glance, the packet is fraught with a multitude of suspicious HTTP requests.
+At first glance, the packet is fraught with a multitude of suspicious HTTP requests. Indeed, the vulnerability lies in the web server.
 
 ![.](/images/posts/0064.png)
 
@@ -273,6 +273,8 @@ In the response body of the request
 
 you will find a metadata field called `<server version>`.
 
+A more efficient method can be filtering for keyword, in this case, `server`.
+
 `Answer: 2023.11.3`
 
 **Q3: After identifying the version of our web server service, what CVE number corresponds to the vulnerability the attacker exploited?**
@@ -289,34 +291,59 @@ In the same request as of Q3, we can see the metadata (credentials) right down b
 
 **Q5: The attacker uploaded a webshell to ensure his access to the system. What is the name of the file that the attacker uploaded?**
 
-Upon inspecting POST /admin/pluginUpload.html in the same HTTP stream, we can see the file that the attacker upload:
+Upon inspecting `POST /admin/pluginUpload.html` in the same HTTP stream, we can see the file that the attacker upload:
 
 `Content-Disposition: form-data; name="file:fileToUpload"; filename="NSt8bHTg.zip"` 
 
 Interestingly, scattering throughout the packet, we can also see the request with the name `POST /plugins/NSt8bHTg.jsp HTTP/1.1 (application/x-www-form-urlencoded)`, which is also the name of the file mentioned.
 
-> This is a vulnerability called [Zip Slip](https://darkt.medium.com/zip-slip-leading-to-remote-command-execution-in-java-application-fd3c41150b71). A malicious `.zip` file can contain path traversal filenames. If the application extracts the archive without validating file paths, the attacker can write a backdoor `.jsp` file directly into the server's web root, leading to Remote Code Execution (RCE).
+> This is an indication of a vulnerability called [Zip Slip](https://darkt.medium.com/zip-slip-leading-to-remote-command-execution-in-java-application-fd3c41150b71), wherein a malicious `.zip` file can contain path traversal filenames. If the application extracts the archive without validating file paths, the attacker can write a backdoor `.jsp` file directly into the server's web root, leading to Remote Code Execution (RCE).
+
+`Answer: NSt8bHTg.zip`
 
 **Q6: When did the attacker execute their first command via the web shell?**
 
+Apply the filter for the attacker's IP address and the keyword "cmd":
 
+`ip.addr == 23.158.56.196 && frame contains "cmd"`
+
+Look for the first one (which is `"cmd"="ls"`, executed via the `.jsp` web shell), and view the UTC Arrival Time.
+
+`Answer: 2024-06-30 08:03`
 
 **Q7: The attacker tampered with a text file that contained the credentials of the admin user of the webserver. What new username and password did the attacker write in the file?**
 
+We keep searching along the lines of `cmd` (since the question tell us that the attacker **wrote** something). Indeed, we encounter a request that contains that mentioned command:
+
+`"cmd"="bash -c echo "username:a1l4m,password:youarecompromised" > /tmp/Creds.txt"`
+
+`Answer: a1l4m:youarecompromised`
+
 **Q8: Q7 showed the attacker writing false credentials into Creds.txt. Which MITRE ATT&CK sub-technique (Data Manipulation family) describes that specific file-write action?**
 
+![image](/images/posts/dreamhack-933703/image-1792857821949-684f88.png)
+
+Well, there is only three sub-techniques. Initially, I'm torn between Stored Data Manipulation (T1565.001) and Transmitted Data Manipulation (T1565.002)
+
+> **Stored Data Manipulation (T1565.001)**: *"Adversaries may insert, delete, or manipulate data at rest in order to influence external outcomes or hide activity, thus threatening the integrity of the data. By manipulating stored data, adversaries may attempt to affect a business process, organizational understanding, and decision making."*
+> 
+> **Transmitted Data Manipulation (T1565.002)**: *"Adversaries may alter data en route to storage or other systems in order to manipulate external outcomes or hide activity, thus threatening the integrity of the data. By manipulating transmitted data, adversaries may attempt to affect a business process, organizational understanding, and decision making."*
+
+After some pondering, well, we can come to a plausible conclusion that: the attacker used a web shell to run some commands to change data stored on the server, like, the `Creds.txt` is pretty much static. And there is no sign of altering any data en route to the server or modifying system processes that I know of.
+
+`Answer: T1565.001`
+
 **Q9: Immediately after gaining a shell, the attacker executed a docker command that mounted the host filesystem and chrooted into it - providing full host access. What was that exact command?**
+
+The keyword this time to filter should be `docker` and `chroot`.
+
+`Answer: docker run --rm -it -v /:/host ubuntu chroot /host`
 
 
 ## 4. RetailBreach
 
 - **Date**: Oct 24, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 1
-
-
-
-
-
 
 **Q1: Identifying an attacker's IP address is crucial for mapping the attack's extent and planning an effective response. What is the attacker's IP address?**
 
