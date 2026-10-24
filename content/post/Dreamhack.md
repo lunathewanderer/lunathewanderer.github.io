@@ -12,6 +12,7 @@ categories:
   - Writeup
 cover: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
 banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
+lastmod: 2026-10-24T07:18:57.133Z
 ---
 
 ## 1. sleepingshark
@@ -221,7 +222,7 @@ This time around, this base64 is simply the flag we are looking for.
 
 **`INCOGNITO{Orphan3d_Obj3cts_R3v3al_Tru3_Int3nt}`**
 
-## 4. Jetbrains Lab
+## 4. Jetbrains
 
 - **Date**: Oct 22, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 1
@@ -243,6 +244,7 @@ Moreover, those requests come in all sizes and shapes.
 ![.](/images/posts/0066.png)
 
 To list a few suspicious HTTP payload in the packet:
+```
 - `GET /authenticationTest.html?csrf HTTP/1.1`
 - `POST /generateId.html HTTP/1.1\r\n (application/x-www-form-urlencoded)`
 - `POST /ajax.html HTTP/1.1\r\n (application/x-www-form-urlencoded)`
@@ -250,7 +252,7 @@ To list a few suspicious HTTP payload in the packet:
 - `GET /app/oauth/space/connections/project/_Root?fullMatch=false&capability=CREATE_SUB_CONNECTION&capability=ISSUE_USER_TOKEN&unwantedCapability=IS_SUB_CONNECTION&queryUserTokens=true&queryPendingType=true HTTP/1.1\r\n`
 - `GET /admin/createProject.html?init=1&parentId=_Root&embedded=true&cameFromUrl=%2Ffavorite%2Fprojects HTTP/1.1\r\n`
 - `POST /hax?jsp=/app/rest/users/id:2/tokens/mD5r0yemB0;.jsp HTTP/1.1\r\n`
-
+```
 ![.](/images/posts/0067.png)
 
 These are evidence of CSRF, [the Cross-Site Request Forgery attack](https://portswigger.net/web-security/csrf).
@@ -261,11 +263,33 @@ And they all coming from the aforementioned IP address, further reinforcing that
 
 **Q2: To identify potential vulnerability exploitation, what version of our web server service is running?**
 
+We've already known that HTTP requests are suspicious, as well as the attacker's IP address. Therefore let's apply the filter for that with: 
+
+`ip.src == 23.158.56.196 && http`
+
+In the response body of the request 
+
+`GET /hax?jsp=/app/rest/server;.jsp`, 
+
+you will find a metadata field called `<server version>`.
+
+`Answer: 2023.11.3`
+
 **Q3: After identifying the version of our web server service, what CVE number corresponds to the vulnerability the attacker exploited?**
+
+Upon looking up the vulnerability for TeamCity with the aforementioned server version, we found two relevant articles from [Splunk](https://www.splunk.com/en_us/blog/security/security-insights-jetbrains-teamcity-cve-2024-27198-and-cve-2024-27199.html) and [Rapid7](https://www.rapid7.com/blog/post/ra-cve-2024-27198-analysis/).
+
+`Answer: CVE-2024-27198`
 
 **Q4: What credentials did the attacker successfully use for Basic Auth against the TeamCity server?**
 
+In the same request as of Q3, we can see the metadata (credentials) right down below.
+
+`Answer: c91oyemw:CL5vzdwLuK`
+
 **Q5: The attacker uploaded a webshell to ensure his access to the system. What is the name of the file that the attacker uploaded?**
+
+
 
 **Q6: When did the attacker execute their first command via the web shell?**
 
@@ -276,10 +300,34 @@ And they all coming from the aforementioned IP address, further reinforcing that
 **Q9: Immediately after gaining a shell, the attacker executed a docker command that mounted the host filesystem and chrooted into it - providing full host access. What was that exact command?**
 
 
+## 4. RetailBreach
+
+- **Date**: Oct 24, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 1
 
 
 
 
+
+
+**Q1: Identifying an attacker's IP address is crucial for mapping the attack's extent and planning an effective response. What is the attacker's IP address?**
+
+
+**Q2: The attacker used a directory brute-forcing tool to discover hidden paths. Which tool did the attacker use to perform the brute-forcing?**
+
+
+**Q3: Cross-Site Scripting (XSS) allows attackers to inject malicious scripts into web pages viewed by users. Can you specify the XSS payload that the attacker used to compromise the integrity of the web application?**
+
+
+**Q4: Pinpointing the exact moment an admin user encounters the injected malicious script is crucial for understanding the timeline of a security breach. Can you provide the UTC timestamp when the admin user first visited the page containing the injected malicious script?**
+
+
+**Q5: The theft of a session token through XSS is a serious security breach that allows unauthorized access. Can you provide the session token that the attacker acquired and used for this unauthorized access?**
+
+**Q6: Identifying which scripts have been exploited is crucial for mitigating vulnerabilities in a web application. What is the name of the script that was exploited by the attacker?**
+
+
+**Q7: Exploiting vulnerabilities to access sensitive system files is a common tactic used by attackers. Can you identify the specific payload the attacker used to access a sensitive system file?**
 
 
 
