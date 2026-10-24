@@ -12,7 +12,7 @@ categories:
   - Writeup
 cover: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
 banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
-lastmod: 2026-10-24T07:18:57.133Z
+lastmod: 2026-10-24T13:45:09.625Z
 ---
 
 ## 1. sleepingshark
@@ -289,9 +289,17 @@ In the same request as of Q3, we can see the metadata (credentials) right down b
 
 **Q5: The attacker uploaded a webshell to ensure his access to the system. What is the name of the file that the attacker uploaded?**
 
+Upon inspecting POST /admin/pluginUpload.html in the same HTTP stream, we can see the file that the attacker upload:
 
+`Content-Disposition: form-data; name="file:fileToUpload"; filename="NSt8bHTg.zip"` 
+
+Interestingly, scattering throughout the packet, we can also see the request with the name `POST /plugins/NSt8bHTg.jsp HTTP/1.1 (application/x-www-form-urlencoded)`, which is also the name of the file mentioned.
+
+> This is a vulnerability called [Zip Slip](https://darkt.medium.com/zip-slip-leading-to-remote-command-execution-in-java-application-fd3c41150b71). A malicious `.zip` file can contain path traversal filenames. If the application extracts the archive without validating file paths, the attacker can write a backdoor `.jsp` file directly into the server's web root, leading to Remote Code Execution (RCE).
 
 **Q6: When did the attacker execute their first command via the web shell?**
+
+
 
 **Q7: The attacker tampered with a text file that contained the credentials of the admin user of the webserver. What new username and password did the attacker write in the file?**
 
