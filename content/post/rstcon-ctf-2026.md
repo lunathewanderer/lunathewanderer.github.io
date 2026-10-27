@@ -8,8 +8,8 @@ tags:
   - Steganography
 categories:
   - Writeup
-cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvC-akBG3_LSC9KXyqKdAcC4M07Gx-o1pqmo0eAMDsOeCIkm-tutKQ8w4&s=10"
-banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvC-akBG3_LSC9KXyqKdAcC4M07Gx-o1pqmo0eAMDsOeCIkm-tutKQ8w4&s=10"
+cover: "https://i.pinimg.com/1200x/25/7c/b4/257cb41be751e844b0ec245069ce96a9.jpg"
+banner: "https://i.pinimg.com/1200x/25/7c/b4/257cb41be751e844b0ec245069ce96a9.jpg"
 lastmod: 2026-10-26T06:29:41.818Z
 ---
 
