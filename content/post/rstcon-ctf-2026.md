@@ -1,9 +1,15 @@
 ---
 title: RSTCON CTF 2026
+description: "I want you to live a normal life and die a normal death."
 draft: false
 date: 2026-10-26T06:02:33.342Z
+tags:
+  - Network Forensics
+  - Steganography
 categories:
   - Writeup
+cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvC-akBG3_LSC9KXyqKdAcC4M07Gx-o1pqmo0eAMDsOeCIkm-tutKQ8w4&s=10"
+banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvC-akBG3_LSC9KXyqKdAcC4M07Gx-o1pqmo0eAMDsOeCIkm-tutKQ8w4&s=10"
 lastmod: 2026-10-26T06:29:41.818Z
 ---
 
