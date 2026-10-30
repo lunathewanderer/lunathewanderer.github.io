@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-10-30T03:16:42.089Z
+lastmod: 2026-10-30T09:30:03.510Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -231,20 +231,36 @@ From these information, I suppose we can conclude that `10.0.0.130` is our attac
 
 **Q2. To fully understand the extent of the breach, can you determine the machine's hostname to which the attacker first pivoted?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793351530886-04d018.png)
+
+At first, I thought it was `Marketing-PC`, since there are early signs of enumeration targeting that host. However, there is something deeper than that.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793350737246-61fb99.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793351925671-4e8a53.png)
+
+There are clusters of SMB2 traffic, which are attempting to:
+
+**- Q2: NTLMSSP_AUTH, User: \ssales**
+**- Q3: Write `psexesvc.exe`**
+
+I suppose, these are signs of the attacker has successfully gained access of the workstation.
+
+Upon follow those streams, (be it TCP or SMB2), we can see fragments of the workstation "SALES-PC" throughout the NTLMSSP payload. 
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793350902549-b83971.png)
+
+This confirmed SALES-PC as the first machine the attacker compromised after gaining access.
 
 `Answer: Sales-PC`
 
 **Q3. Knowing the username of the account the attacker used for authentication will give us insights into the extent of the breach. What is the username utilized by the attacker for authentication?**
-
-
 
 `Answer: ssales`
 
 **Q4. After figuring out how the attacker moved within our network, we need to know what they did on the target machine. What's the name of the service executable the attacker set up on the target?**
 
 `Answer: psexesvc.exe`
-
-
 
 **Q5. We need to know how the attacker installed the service on the compromised machine to understand the attacker's lateral movement tactics. This can help identify other affected systems. Which network share was used by PsExec to install the service on the target machine?**
 
