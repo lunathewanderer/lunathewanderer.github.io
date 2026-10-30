@@ -1,10 +1,10 @@
 ---
 title: CyberDefenders' Lab
 draft: false
-date: 2026-10-30T02:18:43.084Z
+date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-10-30T02:26:56.035Z
+lastmod: 2026-10-30T03:16:42.089Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -17,6 +17,7 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 
 - **Date**: Oct 22, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 1
+- **Category**: Network Forensics
 
 We are presented with a packet capture and nine questions pertaining to it.
 
@@ -140,6 +141,7 @@ The keyword this time to filter should be `docker` and `chroot`.
 
 - **Date**: Oct 24, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 1
+- **Category**: Network Forensics
 
 **Q1: Identifying an attacker's IP address is crucial for mapping the attack's extent and planning an effective response. What is the attacker's IP address?**
 
@@ -199,6 +201,7 @@ The answer lies in the payload of the previous question. The script `log_viewer.
 
 - **Date**: Oct 24, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Network Forensics
 
 **Q1. To effectively trace the attacker's activities within our network, can you identify the IP address of the machine from which the attacker initially gained access?**
 
@@ -225,4 +228,181 @@ Moreover, the requests from `10.0.0.130` are particularly suspicious. There is o
 From these information, I suppose we can conclude that `10.0.0.130` is our attacker's IP address.
 
 `Answer: 10.0.0.130`
+
+**Q2. To fully understand the extent of the breach, can you determine the machine's hostname to which the attacker first pivoted?**
+
+
+`Answer: Sales-PC`
+
+**Q3. Knowing the username of the account the attacker used for authentication will give us insights into the extent of the breach. What is the username utilized by the attacker for authentication?**
+
+
+
+`Answer: ssales`
+
+**Q4. After figuring out how the attacker moved within our network, we need to know what they did on the target machine. What's the name of the service executable the attacker set up on the target?**
+
+`Answer: psexesvc.exe`
+
+
+
+**Q5. We need to know how the attacker installed the service on the compromised machine to understand the attacker's lateral movement tactics. This can help identify other affected systems. Which network share was used by PsExec to install the service on the target machine?**
+
+
+`Answer: ADMIN$`
+
+**Q6. We must identify the network share used to communicate between the two machines. Which network share did PsExec use for communication?**
+
+`Answer: IPC$`
+
+
+**Q7. Now that we have a clearer picture of the attacker's activities on the compromised machine, it's important to identify any further lateral movement. What is the hostname of the second machine the attacker targeted to pivot within our network?**
+
+`Answer: Marketing-PC`
+
+## 4. Tomcat Takeover
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Network Forensics
+
+**Q1. Given the suspicious activity detected on the web server, the PCAP file reveals a series of requests across various ports, indicating potential scanning behavior. Can you identify the source IP address responsible for initiating these requests on our server?**
+
+`Answer: 14.0.0.120`
+
+**Q2. Based on the identified IP address associated with the attacker, can you identify the country from which the attacker's activities originated?**
+
+`Answer: China`
+
+**Q3. From the PCAP file, multiple open ports were detected as a result of the attacker's active scan. Which of these ports provides access to the web server admin panel?**
+
+`Answer: 8080`
+
+**Q4. Following the discovery of open ports on our server, it appears that the attacker attempted to enumerate and uncover directories and files on our web server. Which tools can you identify from the analysis that assisted the attacker in this enumeration process?**
+
+`Answer: gobuster`
+
+**Q5. After enumerating directories on our web server, the attacker made numerous requests to identify administrative interfaces. Which directory related to the admin panel did the attacker uncover? (Provide the path including the leading slash, e.g. /path)**
+
+`Answer: /manager`
+
+**Q6. After accessing the admin panel, the attacker brute-forced the login. What credentials did the attacker successfully use? (Provide them in username:password format)**
+
+`Answer: admin:tomcat`
+
+**Q7. Once inside the admin panel, the attacker attempted to upload a file with the intent of establishing a reverse shell. Can you identify the name of this malicious file from the captured data?**
+
+`Answer: JXQOZY.war`
+
+**Q8. After the attacker established a reverse shell on our server, the payload connects back to the attacker's machine. From the analysis, what is the callback destination in IP:port format?**
+
+`Answer: 14.0.0.120:443`
+
+## 5. GrabThePhisher
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Threat Intel
+
+**Q1. Which wallet is used for asking the seed phrase?**
+
+`Answer: MetaMask`
+
+**Q2. What is the file name that has the code for the phishing kit?**
+
+`Answer: metamask.php`
+
+**Q3. In which language was the kit written?**
+
+`Answer: PHP`
+
+**Q4. What service does the kit use to retrieve the victim's machine information?**
+
+`Answer: Sypex Geo`
+
+**Q5. How many seed phrases were already collected?**
+
+`Answer: 3`
+
+**Q6. Could you please provide the seed phrase associated with the most recent phishing incident?**
+
+`Answer: father also recycle embody balance concert mechanic believe owner pair muffin hockey`
+
+**Q7. Which medium was used for credential dumping?**
+
+`Answer: Telegram`
+
+**Q8. What is the token for accessing the channel?**
+
+`Answer: 5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10`
+
+**Q9. What is the Chat ID for the phisher's channel?**
+
+`Answer: 5442785564`
+
+**Q10. What are the allies of the phish kit developer?**
+
+`Answer: j1j1b1s@m3r0`
+
+## 6. Yellow RAT
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Threat Intel
+
+**Q1. What name does Red Canary use for the threat cluster associated with the SHA256 in hash.txt? Submit the name used in its technical analysis, without adding a malware-type suffix.**
+
+`Answer: Yellow Cockatoo`
+
+**Q2. As part of our incident response, knowing the malware's common filenames can help us scan other workstations for potential infection. What is the common filename associated with this malware? (Use VirusTotal)**
+
+`Answer: 111bc461-1ca8-43c6-97ed-911e0e69fdf8.dll`
+
+**Q3. Determining a malware sample's compilation timestamp can reveal insights into its development and deployment timeline. What compilation timestamp does VirusTotal show for this malware sample?**
+
+`Answer: 2020-09-24 18:26`
+
+**Q4. Understanding when the broader cybersecurity community first identified the malware could help determine how long the malware might have been in the environment before detection. When was the malware first submitted to VirusTotal?**
+
+`Answer: 2020-10-15 02:47`
+
+**Q5. To completely eradicate the threat from Industries' systems, we need to identify all components dropped by the malware. What is the name of the .dat file that the malware dropped in the AppData folder?**
+
+`Answer: solarmarker.dat`
+
+**Q6. It is crucial to identify the C2 servers with which the malware communicates to block its communication and prevent further data exfiltration. What is the C2 server that the malware is communicating with?**
+
+`Answer: https://gogohid.com`
+
+## 7. IcedID
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Threat Intel
+
+**Q1. What is the name of the file associated with the given hash?**
+
+`Answer: document-1982481273.xlsm`
+
+**Q2. Can you identify the filename of the GIF file that was deployed?**
+
+`Answer: 3003.gif`
+
+**Q3. How many domains does the malware look to download the additional payload file in Q2?**
+
+`Answer: 5`
+
+**Q4. From the domains mentioned in Q3, a DNS registrar was predominantly used by the threat actor to host their harmful content, enabling the malware's functionality. Can you specify the Registrar INC of the domain that end with .com?**
+
+`Answer: NAMECHEAP`
+
+**Q5. Could you specify the threat actor linked to the sample provided?**
+
+`Answer: GOLD CABIN`
+
+**Q6. In the Execution phase, what function does the malware employ to fetch extra payloads onto the system?**
+
+`Answer: URLDownloadToFileA`
+
+
+
+
+
+
 
