@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-10-30T09:30:03.510Z
+lastmod: 2026-11-02T17:02:43.716Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -151,7 +151,7 @@ We can see that there are two different IP addresses in the HTTP session. The fi
 
 **Q2: The attacker used a directory brute-forcing tool to discover hidden paths. Which tool did the attacker use to perform the brute-forcing?**
 
-We can see an influx of HTTP GET requests from the attacker, with the form of `./passwd`, `./htpasswd`, `/chpasswd`,... Upon clicking on these requests, we can see this directory brute-forcing use gobuster.
+We can see an influx of HTTP GET requests from the attacker, with the form of `./passwd`, `./htpasswd`, `/chpasswd`,... Upon clicking on these requests, we can see this directory brute-forcing use `gobuster`.
 
 `Answer: gobuster`
 
@@ -209,9 +209,9 @@ At first glance, there is a large amount of traffic of SMB2 under NetBIOS.
 
 ![image](/images/posts/rstcon-ctf-2026-f495bb/image-1793246130295-3fbd9a.png)
 
-> *A large amount of SMB (Server Message Block) traffic running under NetBIOS usually indicates legacy Windows networking activity, active file/printer sharing, or a potential network scanning/malware spreading event.*
+> A large amount of SMB (Server Message Block) traffic running under NetBIOS usually indicates legacy Windows networking activity, active file/printer sharing, or a potential network scanning/malware spreading event.
 > 
-> *In modern networks, SMB typically runs directly over TCP port 445 (Active Directory / Direct Host). When you see it heavily wrapped in NetBIOS (ports 137, 138, and 139), it points to specific architectural behaviors or anomalies.*
+> In modern networks, SMB typically runs directly over TCP port 445 (Active Directory / Direct Host). When you see it heavily wrapped in NetBIOS (ports 137, 138, and 139), it points to specific architectural behaviors or anomalies.
 
 There is also an influx of traffic from the IP address `10.0.0.130`.
 
@@ -241,8 +241,9 @@ At first, I thought it was `Marketing-PC`, since there are early signs of enumer
 
 There are clusters of SMB2 traffic, which are attempting to:
 
-**- Q2: NTLMSSP_AUTH, User: \ssales**
-**- Q3: Write `psexesvc.exe`**
+**- Q3: NTLMSSP_AUTH, User: \ssales**
+
+**- Q4: Write `psexesvc.exe`**
 
 I suppose, these are signs of the attacker has successfully gained access of the workstation.
 
@@ -264,6 +265,23 @@ This confirmed SALES-PC as the first machine the attacker compromised after gain
 
 **Q5. We need to know how the attacker installed the service on the compromised machine to understand the attacker's lateral movement tactics. This can help identify other affected systems. Which network share was used by PsExec to install the service on the target machine?**
 
+First things first, what is even network share?
+
+> - *A network share is a resource on one computer that other computers can access over a network. It is usually a folder, but it can also be a printer or a service. Network Sharing Protocols include SMB, NFS, AFP.*
+>
+> - A network share is normally identified by the path `\\ComputerName\ShareName`. The `$` at the end of some Windows share names means the share is hidden from normal browsing. For example:
+>   -  `\\PC\Documents` indicates a regular share
+>   - `\\PC\C$` indicates a hidden administrative share
+
+Across the packet, we can only see two network share (Tree Connect requests) `ADMIN$` and `IPC$`. They are built-in hidden administrative shares created automatically by Windows operating systems
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793627699063-952b11.png)
+
+Let's delve into the function of both of the network shares.
+- `ADMIN$ (Administration Share)` allows remote administrators with proper credentials to manage system files, deploy updates, or inspect configuration settings across the network without needing physical access to the machine.
+- `IPC$ (Inter-Process Communication Share)` facilitates inter-process communication, named pipe connections, remote procedure calls (RPC), and authentication/permission checks between networked computers before other standard shares can be accessed.
+
+That said, the answer to **Q5** is **ADMIN$**, and **Q6** **IPC$**
 
 `Answer: ADMIN$`
 
@@ -274,6 +292,10 @@ This confirmed SALES-PC as the first machine the attacker compromised after gain
 
 **Q7. Now that we have a clearer picture of the attacker's activities on the compromised machine, it's important to identify any further lateral movement. What is the hostname of the second machine the attacker targeted to pivot within our network?**
 
+If you follow the stream chronologically, you can see that down the end of the packet, the target became `Marketing-PC` rather than the `Sales-PC` at the outset.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793629966303-95d101.png)
+
 `Answer: Marketing-PC`
 
 ## 4. Tomcat Takeover
@@ -283,25 +305,64 @@ This confirmed SALES-PC as the first machine the attacker compromised after gain
 
 **Q1. Given the suspicious activity detected on the web server, the PCAP file reveals a series of requests across various ports, indicating potential scanning behavior. Can you identify the source IP address responsible for initiating these requests on our server?**
 
+The `Dst. Port` of requests from the IP address `14.0.0.120` varies. 
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793631477202-e9b04a.png)
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793631516127-8f7edd.png)
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793631528974-5e3324.png)
+
+Moreover, there is a suspiciously high volume of `TCP SYN` (initiate a connection) and `TCP RST/ACK` (acknowledge the request but reset/reject the connection) traffic in from the source to the destination, in a very short span.
+
+That pattern strongly suggests an automated SYN port scan: one host is checking which ports respond. A large number of SYN packets aimed at one port could instead suggest a SYN flood. Traffic volume alone cannot prove intent; but if you know, you know.
+
 `Answer: 14.0.0.120`
 
 **Q2. Based on the identified IP address associated with the attacker, can you identify the country from which the attacker's activities originated?**
+
+At first, I suppose we need to scavenger hunt this information in the packet capture, like other queries. However, it turns out that the intended approach is to perform an [IP lookup](https://www.ip2location.com/14.0.0.120). This effectively reveals the geological data of the IP address, which in fact originating in Guangzhou, China.
 
 `Answer: China`
 
 **Q3. From the PCAP file, multiple open ports were detected as a result of the attacker's active scan. Which of these ports provides access to the web server admin panel?**
 
+After the incessant port scanning, `Dst. Port: 8080` finally provides a breakthrough, allowing the attacker to successfully call a `GET` request to the web server, and subsequently, access the admin panel.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793633418373-780172.png)
+
 `Answer: 8080`
 
 **Q4. Following the discovery of open ports on our server, it appears that the attacker attempted to enumerate and uncover directories and files on our web server. Which tools can you identify from the analysis that assisted the attacker in this enumeration process?**
+
+This is common knowledge, but to confirm the methodology, we have:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793634198166-e20ff4.png)
 
 `Answer: gobuster`
 
 **Q5. After enumerating directories on our web server, the attacker made numerous requests to identify administrative interfaces. Which directory related to the admin panel did the attacker uncover? (Provide the path including the leading slash, e.g. /path)**
 
+I attempted to inspect `GET /admin`, with a view to discover more about the admin panel.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793635031299-91f5b3.png)
+
+Noticeably, in the same stream, there is also a host of requests to the `/manager` directory. 
+
+We can therefore infer that, the `/manager` directory (which has been discovered by the port scanner) seems to associated with the admin panel, in the Apache Tomcat web server.
+
 `Answer: /manager`
 
 **Q6. After accessing the admin panel, the attacker brute-forced the login. What credentials did the attacker successfully use? (Provide them in username:password format)**
+
+Initially, I tried to filter for `username`, but this is not the correct credential.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793635670695-c0c7e2.png)
+
+Try again, let's filter for `manager` and `http`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793638606343-008f19.png)
+
+We can see that there is some trial and error at play. The attacker tried to login unauthorized, and failed multipled time. Their failed credential is `dG9tY2F0OnMzY3IzdA==`, which is... `tomcat:s3cr3t`
+
 
 `Answer: admin:tomcat`
 
