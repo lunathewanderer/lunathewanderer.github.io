@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-03T05:32:35.040Z
+lastmod: 2026-11-03T05:47:29.049Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -281,7 +281,7 @@ Let's delve into the function of both of the network shares.
 - `ADMIN$ (Administration Share)` allows remote administrators with proper credentials to manage system files, deploy updates, or inspect configuration settings across the network without needing physical access to the machine.
 - `IPC$ (Inter-Process Communication Share)` facilitates inter-process communication, named pipe connections, remote procedure calls (RPC), and authentication/permission checks between networked computers before other standard shares can be accessed.
 
-That said, the answer to **Q5** is **ADMIN$**, and **Q6** **IPC$**
+That said, the answer to **Q5** is **ADMIN$**, and **Q6 IPC$**
 
 `Answer: ADMIN$`
 
@@ -386,15 +386,15 @@ Following the suspicious `GET /JXQOZY/ HTTP/1.1`, we can see that the attacker a
 >
 > That said, `.war` (or `.jar` in general) is benign intrinsically. They only become malicious when an attacker embeds unauthorized code (web shell, backdoor, or RCE payload) inside the archive and deploys or uploads it to a vulnerable server.
 
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793679283691-136ae2.png)
+Moreover, the file was in fact successfully uploaded and accessed by the attacker afterwards, resulting in the `HTTP/1.1 200 OK` response from the server.
 
-The file was successfully uploaded and accessed by the attacker afterwards, resulting in the `HTTP/1.1 200 OK` response from the server.
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793679283691-136ae2.png)
 
 `Answer: JXQOZY.war`
 
 **Q8. After the attacker established a reverse shell on our server, the payload connects back to the attacker's machine. From the analysis, what is the callback destination in IP:port format?**
 
-Having established the shell, the attacker performs a host of commands afterwards, such as `whoami`, `cd /tmp`, `pwd`. These are simple, but there is a more noteworthy command:
+Having established the shell, the attacker performed a host of commands afterwards, such as `whoami`, `cd /tmp`, `pwd`. These are simple, but there is a more noteworthy command:
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793682176146-c509d8.png)
 
