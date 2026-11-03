@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-03T09:47:25.957Z
+lastmod: 2026-11-03T09:51:14.207Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -281,7 +281,7 @@ Let's delve into the function of both of the network shares.
 - `ADMIN$ (Administration Share)` allows remote administrators with proper credentials to manage system files, deploy updates, or inspect configuration settings across the network without needing physical access to the machine.
 - `IPC$ (Inter-Process Communication Share)` facilitates inter-process communication, named pipe connections, remote procedure calls (RPC), and authentication/permission checks between networked computers before other standard shares can be accessed.
 
-That said, the answer to **Q5** is **ADMIN$**, and **Q6 IPC$**
+That said, we have the answer to Q5 and Q6.
 
 `Answer: ADMIN$`
 
