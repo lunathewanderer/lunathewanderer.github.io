@@ -9,6 +9,7 @@ categories:
   - Writeup
 cover: "/images/covers/rubik.jpg"
 banner: "/images/covers/rubik.jpg"
+lastmod: 2026-11-06T14:21:11.791Z
 ---
 
 > Figure out what moves they executed and write them in standard notation separated by underscores and wrapped in `brunner{}`. Example: If the sequence was R B B U F' F' D', the flag would be `brunner{R_B2_U_F2_D'}`.
@@ -135,9 +136,6 @@ for line in result.stdout.splitlines():
     if plaintext[0] == 0xFE and plaintext[2] == 0x03:
         print(f"Frame {frame}: byte[34] = 0x{plaintext[34]:02x}")
 PY
-```
-print("Raw moves:", " ".join(moves))
-print("Flag:", "brunner{" + "_".join(simplify(moves)) + "}")
 ```
 
 **`brunner{F2_U2_B'_R2_B'_L_D2_R_F2_U_B2_D_R2_B2_D'_B2_U_F2_U_B}`**
