@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-03T09:54:10.486Z
+lastmod: 2026-11-06T15:52:20.010Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -554,6 +554,8 @@ We can see their names in the comment/message.
 - **Date**: Oct 30, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Threat Intel
+
+We are presented with a malware hash `30E527E45F50D2BA82865C5679A6FA998EE0A1755361AB01673950810D071C85`, and we are prompted to gather intel on this malware using online platforms.
 
 **Q1. What name does Red Canary use for the threat cluster associated with the SHA256 in hash.txt? Submit the name used in its technical analysis, without adding a malware-type suffix.**
 
