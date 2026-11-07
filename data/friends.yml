@@ -1,13 +1,3 @@
-- name: "Ahrial The Trash"
-  url: "https://ahrial-notes.onrender.com/#/"
-  desc: "“There is no prize to perfection. Only an end to pursuit.”"
-  image: "https://i.pinimg.com/736x/63/2a/14/632a14464992e67f307686726027a7a2.jpg"
-
-- name: "devobass"
-  url: "https://devobass.neocities.org/"
-  desc: "nananananananamimanamaminamanaminanamin"
-  image: "https://i.pinimg.com/736x/71/ff/86/71ff867c5edd020d684254df6b423b9a.jpg"
-  
 - name: "lunuyennhi"
   url: "https://lunuyennhi-dev.github.io/"
   desc: "an unfathomably-happy-go-lucky-and-chaotically-curious-and-emotionally-detached-kinda-girl"
@@ -18,6 +8,21 @@
   desc: "i feel the camaraderie idk this guy chill af weirdo lucario pochita whatever"
   image: "https://i.pinimg.com/736x/9c/0b/03/9c0b03dcad86850c874d7a7f3fb601ae.jpg"
 
+- name: "siuhangao"
+  url: "https://thuhan01.github.io/"
+  desc: "ermmmm a funny-looking petite gurl, and she's into bad boy hohoho"
+  image: "https://thuhan01.github.io/avatar/karma-avatar-896bc838.jpg"
+
+- name: "Ahrial The Trash"
+  url: "https://ahrial-notes.onrender.com/#/"
+  desc: "0%"
+  image: "https://i.pinimg.com/736x/72/9f/b1/729fb18fcebf4d05dc2ec6d929963929.jpg"
+
+- name: "devobass"
+  url: "https://devobass.neocities.org/"
+  desc: "nananananananamimanamaminamanaminanamin"
+  image: "https://i.pinimg.com/736x/71/ff/86/71ff867c5edd020d684254df6b423b9a.jpg"
+  
 - name: "vtnam"
   url: "https://vtnam207.vercel.app/"
   desc: "lowkey hotboy playing reverse engineering :)"
@@ -27,11 +32,6 @@
   url: "https://vvih.vercel.app/"
   desc: "uocgicoaycungnoiyeutoi"
   image: "https://i.pinimg.com/1200x/45/dd/f5/45ddf56434fd8e4ca52111dcb5b4af66.jpg"
-
-- name: "siuhangao"
-  url: "https://thuhan01.github.io/"
-  desc: "ermmmm a funny-looking petite gurl, and she's into bad boy hohoho"
-  image: "https://thuhan01.github.io/avatar/karma-avatar-896bc838.jpg"
 
 - name: "mdk"
   url: "https://dkoazw.github.io/#/"
