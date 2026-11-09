@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-09T03:47:17.663Z
+lastmod: 2026-11-09T05:19:42.405Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -601,10 +601,9 @@ Again, read the above documentation:
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195762789-b5f95c.png)
 
-You can also find the server in VirusTotal.
+You can also find the server in VirusTotal (*Behavior > Activity Summary*)
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195643873-820a61.png)
-
 
 `Answer: https://gogohid.com`
 
@@ -617,17 +616,29 @@ We are presented with a malware hash `191eda0c539d284b29efe556abb05cd75a9077a0`,
 
 **Q1. What is the name of the file associated with the given hash?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794198219949-c57506.png)
+
 `Answer: document-1982481273.xlsm`
 
 **Q2. Can you identify the filename of the GIF file that was deployed?**
+
+*Relations > Connected URLs*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794199472749-092fe3.png)
 
 `Answer: 3003.gif`
 
 **Q3. How many domains does the malware look to download the additional payload file in Q2?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200473506-781be1.png)
+
 `Answer: 5`
 
 **Q4. From the domains mentioned in Q3, a DNS registrar was predominantly used by the threat actor to host their harmful content, enabling the malware's functionality. Can you specify the Registrar INC of the domain that end with .com?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200453116-59f1b0.png)
+
+From **Q2** and **Q3**, we can see that there is one domain that overlaps with the Contacted URL
 
 `Answer: NAMECHEAP`
 
