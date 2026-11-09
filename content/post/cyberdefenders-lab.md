@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-09T05:19:42.405Z
+lastmod: 2026-11-09T09:17:06.216Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -638,15 +638,24 @@ We are presented with a malware hash `191eda0c539d284b29efe556abb05cd75a9077a0`,
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200453116-59f1b0.png)
 
-From **Q2** and **Q3**, we can see that there is one domain that overlaps with the Contacted URL
+From **Q2** and **Q3**, we can see that there is only one Contacted Domain overlaps with the Contacted URL that deploy the `3003.gif`, which is `tajushariya.com`. Its registrar is `NameCheap, Inc.`
 
 `Answer: NAMECHEAP`
 
 **Q5. Could you specify the threat actor linked to the sample provided?**
 
+According to this page [malpedia](https://malpedia.caad.fkie.fraunhofer.de/details/win.icedid), the threat actor behind IcedID is `GOLD CABIN`
+
 `Answer: GOLD CABIN`
 
 **Q6. In the Execution phase, what function does the malware employ to fetch extra payloads onto the system?**
+
+The malware is distributed on Microsoft Excel, Windows. On Windows, `URLDownloadToFile` is a common function for downloading an additional file onto the system. Here we need the ANSI version of it, `URLDownloadToFileA`. The A in the function means it expects those strings for the URL and file path.
+
+Reference:
+
+- https://www.fortinet.com/blog/threat-research/icedid-malware-analysis-part-two
+- https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775123(v=vs.85)
 
 `Answer: URLDownloadToFileA`
 
