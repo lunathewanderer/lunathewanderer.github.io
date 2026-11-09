@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-06T16:00:05.879Z
+lastmod: 2026-11-09T03:47:17.663Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -559,25 +559,52 @@ We are presented with a malware hash `30E527E45F50D2BA82865C5679A6FA998EE0A17553
 
 **Q1. What name does Red Canary use for the threat cluster associated with the SHA256 in hash.txt? Submit the name used in its technical analysis, without adding a malware-type suffix.**
 
+> In digital forensics, a threat cluster is a group of suspicious activities or incidents that investigators link through shared evidence. That evidence might include malware, attacker controlled servers, commands, or methods used to gain access. Analysts use the cluster to track a pattern while they investigate who is responsible.
+
+With some researches, I stumbled upon this [blog](https://www.zscaler.com/blogs/product-insights/yellow-cockatoo) about the given hash, which reveals that the threat cluster is **Yellow Cockatoo**.
+
 `Answer: Yellow Cockatoo`
 
 **Q2. As part of our incident response, knowing the malware's common filenames can help us scan other workstations for potential infection. What is the common filename associated with this malware? (Use VirusTotal)**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794191943096-7d0c0c.png)
+
+The common filename associated with the malware is shown as above.
 
 `Answer: 111bc461-1ca8-43c6-97ed-911e0e69fdf8.dll`
 
 **Q3. Determining a malware sample's compilation timestamp can reveal insights into its development and deployment timeline. What compilation timestamp does VirusTotal show for this malware sample?**
 
+*Details > History > Creation Time*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794192034936-f913d4.png)
+
 `Answer: 2020-09-24 18:26`
 
 **Q4. Understanding when the broader cybersecurity community first identified the malware could help determine how long the malware might have been in the environment before detection. When was the malware first submitted to VirusTotal?**
+
+*Details > History > First Submission*
 
 `Answer: 2020-10-15 02:47`
 
 **Q5. To completely eradicate the threat from Industries' systems, we need to identify all components dropped by the malware. What is the name of the .dat file that the malware dropped in the AppData folder?**
 
+To fully understand how the malware really works, see more in the aforementioned [blog](https://www.zscaler.com/blogs/product-insights/yellow-cockatoo).
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794192415554-c58b23.png)
+
 `Answer: solarmarker.dat`
 
 **Q6. It is crucial to identify the C2 servers with which the malware communicates to block its communication and prevent further data exfiltration. What is the C2 server that the malware is communicating with?**
+
+Again, read the above documentation:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195762789-b5f95c.png)
+
+You can also find the server in VirusTotal.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195643873-820a61.png)
+
 
 `Answer: https://gogohid.com`
 
@@ -585,6 +612,8 @@ We are presented with a malware hash `30E527E45F50D2BA82865C5679A6FA998EE0A17553
 - **Date**: Oct 30, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Threat Intel
+
+We are presented with a malware hash `191eda0c539d284b29efe556abb05cd75a9077a0`, and we are prompted to gather intel on this malware using online platforms.
 
 **Q1. What is the name of the file associated with the given hash?**
 
