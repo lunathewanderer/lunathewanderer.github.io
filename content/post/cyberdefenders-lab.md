@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-09T09:17:06.216Z
+lastmod: 2026-11-10T13:31:03.833Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -658,6 +658,114 @@ Reference:
 - https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775123(v=vs.85)
 
 `Answer: URLDownloadToFileA`
+
+## 8. Red Stealer
+- **Date**: Nov 10, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Threat Intel
+
+We are presented with a malware hash `248FCC901AFF4E4B4C48C91E4D78A939BF681C9A1BC24ADDC3551B32768F907B`, and we are prompted to gather intel on this malware using online platforms.
+
+**Q1. Categorizing malware enables a quicker and clearer understanding of its unique behaviors and attack vectors. What category has Microsoft identified for that malware in VirusTotal?**
+
+`Answer: Trojan`
+
+**Q2. Clearly identifying the name of the malware file improves communication among the SOC team. What is the file name associated with this malware? Note: Don't include the file extension in the name.**
+
+`Answer: Wextract`
+
+**Q3. Knowing the exact timestamp of when the malware was first observed can help prioritize response actions. Newly detected malware may require urgent containment and eradication compared to older, well-documented threats. What is the UTC timestamp of the malware's first submission to VirusTotal?**
+
+`Answer: 2023-10-06 04:41`
+
+**Q4. Understanding the techniques used by malware helps in strategic security planning. What is the MITRE ATT&CK technique ID for the malware collecting data from the local system prior to exfiltration?**
+
+`Answer: T1005`
+
+**Q5. Following execution, the malware performs a connectivity check by resolving a well-known social-media domain before contacting its C2. Which single domain does it resolve for this check?**
+
+`Answer: facebook.com`
+
+**Q6. Once the malicious IP addresses are identified, network security devices such as firewalls can be configured to block traffic to and from these addresses. Can you provide the IP address and destination port the malware communicates with?**
+
+`Answer: 77.91.124.55:19071`
+
+**Q7. YARA rules are designed to identify specific malware patterns and behaviors. Using MalwareBazaar, what's the name of the YARA rule created by "Varp0s" that detects the identified malware?**
+
+`Answer: detect_Redline_Stealer`
+
+**Q8. Understanding which malware families are targeting the organization helps in strategic security planning for the future and prioritizing resources based on the threat. Can you provide the different malware alias associated with the malicious IP address according to Malpedia?**
+
+`Answer: RECORDSTEALER`
+
+**Q9. By identifying the malware's imported DLLs, we can configure security tools to monitor for the loading or unusual usage of these specific DLLs. Can you provide the DLL utilized by the malware for privilege escalation?**
+
+`Answer: ADVAPI32.dll`
+
+
+## 9. Oski
+- **Date**: Nov 10, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Threat Intel
+
+We are presented with a malware hash `12c1842c3ccafe7408c23ebf292ee3d9`, and we are prompted to gather intel on this malware using online platforms.
+
+**Q1. Determining the creation time of the malware can provide insights into its origin. What was the time of malware creation?**
+
+`Answer: 2022-09-28 17:40`
+
+**Q2. Identifying the command and control (C2) server that the malware communicates with can help trace back to the attacker. Which C2 server does the malware in the PPT file communicate with?**
+
+`Answer: http://171.22.28.221/5c06c05b7b34e8e6.php`
+
+**Q3. Identifying the initial actions of the malware post-infection can provide insights into its primary objectives. What is the first library that the malware requests post-infection?**
+
+`Answer: sqlite3.dll`
+
+**Q4. By examining the provided [Recorded Future Triage](https://tria.ge/260730-engzhayhja) report, what RC4 key is used by the malware to decrypt its base64-encoded string?**
+
+`Answer: 5329514621441247975720749009`
+
+**Q5. By examining the MITRE ATT&CK techniques displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), identify the main MITRE technique (not sub-techniques) the malware uses to steal the user’s password.**
+
+`Answer: T1555`
+
+**Q6. By examining the child processes displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), which directory does the malware target for the deletion of all DLL files?**
+
+`Answer: C:\ProgramData`
+
+**Q7. Understanding the malware's behavior post-data exfiltration can give insights into its evasion techniques. By analyzing the child processes, after successfully exfiltrating the user's data, how many seconds does it take for the malware to self-delete?**
+
+`Answer: 5`
+
+
+## 10. DanaBot
+- **Date**: Nov 11, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Network Forensics
+
+**Q1. Which IP address was used by the attacker during the initial access?**
+
+`Answer: 62.173.142.148`
+
+
+**Q2. What is the name of the malicious file used for initial access?**
+
+`Answer: allegato_708.js`
+
+**Q3. What is the SHA-256 hash of the malicious file used for initial access?**
+
+`Answer: 847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268`
+
+**Q4. Which process was used to execute the malicious file?**
+
+**Q5. What is the file extension of the second malicious file utilized by the attacker?**
+
+**Q6. What is the MD5 hash of the second malicious file?**
+
+
+
+
 
 
 
