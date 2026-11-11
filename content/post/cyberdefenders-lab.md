@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T11:43:17.651Z
+lastmod: 2026-11-11T13:55:19.570Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -652,10 +652,9 @@ According to this page [malpedia](https://malpedia.caad.fkie.fraunhofer.de/detai
 
 The malware is distributed on Microsoft Excel, Windows. On Windows, `URLDownloadToFile` is a common function for downloading an additional file onto the system. Here we need the ANSI version of it, `URLDownloadToFileA`. The A in the function means it expects those strings for the URL and file path.
 
-Reference:
-
-- https://www.fortinet.com/blog/threat-research/icedid-malware-analysis-part-two
-- https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775123(v=vs.85)
+> Reference:
+> - https://www.fortinet.com/blog/threat-research/icedid-malware-analysis-part-two
+> - https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775123(v=vs.85)
 
 `Answer: URLDownloadToFileA`
 
@@ -700,21 +699,57 @@ Researching with such keywords from the question, I stumbled upon [MITRE ATT&CK 
 
 **Q5. Following execution, the malware performs a connectivity check by resolving a well-known social-media domain before contacting its C2. Which single domain does it resolve for this check?**
 
+There are multiple traces of `facebook.com` in *Relations > Contacted URLs & Contacted Domains*
+
 `Answer: facebook.com`
 
 **Q6. Once the malicious IP addresses are identified, network security devices such as firewalls can be configured to block traffic to and from these addresses. Can you provide the IP address and destination port the malware communicates with?**
+
+*Behavior > Activity Summary > IP Traffic & Memory Pattern URLs/IPs*
 
 `Answer: 77.91.124.55:19071`
 
 **Q7. YARA rules are designed to identify specific malware patterns and behaviors. Using MalwareBazaar, what's the name of the YARA rule created by "Varp0s" that detects the identified malware?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404797829-207597.png)
+
+> **YARA** allows analysts to create custom descriptions, known as **YARA** rules, that capture the "DNA" of malware families. These rules combine textual strings, hexadecimal sequences, and regular expressions with Boolean logic. Instead of relying strictly on fragile file hashes (which change if a single byte is altered), **YARA** scans files, memory processes, or directories for specific code fragments, configurations, or behavioral patterns.
+
+
+Go to *MalwareBazaar > Browse* with the search syntax `sha256:248fcc901aff4e4b4c48c91e4d78a939bf681c9a1bc24addc3551b32768f907b`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404462724-c0558c.png)
+
+*Click on the only result found*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404624727-5e984c.png)
+
+*Go to YARA*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404669377-2f9a1b.png)
+
+
 `Answer: detect_Redline_Stealer`
 
 **Q8. Understanding which malware families are targeting the organization helps in strategic security planning for the future and prioritizing resources based on the threat. Can you provide the different malware alias associated with the malicious IP address according to Malpedia?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404976274-3f674c.png)
+
 `Answer: RECORDSTEALER`
 
 **Q9. By identifying the malware's imported DLLs, we can configure security tools to monitor for the loading or unusual usage of these specific DLLs. Can you provide the DLL utilized by the malware for privilege escalation?**
+
+*Details > Portable Executable Info > Imports*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794405053688-7cf042.png)
+
+Click on each imported DLLs to inspect them further.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794405097986-ce4456.png)
+
+`ADVAPI32.dll` is seemingly used for privilege escalation, the others are irrelevant.
+
+> Reference: https://learn.microsoft.com/en-us/troubleshoot/windows-client/setup-upgrade-and-drivers/dynamic-link-library
 
 `Answer: ADVAPI32.dll`
 
