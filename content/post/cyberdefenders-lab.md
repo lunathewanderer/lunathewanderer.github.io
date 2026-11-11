@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T11:31:37.177Z
+lastmod: 2026-11-11T11:43:17.651Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -668,17 +668,33 @@ We are presented with a malware hash `248FCC901AFF4E4B4C48C91E4D78A939BF681C9A1B
 
 **Q1. Categorizing malware enables a quicker and clearer understanding of its unique behaviors and attack vectors. What category has Microsoft identified for that malware in VirusTotal?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794396882695-2b3cc7.png)
+
+With Microsoft's threat naming convention and categorization, Trojan should be the correct answer here.
+
 `Answer: Trojan`
 
 **Q2. Clearly identifying the name of the malware file improves communication among the SOC team. What is the file name associated with this malware? Note: Don't include the file extension in the name.**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397061680-8269e5.png)
 
 `Answer: Wextract`
 
 **Q3. Knowing the exact timestamp of when the malware was first observed can help prioritize response actions. Newly detected malware may require urgent containment and eradication compared to older, well-documented threats. What is the UTC timestamp of the malware's first submission to VirusTotal?**
 
+*Details > History > First Submission*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397386975-85f053.png)
+
+
+
 `Answer: 2023-10-06 04:41`
 
 **Q4. Understanding the techniques used by malware helps in strategic security planning. What is the MITRE ATT&CK technique ID for the malware collecting data from the local system prior to exfiltration?**
+
+Researching with such keywords from the question, I stumbled upon [MITRE ATT&CK technique ID T1005, Data from Local System](https://attack.mitre.org/techniques/T1005/)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397252708-ff5208.png)
 
 `Answer: T1005`
 
