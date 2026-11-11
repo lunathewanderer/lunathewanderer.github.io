@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T09:13:42.192Z
+lastmod: 2026-11-11T09:15:41.987Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -995,11 +995,12 @@ We get `3e035f2d7d30869ce53171ef5a0f761bfb9c14d94d9fe6da385e20b8d96dc2fb` as the
 
 **Q16. In some cases, decryption tools are available for specific ransomware families. Identifying the family name can lead to a potential decryption solution. What's the name of this ransomware family?**
 
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794388303005-166d1a.png)
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794388510366-29bb8a.png)
+
 
 The ransomware belongs to the `Conti` and `BlueSky` families. 
 
-*Since the question prompts for a 7-words answer, I suppose `BlueSky` is our sought-after answer.*
+*Since the question prompts for a 7-words answer, I suppose `BlueSky` is our sought-after answer. And the name of this lab is "BlueSky Ransomware", so...*
 
 `Answer: BlueSky`
 
