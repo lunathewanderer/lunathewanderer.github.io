@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T03:01:41.776Z
+lastmod: 2026-11-11T04:52:12.159Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -828,6 +828,76 @@ However, the successful `TDS7 login` reveals the sensitive correct credentials (
 `Answer: cyb3rd3f3nd3r$`
 
 **Q4. Attackers often change some settings to facilitate lateral movement within a network. What setting did the attacker enable to control the target host further and execute further commands?**
+
+> Lateral movement (classified as [MITRE ATT&CK Tactic TA0008](https://attack.mitre.org/tactics/TA0008/)) refers to the techniques that cyber attackers use after gaining an initial foothold in a network to navigate sideways, escalate privileges, and reach high-value targets such as domain controllers or sensitive databases.
+
+Follow the TCP stream of the SQL batch after the successful login:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794368792546-0850e6.png)
+
+We can see that the attacker has configured the setting option `xp_cmdshell`, switching `0` to `1` to be specific.
+
+`Answer: xp_cmdshell`
+
+**Q5. Process injection is often used by attackers to escalate privileges within a system. What process did the attacker inject the C2 into to gain administrative privileges?**
+
+After configured the `xp_cmdshell`, following the SQL Batch reveals that the attacker used it to upload a executable reverse shell into `tmp`, probaly for gaining initial access.
+
+This is seemingly corresponding to the events happened in the log. Following the task in `MSSQLSERVER`, we can see there are activities in `PowerShell`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794369189801-b4807d.png)
+
+And we can see the attacker used `MSFConsole`, an interactive control center platform, to inject [winlogon.exe](https://quantrimang.com/cong-nghe/windows-logon-application-la-gi-va-tai-sao-no-lai-chay-tren-he-thong-149728) as the host application.
+
+`Answer: winlogon.exe`
+
+**Q6. Following privilege escalation, the attacker attempted to download a file. Can you identify the URL of this file downloaded?**
+
+After the TDS traffic, we then see an large amount of TCP & SSLv2, a bit of DNS and ICMP, and then HTTP. The first HTTP request we encounter is `GET /checking.ps1` from the attacker host. Seem like the attacker is downloading/deploying this PS1 file.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794371339917-14c72e.png)
+
+> A `.ps1` file is a plain text file containing a sequence of commands written for Windows PowerShell, Microsoft's automation and task-management framework.
+
+`Answer: http://87.96.21.84/checking.ps1`
+
+**Q7. Understanding which group Security Identifier (SID) the malicious script checks to verify the current user's privileges can provide insights into the attacker's intentions. Can you provide the specific Group SID that is being checked?**
+
+The `checking.ps1` is the malicious script in question.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794371371108-2de1c5.png)
+
+Microsoft has detailed documentation about [Group SIDs](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers) here, including their definition, how they works, and its architecture:
+
+> The components of a `SID` are easier to visualize when SIDs are converted from a binary to a string format by using standard notation: `S-R-X-Y1-Y2-Yn-1-Yn`, in that:
+
+
+| Component | Description |
+| --------- | ----------- |
+| S | Indicates that the string is a SID |
+| R	| Indicates the revision level |
+| X	| Indicates the identifier authority value |
+| Y	| Represents a series of subauthority values, where n is the number of values |
+
+In the above image, at the very first line of `checking.ps1`
+
+```
+$priv = [bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544")
+```
+
+This line of code check for the SID `S-1-5-32-544`
+
+`Answer: S-1-5-32-544`
+
+
+
+
+
+
+
+
+
+
 
 
 
