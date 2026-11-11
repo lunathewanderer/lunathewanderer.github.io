@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T09:15:41.987Z
+lastmod: 2026-11-11T11:20:23.242Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -804,7 +804,7 @@ We have a better view of the TDS traffic upon filtering for it:
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794365816101-c60370.png)
 
-The pre-login message contains only basic information:
+The pre-login message merely contains basic information:
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794365093210-6b568b.png)
 
@@ -835,7 +835,7 @@ Follow the TCP stream of the SQL batch after the successful login:
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794368792546-0850e6.png)
 
-We can see that the attacker has configured the setting option `xp_cmdshell`, switching `0` to `1` to be specific.
+We can see that the attacker has configured the setting option `xp_cmdshell`, switching from `0` to `1` to be specific.
 
 `Answer: xp_cmdshell`
 
@@ -895,7 +895,9 @@ Inspecting the `checking.ps1` deeper, we can see that the script is using the fo
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794372794633-828214.png)
 
-> According to [Microsoft Documentation](https://learn.microsoft.com/vi-vn/defender-endpoint/troubleshoot-service-startup-problems), **Windows Defender Event ID 5007** indicates that the configuration settings for Microsoft Defender Antivirus have changed. Moreover, the registry path `HKLM:\SOFTWARE\Microsoft\Windows Defender` contains the configuration of Microsoft Defender Antivirus. It is the core local registry key used by Windows to store operational settings, service states, paths, and platform diagnostic information for Microsoft Defender Antivirus.
+> According to [Microsoft Documentation](https://learn.microsoft.com/vi-vn/defender-endpoint/troubleshoot-service-startup-problems), **Windows Defender Event ID 5007** indicates that the configuration settings for Microsoft Defender Antivirus have changed.
+>
+> The registry path `HKLM:\SOFTWARE\Microsoft\Windows Defender` contains the configuration of Microsoft Defender Antivirus. It is the core local registry key used by Windows to store operational settings, service states, paths, and platform diagnostic information for Microsoft Defender Antivirus.
 
 `Answer: DisableAntiSpyware, DisableRoutinelyTakingAction, DisableRealtimeMonitoring, SubmitSamplesConsent, SpynetReporting`
 
@@ -903,7 +905,7 @@ Inspecting the `checking.ps1` deeper, we can see that the script is using the fo
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794381368178-98daf7.png)
 
-`checking.ps1` then is called to download `del.ps1`, and then `ichigo-lite.ps1`. Filtering for `http` for a better view of the chronological order.
+`checking.ps1` then is called to download `del.ps1` first, and then `ichigo-lite.ps1`. Filtering for `http` for a better view in the chronological order.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794381008104-69755d.png)
 
@@ -945,6 +947,8 @@ As we can see, the script disables some of the functions using `stop-process -na
 
 **Q12. What's the invoked PowerShell script used by the attacker for dumping credentials?**
 
+I naturally check `Invoke-PowerDump.ps1` according to the keywords of the question. Indeed, there are credentials that were dumped in this script :)
+
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794385112823-9fcbaf.png)
 
 `Answer: Invoke-PowerDump.ps1`
@@ -957,7 +961,7 @@ Inspecting `ichigo-lite.ps1`
 
 - We know that the credentials are dumped using `Invoke-PowerDump.ps1`, and this `ichigo-lite.ps1` `DownloadString` from it.
 - And there is this encoded command `Invoke-PowerDump | Out-File -FilePath "C:\ProgramData\hashes.txt"` that seems to pipe the credentials into `hashes.txt`
-- And then those hashes get processed more afterwards.
+- The script then processes those hashes in more detail afterwards, but that is beside the points.
 
 `Answer: hashes.txt`
 
@@ -967,7 +971,7 @@ There is an aptly named file called `extracted_hosts.txt` in the mists of HTTP t
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794386541769-ecdc28.png)
 
-Indeed, it contains the discovered hosts in the packet.
+Indeed, it contains the packet's discovered hosts.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794386610527-347dd5.png)
 
@@ -975,7 +979,7 @@ Indeed, it contains the discovered hosts in the packet.
 
 **Q15. After hash dumping, the attacker attempted to deploy ransomware on the compromised host, spreading it to the rest of the network through previous lateral movement activities using SMB. You’re provided with the ransomware sample for further analysis. By performing behavioral analysis, what’s the name of the ransom note file?**
 
-`Invoke-PowerDump.ps1` is the hash dumping, and `javaw.exe` is the ransomware in play.
+`Invoke-PowerDump.ps1` is the hash dumping, and we can infer that `javaw.exe` is the ransomware in play.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794387320037-f69394.png)
 
