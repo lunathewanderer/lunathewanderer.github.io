@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T15:19:19.757Z
+lastmod: 2026-11-11T17:01:55.839Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1071,6 +1071,25 @@ The ransomware belongs to the `Conti` and `BlueSky` families.
 *Since the question prompts for a 7-words answer, I suppose `BlueSky` is our sought-after answer. And the name of this lab is "BlueSky Ransomware", so...*
 
 `Answer: BlueSky`
+
+## 12. 3CX Supply Chain
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
+- **Category**: Threat Intel
+
+## 13. RedLine
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Endpoint Forensics
+
+## 14. Reveal
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
+- **Category**: Endpoint Forensics
+
+
+
+
 
 
 
