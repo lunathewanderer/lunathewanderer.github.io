@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T11:23:10.148Z
+lastmod: 2026-11-11T11:31:37.177Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -924,7 +924,7 @@ Function CleanerEtc {
 }
 ```
 
-Notably, there is `schtasks.exe` - a command that creates a Windows Scheduled Task, which is commonplace in [MITRE ATT&CK Technique T1053.005](https://attack.mitre.org/techniques/T1053/005/). Moreover, it is designed to running a script automatically at every 4 hours `/sc HOURLY /mo 4` with the highest possible system privileges `/ru SYSTEM`, suggesting at the persistence tactic.
+Notably, there is `schtasks.exe` - a command that creates a Windows Scheduled Task, which is commonplace in [MITRE ATT&CK Technique T1053.005](https://attack.mitre.org/techniques/T1053/005/). Moreover, it is designed to running a script automatically at every 4 hours `/sc HOURLY /mo 4` with the highest possible system privileges `/ru SYSTEM`, pointing at the persistence tactic.
 
 `/tr` stands for task run, specifying the command or script to execute when the task triggers. In this case, it launches `Command Prompt (cmd.exe)` to run a PowerShell script `C:\ProgramData\del.ps1` with execution policies bypassed `-ExecutionPolicy Bypass`.
 
@@ -938,7 +938,7 @@ The malicious file in question is `del.ps1`
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794383251008-01529d.png)
 
-As we can see, the script disables some of the functions using `stop-process -name $task -Force`. At first, I supposed it was [MITRE ID TA0112 (Defense Impairment)](https://attack.mitre.org/tactics/TA0112/). But to some extent, [MITRE ID TA0005 (Stealth/Defense Evasion)](https://attack.mitre.org/tactics/TA0005/) is a better fit, since the functions that were disabled are merely monitoring tools (in order to hide their sussy activities, supposedly): 
+As we can see, the script disables some of the functions using `stop-process -name $task -Force`. At first, I supposed it was [MITRE ID TA0112 (Defense Impairment)](https://attack.mitre.org/tactics/TA0112/). But to some extent, [MITRE ID TA0005 (Stealth/Defense Evasion)](https://attack.mitre.org/tactics/TA0005/) is a better fit, since the functions that were disabled are merely monitoring tools (in order to hide the malware's sussy activities, supposedly): 
 ```
 "taskmgr", "perfmon", "SystemExplorer", "taskman", "ProcessHacker", "procexp64", "procexp", "Procmon", "Daphne"
 ```
