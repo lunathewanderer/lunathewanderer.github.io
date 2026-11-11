@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T05:28:11.970Z
+lastmod: 2026-11-11T05:30:04.168Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -897,9 +897,25 @@ Inspecting the `checking.ps1` deeper, we can see that the script is using the fo
 
 > According to [Microsoft Documentation](https://learn.microsoft.com/vi-vn/defender-endpoint/troubleshoot-service-startup-problems), **Windows Defender Event ID 5007** indicates that the configuration settings for Microsoft Defender Antivirus have changed. Moreover, the registry path `HKLM:\SOFTWARE\Microsoft\Windows Defender` contains the configuration of Microsoft Defender Antivirus. It is the core local registry key used by Windows to store operational settings, service states, paths, and platform diagnostic information for Microsoft Defender Antivirus.
 
-`Answer: DisableAntiSpyware,DisableRoutinelyTakingAction,DisableRealtimeMonitoring,SubmitSamplesConsent,SpynetReporting`
+`Answer: DisableAntiSpyware, DisableRoutinelyTakingAction, DisableRealtimeMonitoring, SubmitSamplesConsent, SpynetReporting`
 
 **Q9. Can you determine the URL of the second file downloaded by the attacker?**
+
+
+`Answer: http://87.96.21.84/del.ps1`
+
+
+**Q10. Identifying malicious tasks and understanding how they were used for persistence helps in fortifying defenses against future attacks. What's the full name of the task created by the attacker to maintain persistence?**
+
+
+
+
+
+
+
+
+
+
 
 
 
