@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T04:52:12.159Z
+lastmod: 2026-11-11T05:28:11.970Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -841,7 +841,7 @@ We can see that the attacker has configured the setting option `xp_cmdshell`, sw
 
 **Q5. Process injection is often used by attackers to escalate privileges within a system. What process did the attacker inject the C2 into to gain administrative privileges?**
 
-After configured the `xp_cmdshell`, following the SQL Batch reveals that the attacker used it to upload a executable reverse shell into `tmp`, probaly for gaining initial access.
+After having configured the `xp_cmdshell`, the SQL Batchs that follow reveals that the attacker used it to upload a executable reverse shell into `tmp`, probaly for gaining initial access.
 
 This is seemingly corresponding to the events happened in the log. Following the task in `MSSQLSERVER`, we can see there are activities in `PowerShell`
 
@@ -889,8 +889,17 @@ This line of code check for the SID `S-1-5-32-544`
 
 `Answer: S-1-5-32-544`
 
+**Q8. Windows Defender plays a critical role in defending against cyber threats. If an attacker disables it, the system becomes more vulnerable to further attacks. What are the registry keys used by the attacker to disable Windows Defender functionalities? Provide them in the same order found.**
 
+Inspecting the `checking.ps1` deeper, we can see that the script is using the following `defenderRegistryKeys` to disable the functionalities of Windows Defender.
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794372794633-828214.png)
+
+> According to [Microsoft Documentation](https://learn.microsoft.com/vi-vn/defender-endpoint/troubleshoot-service-startup-problems), **Windows Defender Event ID 5007** indicates that the configuration settings for Microsoft Defender Antivirus have changed. Moreover, the registry path `HKLM:\SOFTWARE\Microsoft\Windows Defender` contains the configuration of Microsoft Defender Antivirus. It is the core local registry key used by Windows to store operational settings, service states, paths, and platform diagnostic information for Microsoft Defender Antivirus.
+
+`Answer: DisableAntiSpyware,DisableRoutinelyTakingAction,DisableRealtimeMonitoring,SubmitSamplesConsent,SpynetReporting`
+
+**Q9. Can you determine the URL of the second file downloaded by the attacker?**
 
 
 
