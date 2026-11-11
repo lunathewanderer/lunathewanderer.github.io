@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T13:55:19.570Z
+lastmod: 2026-11-11T15:19:19.757Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -685,8 +685,6 @@ With Microsoft's threat naming convention and categorization, Trojan should be t
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397386975-85f053.png)
 
-
-
 `Answer: 2023-10-06 04:41`
 
 **Q4. Understanding the techniques used by malware helps in strategic security planning. What is the MITRE ATT&CK technique ID for the malware collecting data from the local system prior to exfiltration?**
@@ -705,7 +703,7 @@ There are multiple traces of `facebook.com` in *Relations > Contacted URLs & Con
 
 **Q6. Once the malicious IP addresses are identified, network security devices such as firewalls can be configured to block traffic to and from these addresses. Can you provide the IP address and destination port the malware communicates with?**
 
-*Behavior > Activity Summary > IP Traffic & Memory Pattern URLs/IPs*
+*Behavior > Network Communication > IP Traffic & Memory Pattern URLs/IPs*
 
 `Answer: 77.91.124.55:19071`
 
@@ -727,7 +725,6 @@ Go to *MalwareBazaar > Browse* with the search syntax `sha256:248fcc901aff4e4b4c
 *Go to YARA*
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404669377-2f9a1b.png)
-
 
 `Answer: detect_Redline_Stealer`
 
@@ -753,7 +750,6 @@ Click on each imported DLLs to inspect them further.
 
 `Answer: ADVAPI32.dll`
 
-
 ## 9. Oski
 - **Date**: Nov 10, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
@@ -763,32 +759,49 @@ We are presented with a malware hash `12c1842c3ccafe7408c23ebf292ee3d9`, and we 
 
 **Q1. Determining the creation time of the malware can provide insights into its origin. What was the time of malware creation?**
 
+*Details > History > Creation Time*
+
 `Answer: 2022-09-28 17:40`
 
 **Q2. Identifying the command and control (C2) server that the malware communicates with can help trace back to the attacker. Which C2 server does the malware in the PPT file communicate with?**
+
+From *Relations > Contacted URLs | Behavior > Network Communication*, the C2 server that the malware commmunicates seems to be `http://171.22.28.221/5c06c05b7b34e8e6.php`.
 
 `Answer: http://171.22.28.221/5c06c05b7b34e8e6.php`
 
 **Q3. Identifying the initial actions of the malware post-infection can provide insights into its primary objectives. What is the first library that the malware requests post-infection?**
 
+From *Relations > Contacted URLs | Behavior > Network Communication*, the (first) library the malware requests is `sqlite3.dll`.
+
 `Answer: sqlite3.dll`
 
 **Q4. By examining the provided [Recorded Future Triage](https://tria.ge/260730-engzhayhja) report, what RC4 key is used by the malware to decrypt its base64-encoded string?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794409914324-342eef.png)
 
 `Answer: 5329514621441247975720749009`
 
 **Q5. By examining the MITRE ATT&CK techniques displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), identify the main MITRE technique (not sub-techniques) the malware uses to steal the user’s password.**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410067830-6b679f.png)
+
 `Answer: T1555`
 
 **Q6. By examining the child processes displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), which directory does the malware target for the deletion of all DLL files?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410163073-354776.png)
+
+In `cmd.exe`, `del "C:\ProgramData\*.dll"` used the wildcard `*` to apply the deletion to all files in the folder `"C:\ProgramData\*.dll"`
 
 `Answer: C:\ProgramData`
 
 **Q7. Understanding the malware's behavior post-data exfiltration can give insights into its evasion techniques. By analyzing the child processes, after successfully exfiltrating the user's data, how many seconds does it take for the malware to self-delete?**
 
-`Answer: 5`
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410315458-b5bb4e.png)
 
+There is a 5-second timeout in the deletion.
+
+`Answer: 5`
 
 ## 10. DanaBot
 - **Date**: Nov 11, 2026
