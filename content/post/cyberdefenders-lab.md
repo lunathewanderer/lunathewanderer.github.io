@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T11:20:23.242Z
+lastmod: 2026-11-11T11:23:10.148Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -938,7 +938,7 @@ The malicious file in question is `del.ps1`
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794383251008-01529d.png)
 
-As we can see, the script disables some of the functions using `stop-process -name $task -Force`. At first, I supposed it was [MITRE ID TA0112 (Defense Impairment)](https://attack.mitre.org/tactics/TA0112/). But to some extent, [MITRE ID TA0005 (Stealth/Defense Evasion)](https://attack.mitre.org/tactics/TA0005/) is a better fit, since the functions that were disabled are merely monitoring tools: 
+As we can see, the script disables some of the functions using `stop-process -name $task -Force`. At first, I supposed it was [MITRE ID TA0112 (Defense Impairment)](https://attack.mitre.org/tactics/TA0112/). But to some extent, [MITRE ID TA0005 (Stealth/Defense Evasion)](https://attack.mitre.org/tactics/TA0005/) is a better fit, since the functions that were disabled are merely monitoring tools (in order to hide their sussy activities, supposedly): 
 ```
 "taskmgr", "perfmon", "SystemExplorer", "taskman", "ProcessHacker", "procexp64", "procexp", "Procmon", "Daphne"
 ```
