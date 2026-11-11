@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T08:36:35.053Z
+lastmod: 2026-11-11T09:10:58.201Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -963,14 +963,39 @@ Inspecting `ichigo-lite.ps1`
 
 **Q14. Knowing the hosts targeted during the attacker's reconnaissance phase, the security team can prioritize their remediation efforts on these specific hosts. What's the name of the text file containing the discovered hosts?**
 
+There is an aptly named file called `extracted_hosts.txt` in the mists of HTTP traffic.
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794386541769-ecdc28.png)
 
+Indeed, it contains the discovered hosts in the packet.
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794386610527-347dd5.png)
 
+`Answer: extracted_hosts.txt`
 
+**Q15. After hash dumping, the attacker attempted to deploy ransomware on the compromised host, spreading it to the rest of the network through previous lateral movement activities using SMB. You’re provided with the ransomware sample for further analysis. By performing behavioral analysis, what’s the name of the ransom note file?**
 
+`Invoke-PowerDump.ps1` is the hash dumping, and `javaw.exe` is the ransomware in play.
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794387320037-f69394.png)
 
+Then we could go to *File > Export Objects > HTTP*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794387939229-9b1ea4.png)
+
+to download the ransomware and scan its hash:
+
+`Get-FileHash -Path "javaw.exe" -Algorithm SHA256`
+
+We get `3e035f2d7d30869ce53171ef5a0f761bfb9c14d94d9fe6da385e20b8d96dc2fb` as the result. On *VirusTotal > Behavior > Files Dropped*, we can find out the ransom note files.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794388176659-8bf58d.png)
+
+`Answer: # DECRYPT FILES BLUESKY #`
+
+**Q16. In some cases, decryption tools are available for specific ransomware families. Identifying the family name can lead to a potential decryption solution. What's the name of this ransomware family?**
+
+`Answer: BlueSky`
 
 
 
