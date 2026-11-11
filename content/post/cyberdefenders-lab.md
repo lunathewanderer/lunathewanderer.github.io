@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-10T16:10:31.755Z
+lastmod: 2026-11-11T03:01:41.776Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -768,6 +768,67 @@ We are presented with a malware hash `12c1842c3ccafe7408c23ebf292ee3d9`, and we 
 - **Date**: Nov 11, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 4
 - **Category**: Network Forensics
+
+**Q1. Knowing the source IP of the attack allows security teams to respond to potential threats quickly. Can you identify the source IP responsible for potential port scanning activity?**
+
+Throughout the packet, there is only an influx of `TCP [SYN]` traffic from `87.96.21.84` to `87.96.21.81`. And the ports of the packets change every single time. The `87.96.21.81` also replied `87.96.21.84` with a lot of `TCP [RST, ACK]`.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794363358915-b453ae.png)
+
+`Answer: 87.96.21.84`
+
+**Q2. During the investigation, it's essential to determine the account targeted by the attacker. Can you identify the targeted account username?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794363765856-bf135d.png)
+
+Immediately after the time the port scanning has finished, there is a host of TDS traffic, with a range of message:
+- TDS7 pre-login message
+- Response
+- Client Hello
+- Server Hello, Certificate, Server Key Exchange, Server Hello Done
+- Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message
+- Change Cipher Spec, Encrypted Handshake Message
+- Application Data
+
+> *"The Tabular Data Stream (TDS) protocol versions 7 and 8, hereinafter referred to as "TDS", is an application-level protocol used for the transfer of requests and responses between clients and database server systems. In such systems, the client establishes a long-lived connection with the server. Once the connection is established using a transport-level protocol, TDS messages are used to communicate between the client and the server. A database server can also act as the client if needed, in which case a separate TDS connection has to be established. Note that the TDS session is directly tied to the transport-level session, meaning that a TDS session is established when the transport-level connection is established and the server receives a request to establish a TDS connection. It persists until the transport-level connection is terminated (for example, when a TCP socket is closed). In addition, TDS does not make any assumption about the transport protocol used, but it does assume the transport protocol supports reliable, in-order delivery of the data.*
+>
+> *TDS includes facilities for authentication and identification, channel encryption negotiation, issuing of SQL batches, stored procedure calls, returning data, and transaction manager requests. Returned data is self-describing and record-oriented. The data streams describe the names, types, and optional descriptions of the rows being returned."* - [Microsoft](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-tds/893fcc7e-8a39-4b3c-815a-773b7b982c50)
+
+We have a better view of the TDS traffic upon filtering for it:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794364296456-d2f07a.png)
+
+- The red part (that happened right after the port scanning) is the initial connection requests & responses of the TDS protocol.
+- The yellow part is the successful authentication request & response of the TDS protocol
+- The orange part is the client requests & server responses of the TDS protocol.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794365816101-c60370.png)
+
+The pre-login message contains only basic information:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794365093210-6b568b.png)
+
+However, the successful `TDS7 login` reveals the sensitive correct credentials (including the targeted username and password).
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794365268920-6ffee7.png)
+
+> Interestingly, the `sa` (System Administrator) username is the default built-in administrator account in Microsoft SQL Server that possesses full `sysadmin` server-level privileges.
+>
+> Moreover, this influx of Tabular Data Stream (TDS) traffic targeting Microsoft SQL Server (typically on TCP Port 1433) is a serious scenario that usually indicates one of three things:
+> - An Active Brute-Force or Credential Stuffing Attack: Automated scanners and botnets frequently target internet-exposed SQL Servers to guess password credentials (especially for the default `sa` account).
+> - Reconnaissance & Fingerprinting: Attackers send massive waves of unauthenticated PRELOGIN TDS packets to enumerate database versions, configurations, and patch levels without triggering login-failure alerts.
+> - A Network Denial of Service (DoS/DDoS): Flood traffic attempting to exhaust the server’s available TCP connections, ephemeral ports, or processing queues.
+>
+> In our lab, it probably alludes at the first or the second case.
+
+`Answer: sa`
+
+**Q3. We need to determine if the attacker succeeded in gaining access. Can you provide the correct password discovered by the attacker?**
+
+`Answer: cyb3rd3f3nd3r$`
+
+**Q4. Attackers often change some settings to facilitate lateral movement within a network. What setting did the attacker enable to control the target host further and execute further commands?**
+
 
 
 
