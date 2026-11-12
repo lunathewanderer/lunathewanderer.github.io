@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-11T17:01:55.839Z
+lastmod: 2026-11-12T09:32:12.816Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1073,9 +1073,97 @@ The ransomware belongs to the `Conti` and `BlueSky` families.
 `Answer: BlueSky`
 
 ## 12. 3CX Supply Chain
-- **Date**: Nov xx, 2026
+- **Date**: Nov 12, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
 - **Category**: Threat Intel
+
+We are presented with a Windows Installer package `.msi`
+
+> MSI file is a standard database file used by Microsoft Windows to install, maintain, update, and remove software.
+
+**Q1. Understanding the scope of the attack and identifying which versions exhibit malicious behavior is crucial for making informed decisions if these compromised versions are present in the organization. How many versions of 3CX running on Windows have been flagged as malware?**
+
+The question prompts us to investigate public threat intelligence reports on the 3CX compromise via cybersecurity vendors, such as `Zscaler`, `Unit42`, `Mandiant`, `CrowdStrik`, or `SentinelOne`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468566913-f19c8c.png)
+
+There are two affected versions running on Windows.
+
+`Answer: 2`
+
+**Q2. Determining the age of the malware can help assess the extent of the compromise and track the evolution of malware families and variants. What's the UTC creation time of the .msi malware?**
+
+Upload the file onto VirusTotal and start inspecting.
+
+`Answer: 2023-03-13 06:33`
+
+**Q3. Executable files (.exe) are frequently used as primary or secondary malware payloads, while dynamic link libraries (.dll) often load malicious code or enhance malware functionality. Analyzing files deposited by the Microsoft Software Installer (.msi) is crucial for identifying malicious files and investigating their full potential. Which malicious DLLs were dropped by the .msi file?**
+
+There is a handful amount of `.dll` files upon inspecting `Files Dropped`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469051180-20a96f.png)
+
+Which of them is the malicious one, you may ask? We can inspect them further by taking their SHA256 to view it again on the very VirusTotal
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469175340-703e20.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469331095-bcfaf4.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469301486-462f58.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469349581-f91132.png)
+
+As we can see,only the two files `ffmpeg.dll` and `d3dcompiler_47.dll` are marked as malicious (as trojans, to be precise), while the others are not harmful.
+
+`Answer: ffmpeg.dll,d3dcompiler_47.dll`
+
+**Q4. Recognizing the persistence techniques used in this incident is essential for current mitigation strategies and future defense improvements. What is the MITRE Technique ID employed by the .msi files to load the malicious DLL?**
+
+Search for the `3CX Supply Chain Attack` campaign.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794472386279-263519.png)
+
+Reading further, there is a technique with a befitting description:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794474081905-f8c1f2.png)
+
+`Answer: T1574`
+
+**Q5. Recognizing the malware type (threat category) is essential to your investigation, as it can offer valuable insight into the possible malicious actions you'll be examining. What is the threat category of the two malicious DLLs?**
+
+`Answer: Trojan`
+
+**Q6. As a threat intelligence analyst conducting dynamic analysis, it's vital to understand how malware can evade detection in virtualized environments or analysis systems. This knowledge will help you effectively mitigate or address these evasive tactics. What is the MITRE ID for the virtualization/sandbox evasion techniques used by the two malicious DLLs?**
+
+`Virtualization/Sandbox Evasion` falls below `Stealth` and `Discovery`.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794474655960-56ae31.png)
+
+`Answer: T1497`
+
+**Q7. When conducting malware analysis and reverse engineering, understanding anti-analysis techniques is vital to avoid wasting time. Which hypervisor is targeted by the anti-analysis techniques in the ffmpeg.dll file?**
+
+Investigate the `ffmpeg.dll` on VirusTotal using its hash. Navigate to *Behavior > Capabilities*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794475673568-0633ef.png)
+
+`Answer: VMware`
+
+**Q8. Identifying the cryptographic method used in malware is crucial for understanding the techniques employed to bypass defense mechanisms and execute its functions fully. What encryption algorithm is used by the ffmpeg.dll file?**
+
+Such cryptographic method can be seen in the previous image, but you can see it on a [cybersecurity vendor](https://unit42.paloaltonetworks.com/3cxdesktopapp-supply-chain-attack/), too.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794475810235-b70aed.png)
+
+`Answer: RC4`
+
+**Q9. As an analyst, you've recognized some TTPs involved in the incident, but identifying the APT group responsible will help you search for their usual TTPs and uncover other potential malicious activities. Which group is responsible for this attack?**
+
+The question asks for the threat actor, so I naturally went to `Malpedia`.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468874543-884af4.png)
+
+`Answer: Lazarus`
 
 ## 13. RedLine
 - **Date**: Nov xx, 2026
