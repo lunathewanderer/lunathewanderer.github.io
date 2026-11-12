@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-12T15:30:38.418Z
+lastmod: 2026-11-12T15:42:02.151Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1047,7 +1047,7 @@ The ransomware belongs to the `Conti` and `BlueSky` families.
 
 `Answer: BlueSky`
 
-## 12. 3CX Supply Chain
+## 11. 3CX Supply Chain
 - **Date**: Nov 12, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
 - **Category**: Threat Intel
@@ -1145,7 +1145,7 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 - **Category**: Network Forensics
 
 ## 12. DanaBot
-- **Date**: Nov 11, 2026
+- **Date**: Nov 13, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Network Forensics
 
