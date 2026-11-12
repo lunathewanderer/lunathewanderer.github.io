@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-12T09:32:12.816Z
+lastmod: 2026-11-12T15:30:38.418Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -803,32 +803,7 @@ There is a 5-second timeout in the deletion.
 
 `Answer: 5`
 
-## 10. DanaBot
-- **Date**: Nov 11, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
-- **Category**: Network Forensics
-
-**Q1. Which IP address was used by the attacker during the initial access?**
-
-`Answer: 62.173.142.148`
-
-
-**Q2. What is the name of the malicious file used for initial access?**
-
-`Answer: allegato_708.js`
-
-**Q3. What is the SHA-256 hash of the malicious file used for initial access?**
-
-`Answer: 847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268`
-
-**Q4. Which process was used to execute the malicious file?**
-
-**Q5. What is the file extension of the second malicious file utilized by the attacker?**
-
-**Q6. What is the MD5 hash of the second malicious file?**
-
-
-## 11. BlueSky Ransomware
+## 10. BlueSky Ransomware
 - **Date**: Nov 11, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 4
 - **Category**: Network Forensics
@@ -1165,19 +1140,43 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 
 `Answer: Lazarus`
 
-## 13. RedLine
+## 11. Web Investigation
+- **Date**: Nov 12, 2026
+- **Category**: Network Forensics
+
+## 12. DanaBot
+- **Date**: Nov 11, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Network Forensics
+
+**Q1. Which IP address was used by the attacker during the initial access?**
+
+`Answer: 62.173.142.148`
+
+
+**Q2. What is the name of the malicious file used for initial access?**
+
+`Answer: allegato_708.js`
+
+**Q3. What is the SHA-256 hash of the malicious file used for initial access?**
+
+`Answer: 847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268`
+
+**Q4. Which process was used to execute the malicious file?**
+
+**Q5. What is the file extension of the second malicious file utilized by the attacker?**
+
+**Q6. What is the MD5 hash of the second malicious file?**
+
+## xx. RedLine
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Endpoint Forensics
 
-## 14. Reveal
+## xx. Reveal
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
 - **Category**: Endpoint Forensics
-
-
-
-
 
 
 
