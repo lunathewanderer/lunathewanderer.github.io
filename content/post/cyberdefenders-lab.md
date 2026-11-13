@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-13T09:58:09.312Z
+lastmod: 2026-11-13T15:48:52.292Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1277,21 +1277,143 @@ Export the file and upload it to VirusTotal.
 
 **Q16. What software runs the webserver that hosts the malware?**
 
-The stream above has already revealed the server.
+The stream above has already revealed the server in the question
 
 `Answer: LiteSpeed`
 
-**Q16. What is the public IP of the victim's computer?**
+**Q17. What is the public IP of the victim's computer?**
+
+The large amount of TCP traffic indicates a file download. Most of the packets shown travel from `10.4.10.132:49204` to `217.182.138.150:80` and vice versa, and their TCP sequence numbers keep increasing. The smaller packets going back are mainly acknowledgments (ACK) confirming receipt. The HTTP response is marked `200 OK` with the content type `application/x-msdownload`, confirms that the host downloaded a Windows executable file. The TCP acknowledgment number near 2,025,705 suggests roughly 2 MB of data arrived in that connection. These TCP rows are pieces of the same, the only transfer, not thousands of separate download requests.
+
+> `PSH (Push)` tells the receiving device's network stack to immediately flush its buffer and deliver the enclosed data straight to the application (like a chat app, SSH terminal, or browser), rather than waiting to collect more bytes for efficiency.
+
+After that, the victim's internal IP communicates with `23.229.162.69` for mail transferring. But before that, we can see that the source address has contacted `66.171.248.178` for an IP lookup. In the result `.txt`, we can see the public IP address of the victim's machine, which is `173.66.146.112`
+
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794563219615-6d7be0.png)
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794562886954-0bcd64.png)
 
-> `PSH (Push)` tells the receiving device's network stack to immediately flush its buffer and deliver the enclosed data straight to the application (like a chat app, SSH terminal, or browser), rather than waiting to collect more bytes for efficiency.
+**Q18. In which country is the email server to which the stolen information is sent?**
 
-The large amount of TCP traffic indicates a file download. Most of the packets shown travel from `217.182.138.150:80` to `10.4.10.132:49204`, and their TCP sequence numbers keep increasing. The smaller packets going back are mainly acknowledgments (ACK) confirming receipt. The HTTP response is marked `200 OK` with the content type `application/x-msdownload`, confirms that the host downloaded a Windows executable file. The TCP acknowledgment number near 2,025,705 suggests roughly 2 MB of data arrived in that connection. These TCP rows are pieces of the same, the only transfer, not thousands of separate download requests.
+The mail transferring is heading towards `23.229.162.69`, so we simply perform an IP lookup.
 
-After that, the victim's internal IP communicates with external IPs for mail transferring. In the image, we can see that the source address is leaving the network from the internal IP (10.4.10.132).
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794581622454-cbd6f7.png)
 
+`Answer: United States`
+
+**Q19. Analyzing the first extraction of information. What software runs the email server to which the stolen data is sent?**
+
+In the SMTP traffic, the information about the software always appear at the top of the stream.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794583069942-6258cf.png)
+
+
+> [Exim](https://en.wikipedia.org/wiki/Exim) is a mail transfer agent (MTA) used on Unix-like operating systems.
+>
+> [Exim](https://www.exim.org/) versions 4.87 through 4.91 are affected by a critical remote command execution (RCE) and local privilege escalation vulnerability known as CVE-2019-10149 (titled "The Return of the WIZard")
+
+`Answer: Exim 4.91`
+
+**Q20. To which email account is the stolen information sent?**
+
+This information can also be seen in the SMTP traffic, at the `AUTH login c2FsZXMuZGVsQG1hY3dpbmxvZ2lzdGljcy5pbg==`
+
+as well as in the fields `<MAIL FROM>` and `<RCPT TO>` that follows
+
+`Answer: sales.del@macwinlogistics.in`
+
+**Q21. What is the password used by the malware to send the email?**
+
+Right below `AUTH login`:
+
+```
+334 UGFzc3dvcmQ6
+
+U2FsZXNAMjM=
+
+235 Authentication succeeded
+```
+
+which is decoded into
+
+```
+334 Password:
+
+Sales@23
+
+235 Authentication succeeded
+```
+
+`Answer: Sales@23`
+
+**Q22. Which malware variant exfiltrated the data?**
+
+Read the encoded message in the SMTP traffic with CyberChef
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794584360491-3032dd.png)
+
+```
+HawkEye Keylogger - Reborn v9
+Passwords Logs
+roman.mcguire \ BEIJING-5CD1-PC
+
+==================================================
+URL               : https://login.aol.com/account/challenge/password
+Web Browser       : Internet Explorer 7.0 - 9.0
+User Name         : roman.mcguire914@aol.com
+Password          : P@ssw0rd$
+Password Strength : Very Strong
+User Name Field   : 
+Password Field    : 
+Created Time      : 
+Modified Time     : 
+Filename          : 
+==================================================
+
+==================================================
+URL               : https://www.bankofamerica.com/
+Web Browser       : Chrome
+User Name         : roman.mcguire
+Password          : P@ssw0rd$
+Password Strength : Very Strong
+User Name Field   : onlineId1
+Password Field    : passcode1
+Created Time      : 4/10/2019 2:35:17 AM
+Modified Time     : 
+Filename          : C:\Users\roman.mcguire\AppData\Local\Google\Chrome\User Data\Default\Login Data
+==================================================
+
+==================================================
+Name              : Roman McGuire
+Application       : MS Outlook 2002/2003/2007/2010
+Email             : roman.mcguire@pizzajukebox.com
+Server            : pop.pizzajukebox.com
+Server Port       : 995
+Secured           : No
+Type              : POP3
+User              : roman.mcguire
+Password          : P@ssw0rd$
+Profile           : Outlook
+Password Strength : Very Strong
+SMTP Server       : smtp.pizzajukebox.com
+SMTP Server Port  : 587
+==================================================
+
+```
+
+`Answer: Reborn v9`
+
+**Q23. What are the bankofamerica access credentials? (username:password)**
+
+`Answer: roman.mcguire:P@ssw0rd$`
+
+**Q24. Every how many minutes does the collected data get exfiltrated?**
+
+The email is sent every 10 minutes, starting with a `GET` request in `HTTP` protocol. You can inspect the SMTP traffic, and the result would be the same: the block of message is transferred at the 10 minutes interval.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794584711752-09d026.png)
+
+`Answer: 10`
 
 ## xx. DanaBot
 - **Date**: Nov 13, 2026
