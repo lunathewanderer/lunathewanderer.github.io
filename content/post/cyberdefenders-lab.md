@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-13T09:03:50.206Z
+lastmod: 2026-11-13T09:58:09.312Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1140,33 +1140,10 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 
 `Answer: Lazarus`
 
-## 11. Web Investigation
+## 12. Web Investigation
 - **Date**: Nov 12, 2026
 - **Category**: Network Forensics
 
-## 12. DanaBot
-- **Date**: Nov 13, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
-- **Category**: Network Forensics
-
-**Q1. Which IP address was used by the attacker during the initial access?**
-
-`Answer: 62.173.142.148`
-
-
-**Q2. What is the name of the malicious file used for initial access?**
-
-`Answer: allegato_708.js`
-
-**Q3. What is the SHA-256 hash of the malicious file used for initial access?**
-
-`Answer: 847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268`
-
-**Q4. Which process was used to execute the malicious file?**
-
-**Q5. What is the file extension of the second malicious file utilized by the attacker?**
-
-**Q6. What is the MD5 hash of the second malicious file?**
 
 ## 13. HawkEye
 - **Date**: Nov 13, 2026
@@ -1305,7 +1282,40 @@ The stream above has already revealed the server.
 `Answer: LiteSpeed`
 
 **Q16. What is the public IP of the victim's computer?**
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794563219615-6d7be0.png)
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794562886954-0bcd64.png)
+
+> `PSH (Push)` tells the receiving device's network stack to immediately flush its buffer and deliver the enclosed data straight to the application (like a chat app, SSH terminal, or browser), rather than waiting to collect more bytes for efficiency.
+
+The large amount of TCP traffic indicates a file download. Most of the packets shown travel from `217.182.138.150:80` to `10.4.10.132:49204`, and their TCP sequence numbers keep increasing. The smaller packets going back are mainly acknowledgments (ACK) confirming receipt. The HTTP response is marked `200 OK` with the content type `application/x-msdownload`, confirms that the host downloaded a Windows executable file. The TCP acknowledgment number near 2,025,705 suggests roughly 2 MB of data arrived in that connection. These TCP rows are pieces of the same, the only transfer, not thousands of separate download requests.
+
+After that, the victim's internal IP communicates with external IPs for mail transferring. In the image, we can see that the source address is leaving the network from the internal IP (10.4.10.132).
+
+
+## xx. DanaBot
+- **Date**: Nov 13, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Network Forensics
+
+**Q1. Which IP address was used by the attacker during the initial access?**
+
+`Answer: 62.173.142.148`
+
+
+**Q2. What is the name of the malicious file used for initial access?**
+
+`Answer: allegato_708.js`
+
+**Q3. What is the SHA-256 hash of the malicious file used for initial access?**
+
+`Answer: 847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268`
+
+**Q4. Which process was used to execute the malicious file?**
+
+**Q5. What is the file extension of the second malicious file utilized by the attacker?**
+
+**Q6. What is the MD5 hash of the second malicious file?**
 
 
 ## xx. RedLine
