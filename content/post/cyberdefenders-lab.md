@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-13T06:55:00.513Z
+lastmod: 2026-11-13T09:03:50.206Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1225,36 +1225,88 @@ Having known the organization, I simply search for its HQ:
 
 **Q7. The organization works with private addressing and netmask /24. How many computers in the organization are involved in the capture?**
 
+Inspect the *Statistics > Endpoints*
 
+> A `/24` netmask is commonly used for `IPv4` subnets. That notation also works for `IPv6`, but there is no `IPv6` in this packet. You can learn more about such networking on Youtube, or there is a detailed documentation about [TCP/IP Adressing & Subnetting](https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/tcpip-addressing-and-subnetting) here by Microsoft. Anyhow, the private ranges of `IPv4` are:
+> - `10.0.0.0` to `10.255.255.255`
+> - `172.16.0.0` to `172.31.255.255`
+> - `192.168.0.0` to `192.168.255.255`
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794556525212-60bc30.png)
 
+`Answer: 3`
 
+**Q8. What is the name of the most active computer at the network level?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794556773140-0c517d.png)
 
+A computer name at the network level can be simply put as a hostname. Throughout the packet, there is a prevalent one with the name `beijing-5cd1-pc`
 
+`Answer: beijing-5cd1-pc`
 
+**Q9. What is the IP of the organization's DNS server?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794557453307-d34801.png)
 
+The attacker sends a multitude of DNS requests, and the victim (the organization) responds correspondingly. In the image, the responses come from the IP address `10.4.10.4`
 
+`Answer: 10.4.10.4`
 
+**Q10. What domain is the victim asking about in packet 204?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794557602549-92fd88.png)
 
+`Answer: proforma-invoices.com`
 
+**Q11. What is the IP of the domain in the previous question?**
 
+Upon following the stream of the previous packet, the IP address is revealed to be `217.182.138.150`
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794557648976-980a14.png)
 
+`Answer: 217.182.138.150`
 
+**Q12. Indicate the country to which the IP in the previous section belongs.**
 
+Simply perform an IP lookup
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794557771899-5c318e.png)
 
+`Answer: France`
 
+**Q13. What operating system does the victim's computer run?**
 
+Filter for the IP address of the victim's machine:
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794558014503-2b8792.png)
 
+We can see an anomalous downloading of an executable. Following the stream reveals more information.
 
---
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794558113490-6b172b.png)
+
+`Answer: Windows NT 6.1`
+
+**Q14. What is the name of the malicious file downloaded by the accountant?**
+
+`Answer: tkraw_Protected99.exe`
+
+**Q15. What is the md5 hash of the downloaded file?**
+
+Export the file and upload it to VirusTotal.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794546519767-5b8d95.png)
+
+`Answer: 71826ba081e303866ce2a2534491a2f7`
+
+**Q16. What software runs the webserver that hosts the malware?**
+
+The stream above has already revealed the server.
+
+`Answer: LiteSpeed`
+
+**Q16. What is the public IP of the victim's computer?**
+
+
 
 ## xx. RedLine
 - **Date**: Nov xx, 2026
