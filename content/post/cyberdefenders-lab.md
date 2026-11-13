@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-13T15:48:52.292Z
+lastmod: 2026-11-13T18:29:03.780Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -820,7 +820,7 @@ Throughout the packet, there is only an influx of `TCP [SYN]` traffic from `87.9
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794363765856-bf135d.png)
 
-Immediately after the time the port scanning has finished, there is a host of TDS traffic, with a range of message:
+Immediately after the time the port scanning has finished, there is a host of [TDS](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-tds/893fcc7e-8a39-4b3c-815a-773b7b982c50) traffic, with a range of message:
 - TDS7 pre-login message
 - Response
 - Client Hello
@@ -828,10 +828,6 @@ Immediately after the time the port scanning has finished, there is a host of TD
 - Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message
 - Change Cipher Spec, Encrypted Handshake Message
 - Application Data
-
-> *"The Tabular Data Stream (TDS) protocol versions 7 and 8, hereinafter referred to as "TDS", is an application-level protocol used for the transfer of requests and responses between clients and database server systems. In such systems, the client establishes a long-lived connection with the server. Once the connection is established using a transport-level protocol, TDS messages are used to communicate between the client and the server. A database server can also act as the client if needed, in which case a separate TDS connection has to be established. Note that the TDS session is directly tied to the transport-level session, meaning that a TDS session is established when the transport-level connection is established and the server receives a request to establish a TDS connection. It persists until the transport-level connection is terminated (for example, when a TCP socket is closed). In addition, TDS does not make any assumption about the transport protocol used, but it does assume the transport protocol supports reliable, in-order delivery of the data.*
->
-> *TDS includes facilities for authentication and identification, channel encryption negotiation, issuing of SQL batches, stored procedure calls, returning data, and transaction manager requests. Returned data is self-describing and record-oriented. The data streams describe the names, types, and optional descriptions of the rows being returned."* - [Microsoft](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-tds/893fcc7e-8a39-4b3c-815a-773b7b982c50)
 
 We have a better view of the TDS traffic upon filtering for it:
 
@@ -875,6 +871,10 @@ Follow the TCP stream of the SQL batch after the successful login:
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794368792546-0850e6.png)
 
 We can see that the attacker has configured the setting option `xp_cmdshell`, switching from `0` to `1` to be specific.
+
+> SQL queries normally work with database data. [xp_cmdshell](https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/xp-cmdshell-transact-sql?view=sql-server-ver17) is an extended stored procedure that crosses into the operating system: it asks the SQL Server machine to run a Windows command and returns the command’s text output to the SQL caller. For example, EXEC xp_cmdshell 'whoami'; reports the Windows account used to run the command. It runs synchronously, so the SQL call waits for the command to finish.
+>
+> The Windows permissions matter. For a highly privileged SQL Server caller, the command runs with the SQL Server service account’s permissions. A permitted caller outside the sysadmin role uses a separately configured proxy account. Because this feature can turn database access into operating system command execution, it is disabled by default on new [SQL Server installations](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/xp-cmdshell-server-configuration-option).
 
 `Answer: xp_cmdshell`
 
