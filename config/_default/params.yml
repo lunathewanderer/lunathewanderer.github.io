@@ -674,28 +674,53 @@ injector:
         --color-red-3-shadow: rgba(219, 39, 119, 0.16);
       }
 
-      [data-theme="dark"] {
-        --color-background: #0b070a;
-        --color-default: #f8eef3;
-        --color-border: #33232d;
+      /* :root must be part of this selector to override Reimu's defaults. */
+      html:root[data-theme="dark"] {
+        --color-background: #000000;
+        --color-default: #ededed;
+        --color-border: #292929;
         --color-link: #f9a8d4;
-        --color-header-background: rgba(11, 7, 10, 0.95);
-        --color-footer-background: #0b070a;
-        --color-mobile-nav-background: #0b070a;
-        --color-wrap: #151016;
-        --color-sticky: #151016;
-        --color-h2-border: #33232d;
+        --color-header-background: #000000;
+        --color-footer-background: #000000;
+        --color-mobile-nav-background: #000000;
+        --color-wrap: #0a0a0a;
+        --color-sticky: #0a0a0a;
+        --color-code-background: #171717;
+        --color-h2-border: #292929;
+        --color-archive-year: #ededed;
+        --grey-7: #b4b4be;
+        --grey-9: #a1a1aa;
 
-        --red-0: #be185d;
-        --red-1: #db2777;
-        --red-2: #ec4899;
-        --red-3: #f472b6;
-        --red-4: rgba(249, 168, 212, 0.45);
-        --red-5: rgba(249, 168, 212, 0.15);
-        --red-5-5: rgba(249, 168, 212, 0.07);
-        --red-6: rgba(249, 168, 212, 0.12);
-        --color-red-6-shadow: rgba(236, 72, 153, 0.28);
-        --color-red-3-shadow: rgba(236, 72, 153, 0.18);
+        --red-0: #f472b6;
+        --red-1: #f472b6;
+        --red-2: #f9a8d4;
+        --red-3: #fbcfe8;
+        --red-4: rgba(249, 168, 212, 0.32);
+        --red-5: #171717;
+        --red-5-5: #101010;
+        --red-6: #131313;
+        --color-red-6-shadow: rgba(236, 72, 153, 0.16);
+        --color-red-3-shadow: rgba(236, 72, 153, 0.12);
+        --color-meta-shadow: rgba(0, 0, 0, 0.35);
+        --color-hover-shadow: rgba(0, 0, 0, 0.45);
+
+        --highlight-nav: #0a0a0a;
+        --highlight-background: #050505;
+        --highlight-foreground: #ededed;
+        --highlight-comment: #a1a1aa;
+        --highlight-selection: rgba(244, 114, 182, 0.24);
+        --highlight-scrollbar: #404040;
+      }
+
+      html[data-theme="dark"] #header-nav .main-nav-link,
+      html[data-theme="dark"] #header-nav .main-nav-link-wrap,
+      html[data-theme="dark"] #header-nav .nav-icon {
+        opacity: 1;
+      }
+
+      html[data-theme="dark"] .sidebar-menu-link-wrap.link-active {
+        background: #9d174d;
+        opacity: 1;
       }
 
       a:hover {
