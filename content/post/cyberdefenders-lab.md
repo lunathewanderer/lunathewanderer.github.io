@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-12T15:42:02.151Z
+lastmod: 2026-11-13T06:55:00.513Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1167,6 +1167,94 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 **Q5. What is the file extension of the second malicious file utilized by the attacker?**
 
 **Q6. What is the MD5 hash of the second malicious file?**
+
+## 13. HawkEye
+- **Date**: Nov 13, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 6
+- **Category**: Network Forensics
+
+**Q1. How many packets does the capture have?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794550370387-ac8b40.png)
+
+`Answer: 4003`
+
+**Q2. At what time was the first packet captured (UTC)?**
+
+`Answer: 2019-04-10 20:37`
+
+**Q3. What is the duration of the capture?**
+
+Looking at the last frame, 
+
+`UTC Arrival Time: Apr 10, 2019 21:40:48.690963000 UTC`
+
+While the first packet was captured at `Apr 10, 2019 20:37:07.129730000 UTC`
+
+Subtract the UTC arrival time of the last capture and the first one above, we get `01:03:41`
+
+`Answer: 01:03:41`
+
+**Q4. What is the most active computer at the link level?**
+
+> Ethernet is a common link-layer technology. The link layer handles communication across one local link using frames and MAC addresses. Above it, the network layer uses IP addresses to move packets between networks.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794551242888-8b2ada.png)
+
+`Answer: 00:08:02:1c:47:ae`
+
+**Q5. Manufacturer of the NIC of the most active system at the link level?**
+
+> A network interface controller is a computer hardware component that connects a computer to a computer network.
+
+Simply perform a [MAC Address lookup](https://maclookup.app/search/result?mac=00:08:02:1c:47:ae) for the address above `00:08:02:1c:47:ae`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794552135257-92d7ff.png)
+
+The address is registered to `Hewlett Packard`, also known as `Hewlett-Packard` or `HP`
+
+`Answer: Hewlett-Packard`
+
+**Q6. Where is the headquarter of the company that manufactured the NIC of the most active computer at the link level?**
+
+Having known the organization, I simply search for its HQ:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794552725331-6fb33c.png)
+
+`Answer: Palo Alto`
+
+**Q7. The organization works with private addressing and netmask /24. How many computers in the organization are involved in the capture?**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794546519767-5b8d95.png)
 
 ## xx. RedLine
 - **Date**: Nov xx, 2026
