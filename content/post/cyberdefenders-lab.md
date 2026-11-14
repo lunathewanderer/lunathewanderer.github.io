@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-14T08:54:31.439Z
+lastmod: 2026-11-14T10:01:18.100Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1472,17 +1472,22 @@ Export the file and check the hash on VirusTotal.
 - **Date**: Nov 14, 2026
 - **Category**: Network Forensics
 
-## xx. HoneyBOT
-- **Date**: Nov xx, 2026
+## 16. HoneyBOT
+- **Date**: Nov 14, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
 - **Category**: Endpoint Forensics
 
-## xx. RedLine
+## 17. EscapeRoom
+- **Date**: Nov 14, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
+- **Category**: Endpoint Forensics
+
+## 18. RedLine
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Endpoint Forensics
 
-## xx. Reveal
+## 19. Reveal
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
 - **Category**: Endpoint Forensics
