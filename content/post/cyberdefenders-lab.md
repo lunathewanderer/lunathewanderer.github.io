@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-13T18:29:03.780Z
+lastmod: 2026-11-14T05:31:43.436Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1422,23 +1422,51 @@ The email is sent every 10 minutes, starting with a `GET` request in `HTTP` prot
 
 **Q1. Which IP address was used by the attacker during the initial access?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794625260655-fb3e32.png)
+
+Such TCP & HTTP requests from the attacker revolve around `login.php`. `10.2.14.101` is probably the attacker's IP address, and it can be seen across the packet capture. On the other hand, `62.173.142.148` only appears in this stage of gaining initial foothold, thus our answer to this question.
+
 `Answer: 62.173.142.148`
 
-
 **Q2. What is the name of the malicious file used for initial access?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794627597850-9c306a.png)
+
+Follow the GET request for initial access, we can see the script name is `allegato_708.js`
 
 `Answer: allegato_708.js`
 
 **Q3. What is the SHA-256 hash of the malicious file used for initial access?**
 
+Paste the script into a SHA256 computer
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794627698666-98c994.png)
+
 `Answer: 847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268`
 
 **Q4. Which process was used to execute the malicious file?**
 
+Use its SHA-256 hash to investigate further on VirusTotal.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794628356703-371065.png)
+
+> When JavaScript files are executed on Windows systems, they typically use a specific interpreter. `wscript.exe` is that built-in Windows component responsible for executing .js files.
+
+`Answer: wscript.exe`
+
 **Q5. What is the file extension of the second malicious file utilized by the attacker?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794628904397-e694d1.png)
+
+Scroll down a little bit, we can see there is a GET request to `/resource.dll`, which is our second malicious file.
+
+`Answer: .dll`
 
 **Q6. What is the MD5 hash of the second malicious file?**
 
+Export the file and check the hash on VirusTotal.
+
+`Answer: e758e07113016aca55d9eda2b0ffeebe`
 
 ## xx. RedLine
 - **Date**: Nov xx, 2026
