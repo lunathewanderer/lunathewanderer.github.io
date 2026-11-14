@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-14T05:31:43.436Z
+lastmod: 2026-11-14T08:54:31.439Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1415,7 +1415,7 @@ The email is sent every 10 minutes, starting with a `GET` request in `HTTP` prot
 
 `Answer: 10`
 
-## xx. DanaBot
+## 14. DanaBot
 - **Date**: Nov 13, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Network Forensics
@@ -1467,6 +1467,15 @@ Scroll down a little bit, we can see there is a GET request to `/resource.dll`, 
 Export the file and check the hash on VirusTotal.
 
 `Answer: e758e07113016aca55d9eda2b0ffeebe`
+
+## 15. XLMRat
+- **Date**: Nov 14, 2026
+- **Category**: Network Forensics
+
+## xx. HoneyBOT
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
+- **Category**: Endpoint Forensics
 
 ## xx. RedLine
 - **Date**: Nov xx, 2026
