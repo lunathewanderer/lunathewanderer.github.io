@@ -731,7 +731,9 @@ injector:
         color: #f9a8d4;
       }
 
-      #main .post-wrap {
+      #main .post-wrap,
+      #sidebar .sidebar-wrap,
+      #sidebar .widget-wrap {
         box-shadow:
           0 0 0 1px rgba(244, 114, 182, 0.4),
           0 0 14px rgba(236, 72, 153, 0.16),
