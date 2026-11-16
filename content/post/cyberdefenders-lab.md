@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-14T10:01:18.100Z
+lastmod: 2026-11-16T05:23:36.643Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -872,7 +872,7 @@ Follow the TCP stream of the SQL batch after the successful login:
 
 We can see that the attacker has configured the setting option `xp_cmdshell`, switching from `0` to `1` to be specific.
 
-> SQL queries normally work with database data. [xp_cmdshell](https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/xp-cmdshell-transact-sql?view=sql-server-ver17) is an extended stored procedure that crosses into the operating system: it asks the SQL Server machine to run a Windows command and returns the command’s text output to the SQL caller. For example, EXEC xp_cmdshell 'whoami'; reports the Windows account used to run the command. It runs synchronously, so the SQL call waits for the command to finish.
+> SQL queries normally work with database data. [xp_cmdshell](https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/xp-cmdshell-transact-sql?view=sql-server-ver17) is an extended stored procedure that crosses into the operating system: it asks the SQL Server machine to run a Windows command and returns the command’s text output to the SQL caller. For example, EXEC [xp_cmdshell](https://youtu.be/0upe1aZPg8M) 'whoami'; reports the Windows account used to run the command. It runs synchronously, so the SQL call waits for the command to finish.
 >
 > The Windows permissions matter. For a highly privileged SQL Server caller, the command runs with the SQL Server service account’s permissions. A permitted caller outside the sysadmin role uses a separately configured proxy account. Because this feature can turn database access into operating system command execution, it is disabled by default on new [SQL Server installations](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/xp-cmdshell-server-configuration-option).
 
@@ -887,6 +887,10 @@ This is seemingly corresponding to the events happened in the log. Following the
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794369189801-b4807d.png)
 
 And we can see the attacker used `MSFConsole`, an interactive control center platform, to inject [winlogon.exe](https://quantrimang.com/cong-nghe/windows-logon-application-la-gi-va-tai-sao-no-lai-chay-tren-he-thong-149728) as the host application.
+
+> More reference of `winlogon.exe`
+> - [What is winlogon.exe?](https://youtu.be/_i_F0UJVg_0)
+> - [How Windows Logon works?](https://youtu.be/42I317fvaGo)
 
 `Answer: winlogon.exe`
 
@@ -1144,6 +1148,57 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 - **Date**: Nov 12, 2026
 - **Category**: Network Forensics
 
+**Q1. By knowing the attacker's IP, we can analyze all logs and actions related to that IP and determine the extent of the attack, the duration of the attack, and the techniques used. Can you provide the attacker's IP?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794801879842-187976.png)
+
+A lot of HTTP requests using `gobuster` from `111.224.250.131` and a lot of `404 Not Found` responses from `73.124.22.98`
+
+`Answer: 111.224.250.131`
+
+**Q2. If the geographical origin of an IP address is known to be from a region that has no business or expected traffic with our network, this can be an indicator of a targeted attack. Can you determine the origin city of the attacker?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794802114643-81981c.png)
+
+`Answer: Shijiazhuang`
+
+**Q3. Identifying the exploited script allows security teams to understand exactly which vulnerability was used in the attack. This knowledge is critical for finding the appropriate patch or workaround to close the security gap and prevent future exploitation. Can you provide the vulnerable PHP script name?**
+
+There are signs of `SQLi` from `search.php`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794802549621-8cd1ff.png)
+
+`Answer: search.php`
+
+**Q4. Establishing the timeline of an attack, starting from the initial exploitation attempt, what is the complete request URI of the first SQLi attempt by the attacker?**
+
+Follow the packet chronologically to determine the first SQLi attempt.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794804927432-b74487.png)
+
+`/search.php?search=book%20and%201=1;%20--%20-` is decoded into `/search.php?search=book and 1=1; -- -`
+
+`Answer: /search.php?search=book and 1=1; -- -`
+
+**Q5. Can you provide the complete request URI that was used to read the web server's available databases?**
+
+`Answer: /search.php?search=book' UNION ALL SELECT NULL,CONCAT(0x7178766271,JSON_ARRAYAGG(CONCAT_WS(0x7a76676a636b,schema_name)),0x7176706a71) FROM INFORMATION_SCHEMA.SCHEMATA-- -`
+
+**Q6. Assessing the impact of the breach and data access is crucial, including the potential harm to the organization's reputation. What's the table name containing the website users data?**
+
+`Answer: customers`
+
+**Q7. The website directories hidden from the public could serve as an unauthorized access point or contain sensitive functionalities not intended for public access. Can you provide the name of the directory discovered by the attacker?**
+
+`Answer: /admin/`
+
+**Q8. Knowing which credentials were used allows us to determine the extent of account compromise. What are the credentials used by the attacker for logging in?**
+
+`Answer: admin:admin123!`
+
+**Q9. We need to determine if the attacker gained further access or control of our web server. What's the name of the malicious script uploaded by the attacker?**
+
+`Answer: NVri2vhp.php`
 
 ## 13. HawkEye
 - **Date**: Nov 13, 2026
@@ -1472,15 +1527,88 @@ Export the file and check the hash on VirusTotal.
 - **Date**: Nov 14, 2026
 - **Category**: Network Forensics
 
+**Q1. The attacker successfully executed a command to download the first stage of the malware. What is the URL from which the first malware stage was installed?**
+
+`Answer: http://45.126.209.4:222/mdm.jpg`
+
+**Q2. Which hosting provider owns the associated IP address?**
+
+`Answer: reliableSite.net`
+
+**Q3. By analyzing the malicious scripts, two payloads were identified: a loader and a secondary executable. What is the SHA256 of the malware executable?**
+
+`Answer: 1eb7b02e18f67420f42b1d94e74f3b6289d92672a0fb1786c30c03d68e81d798`
+
+**Q4. What is the malware family label based on Alibaba?**
+
+`Answer: asyncrat`
+
+**Q5. What is the PE header compile (Creation Time) timestamp of the malware?**
+
+`Answer: 2023-10-30 15:08`
+
+**Q6. Which LOLBin is leveraged for stealthy process execution in this script? Provide the full path.**
+
+`Answer: C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegSvcs.exe`
+
+**Q7. The script is designed to drop several files. List the names of the files dropped by the script.**
+
+`Answer: Conted.vbs,Conted.ps1,Conted.bat`
+
 ## 16. HoneyBOT
-- **Date**: Nov 14, 2026
+- **Date**: Nov 16, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
-- **Category**: Endpoint Forensics
+- **Category**: Network Forensics
+
+**Q1. What is the attacker's IP address?**
+
+`Answer: 98.114.205.102`
+
+**Q2. What is the target's IP address?**
+
+`Answer: 192.150.11.111`
+
+**Q3. Provide the country code for the attacker's IP address (a.k.a geo-location).**
+
+`Answer: US`
+
+**Q4. How many TCP sessions are present in the captured traffic?**
+
+`Answer: 5`
+
+**Q5. How long did it take to perform the attack (in seconds)?**
+
+`Answer: 16`
+
+**Q6. Provide the CVE number of the exploited vulnerability.**
+
+`Answer: CVE-2003-0533`
+
+**Q7. Which protocol was used to carry over the exploit?**
+
+`Answer: SMB`
+
+**Q8. Which protocol did the attacker use to download additional malicious files to the target system?**
+
+`Answer: FTP`
+
+**Q9. What is the name of the downloaded malware?**
+
+
+**Q10. The attacker's server was listening on a specific port. Provide the port number.**
+
+**Q11. When was the involved malware first submitted to VirusTotal for analysis? Format: YYYY-MM-DD**
+
+**Q12. What is the key used to encode the shellcode?**
+
+**Q13. What is the port number the shellcode binds to?**
+
+**Q14. The shellcode used a specific technique to determine its location in memory. What is the OS file being queried during this process?**
 
 ## 17. EscapeRoom
-- **Date**: Nov 14, 2026
+- **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
-- **Category**: Endpoint Forensics
+- **Category**: Network Forensics
 
 ## 18. RedLine
 - **Date**: Nov xx, 2026
