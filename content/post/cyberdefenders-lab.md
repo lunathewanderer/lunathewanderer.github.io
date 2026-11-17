@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-17T10:01:20.882Z
+lastmod: 2026-11-17T10:15:17.238Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1196,9 +1196,15 @@ We can see that there are many instances of `--%20` (and some `--%20-`) in the p
 
 We would like to have another point of view. From those `GET requests`, we would like to inspect if they are all met with a `HTTP successful response` with `ip.dst == 111.224.250.131 && http.response.code == 200`
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794910255826-1987b9.png)
+
+Apparently, not all SQLi requests is responded with `200 OK`.
+
 > `INFORMATION_SCHEMA` is a system metadata area in MySQL-compatible databases. `INFORMATION_SCHEMA.SCHEMATA` contains database names.
 
-ip.dst == 111.224.250.131 && http.request.uri contains "INFORMATION_SCHEMA.SCHEMATA" && http.response.code == 200
+`ip.dst == 111.224.250.131 && http.request.uri contains "INFORMATION_SCHEMA.SCHEMATA" && http.response.code == 200`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794910382869-e27409.png)
 
 `Answer: /search.php?search=book' UNION ALL SELECT NULL,CONCAT(0x7178766271,JSON_ARRAYAGG(CONCAT_WS(0x7a76676a636b,schema_name)),0x7176706a71) FROM INFORMATION_SCHEMA.SCHEMATA-- -`
 
