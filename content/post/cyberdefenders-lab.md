@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-16T05:23:36.643Z
+lastmod: 2026-11-17T10:01:20.882Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1181,6 +1181,24 @@ Follow the packet chronologically to determine the first SQLi attempt.
 `Answer: /search.php?search=book and 1=1; -- -`
 
 **Q5. Can you provide the complete request URI that was used to read the web server's available databases?**
+
+First off, filter for `frame contains "search.php"`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794906501972-ad00a3.png)
+
+We can see that there are many instances of `--%20` (and some `--%20-`) in the payloads. This is an indicator of MySQL dialect.
+
+> Unlike standard SQL engines (such as PostgreSQL, SQL Server, or Oracle) where `--` alone begins a comment, MySQL requires at least one whitespace or control character (such as a space, tab, or newline) immediately after the second dash.
+
+**Sidenote**:
+- `JSON_ARRAYAGG` is an aggregate function. It takes a value from each row and combines the values into one JSON array. 
+- `CONCAT_WS` means “concatenate with separator.” Its first argument is the separator, followed by the strings to join.
+
+We would like to have another point of view. From those `GET requests`, we would like to inspect if they are all met with a `HTTP successful response` with `ip.dst == 111.224.250.131 && http.response.code == 200`
+
+> `INFORMATION_SCHEMA` is a system metadata area in MySQL-compatible databases. `INFORMATION_SCHEMA.SCHEMATA` contains database names.
+
+ip.dst == 111.224.250.131 && http.request.uri contains "INFORMATION_SCHEMA.SCHEMATA" && http.response.code == 200
 
 `Answer: /search.php?search=book' UNION ALL SELECT NULL,CONCAT(0x7178766271,JSON_ARRAYAGG(CONCAT_WS(0x7a76676a636b,schema_name)),0x7176706a71) FROM INFORMATION_SCHEMA.SCHEMATA-- -`
 
