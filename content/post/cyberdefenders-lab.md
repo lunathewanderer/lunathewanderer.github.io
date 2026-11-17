@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-17T10:15:17.238Z
+lastmod: 2026-11-17T14:22:14.565Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1194,17 +1194,28 @@ We can see that there are many instances of `--%20` (and some `--%20-`) in the p
 - `JSON_ARRAYAGG` is an aggregate function. It takes a value from each row and combines the values into one JSON array. 
 - `CONCAT_WS` means “concatenate with separator.” Its first argument is the separator, followed by the strings to join.
 
-We would like to have another point of view. From those `GET requests`, we would like to inspect if they are all met with a `HTTP successful response` with `ip.dst == 111.224.250.131 && http.response.code == 200`
+We would like to have another point of view. From those `GET requests`, we would like to inspect if they are all met with a `HTTP successful response` with `ip.dst == 111.224.250.131 && http.response.code == 200`. I suppose our targeted payload should be successful.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794910255826-1987b9.png)
 
-Apparently, not all SQLi requests is responded with `200 OK`.
+Apparently, not all SQLi requests is responded with `200 OK` if you pay attention to the packets displayed. And the filter is not yet optimal, there is still a lot of requests to analyze manually, I suppose. Anyhow, lemme introduce you to `INFORMATION_SCHEMA`
 
-> `INFORMATION_SCHEMA` is a system metadata area in MySQL-compatible databases. `INFORMATION_SCHEMA.SCHEMATA` contains database names.
+> `INFORMATION_SCHEMA` is a built-in catalog of metadata about a database system. In MySQL, it appears as a special database containing read-only views that describe items such as `databases`, `tables`, `columns`, `indexes`, and `user privileges`. A request referencing INFORMATION_SCHEMA can therefore indicate that someone is probing for database structure. Some of `INFORMATION_SCHEMA` views include:
+>
+> - `INFORMATION_SCHEMA.SCHEMATA` lists all schemas or databases available on the server.
+> - `INFORMATION_SCHEMA.TABLES` lists all tables and views in a database along with their types and storage engines.
+> - `INFORMATION_SCHEMA.COLUMNS` provides details on table/view columns, including data types, default values, and nullability.
+> - `INFORMATION_SCHEMA.TABLE_CONSTRAINTS` lists constraints such as primary keys, foreign keys, and unique checks.
+
+That said, let's try to apply the new filter. Since the question asks for the "server's databases available", `INFORMATION_SCHEMA.SCHEMATA` would be a great fit here.
 
 `ip.dst == 111.224.250.131 && http.request.uri contains "INFORMATION_SCHEMA.SCHEMATA" && http.response.code == 200`
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794910382869-e27409.png)
+
+Only one frame 1525 fits the conditions applied, and upon following the stream, the payload is visible right in front of our eyes.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794925294211-4d91cb.png)
 
 `Answer: /search.php?search=book' UNION ALL SELECT NULL,CONCAT(0x7178766271,JSON_ARRAYAGG(CONCAT_WS(0x7a76676a636b,schema_name)),0x7176706a71) FROM INFORMATION_SCHEMA.SCHEMATA-- -`
 
