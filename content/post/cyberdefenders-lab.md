@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-18T15:02:34.757Z
+lastmod: 2026-11-18T15:50:13.433Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1122,13 +1122,25 @@ Export the file and check the hash on VirusTotal.
 
 **Q1. The attacker successfully executed a command to download the first stage of the malware. What is the URL from which the first malware stage was installed?**
 
-At first glance, the traffic is pretty much straightforward. There is only two HTTP requests `xlm.txt` and `mdm.jpg` (both of which are successful). Note that the transfer of`mdm.jpg` take up much more packets.
+At first glance, the traffic is pretty much straightforward. There is only two HTTP requests `xlm.txt` and `mdm.jpg` (both of which are successful). Note that the transfer of `mdm.jpg` take up much more packets.
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795012749781-aa9495.png)
+
+Out of the two files, `mdm.jpg` seems like a malware hidden in a seemingly innocuous image, with very suspicious scripting after the hex content.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795014993730-35e48b.png)
+
+Having the `Host Header` and the known `HTTP Request`, we now acquire the complete URL.
 
 `Answer: http://45.126.209.4:222/mdm.jpg`
 
 **Q2. Which hosting provider owns the associated IP address?**
+
+Perform an IP lookup, we get the following
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795016538513-bf93bb.png)
+
+> An internet service provider (ISP) is an organization that provides a myriad of services related to accessing, using, managing, or participating in the internet.
 
 `Answer: reliableSite.net`
 
