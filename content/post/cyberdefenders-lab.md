@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-18T13:58:18.143Z
+lastmod: 2026-11-18T14:05:40.048Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -12,6 +12,8 @@ tags:
   - Threat Intel
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 ---
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795010734103-f4c579.png)
 
 # Endpoint Forensics
 
