@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-18T14:13:36.400Z
+lastmod: 2026-11-18T15:02:34.757Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1121,6 +1121,10 @@ Export the file and check the hash on VirusTotal.
 - **Category**: Network Forensics
 
 **Q1. The attacker successfully executed a command to download the first stage of the malware. What is the URL from which the first malware stage was installed?**
+
+At first glance, the traffic is pretty much straightforward. There is only two HTTP requests `xlm.txt` and `mdm.jpg` (both of which are successful). Note that the transfer of`mdm.jpg` take up much more packets.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795012749781-aa9495.png)
 
 `Answer: http://45.126.209.4:222/mdm.jpg`
 
