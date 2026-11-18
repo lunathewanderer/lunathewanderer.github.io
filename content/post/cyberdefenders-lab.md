@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-17T14:22:14.565Z
+lastmod: 2026-11-18T09:02:52.331Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1221,17 +1221,41 @@ Only one frame 1525 fits the conditions applied, and upon following the stream, 
 
 **Q6. Assessing the impact of the breach and data access is crucial, including the potential harm to the organization's reputation. What's the table name containing the website users data?**
 
+In the previous HTTP response, we can see that `bookworld_db` is the database/schema name. Using that to investigate further:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794927313692-a2dda1.png)
+
+Out of the 3 results, frame 1622 indeed contains website users data, with the table name being `customers`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794927420602-28c79b.png)
+
+> In `bookworld_db.customers`, bookworld_db is the database name while customers is the table name.
+
 `Answer: customers`
 
 **Q7. The website directories hidden from the public could serve as an unauthorized access point or contain sensitive functionalities not intended for public access. Can you provide the name of the directory discovered by the attacker?**
+
+> `GET` requests retrieve data from a server using parameters visible in the URL, while `POST` requests send data to a server inside the hidden request body to create or modify resources.
+
+Throughout the packet, we have seen a majority of `GET` request. However, towards the end of the packet, we can see some `POST` (as well as `GET`) requests to `/admin/`. This observation becomes more apparent upon applying the following filter:
+
+> Use `http.request.method == POST` in Wireshark to focus on requests where data is being submitted, which often indicate login attempts or interactions with restricted areas.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794990180073-7b8e69.png)
 
 `Answer: /admin/`
 
 **Q8. Knowing which credentials were used allows us to determine the extent of account compromise. What are the credentials used by the attacker for logging in?**
 
+In the previous question, we can see that there are some attempt to login, as seen in the `POST` requests to the endpoints `/admin/login.php` with several credentials. Apparently, the last attempt is successful, and thus logged in to `/admin/index.php` in the next `POST` request. The correct credential seems to be `admin:admin123%21`, which we need to URL decode once.
+
 `Answer: admin:admin123!`
 
 **Q9. We need to determine if the attacker gained further access or control of our web server. What's the name of the malicious script uploaded by the attacker?**
+
+Inspect the observed `/admin/uploads/`, we can see there is a suspicious PHP.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794992440141-a9c008.png)
 
 `Answer: NVri2vhp.php`
 
