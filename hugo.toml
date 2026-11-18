@@ -14,6 +14,9 @@ enable = true
 delimiters.block = [["\\[", "\\]"], ["$$", "$$"]]
 delimiters.inline = [["\\(", "\\)"], ["$", "$"]]
 
+[markup.tableOfContents]
+startLevel = 1
+
 [markup.highlight]
 guessSyntax = true
 noClasses = false
