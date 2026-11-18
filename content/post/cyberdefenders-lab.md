@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-18T14:05:40.048Z
+lastmod: 2026-11-18T14:13:36.400Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -13,9 +13,11 @@ tags:
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 ---
 
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795010734103-f4c579.png)
+![sea cat](/images/posts/cyberdefenders-lab-2f7e08/sea-cat-1795011086043-53ac82.jpg)
 
 # Endpoint Forensics
+
+![WSLBG](/images/posts/cyberdefenders-lab-2f7e08/wslbg-1795010988815-ea843a.jpg)
 
 ## 1. Insider
 - **Date**: Nov xx, 2026
@@ -32,6 +34,8 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 - **Category**: Endpoint > Memory Forensics
 
 # Network Forensics
+
+![japane](/images/posts/cyberdefenders-lab-2f7e08/japane-1795011209053-7824a3.jpg)
 
 ## 1. Jetbrains
 
@@ -1200,6 +1204,8 @@ Export the file and check the hash on VirusTotal.
 - **Category**: Network Forensics
 
 # Threat Intel
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795010946351-6a4a06.png)
 
 ## 1. GrabThePhisher
 - **Date**: Oct 30, 2026
