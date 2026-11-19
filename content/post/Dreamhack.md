@@ -12,10 +12,10 @@ categories:
   - Writeup
 cover: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
 banner: "https://i.pinimg.com/736x/26/fd/ac/26fdace7db70d8cb4c0803315d518327.jpg"
-lastmod: 2026-10-30T03:21:54.983Z
+lastmod: 2026-11-19T12:36:21.068Z
 ---
 
-## 1. sleepingshark
+# 1. sleepingshark
 
 - **Date**: Oct 2, 2026
 - **Difficulty**: Dreamhack - Gold
@@ -72,7 +72,7 @@ awk -F '\t' '$2 ~ /SUBSTRING/ {q[$1]=$2} $3+0 > 2.75 {
 
 **`GoN{T1mE_B4s3d_5QL_Inj3c7i0n_wI7h_Pc4p}`**
 
-## 2. Dream Zoo
+# 2. Dream Zoo
 
 - **Date**: Oct 5, 2026
 - **Difficulty**: Dreamhack - Gold
@@ -158,7 +158,7 @@ JFu:l`>|c:bQj`}Q~:me=zQb=:e}Qj:z:s
 
 **`DH{4bn0rm4l_dns_p4ck3t_l34ks_d4t4}`**
 
-## 3. Don't miss the data
+# 3. Don't miss the data
 
 - **Date**: Oct 6, 2026
 - **Difficulty**: Dreamhack - Platinum
