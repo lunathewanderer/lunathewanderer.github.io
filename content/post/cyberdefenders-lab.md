@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-18T15:50:13.433Z
+lastmod: 2026-11-19T03:37:12.059Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -1146,13 +1146,23 @@ Perform an IP lookup, we get the following
 
 **Q3. By analyzing the malicious scripts, two payloads were identified: a loader and a secondary executable. What is the SHA256 of the malware executable?**
 
+Get the hexstring, go to CyberChef > From Hex, then download the true form of the "image". Then, on the terminal,
+
+`certutil -hashfile C:\pathfile SHA256`
+
+Note that `$hexString_bbb` is the executable, while `$hexString_pe` is the loader.
+
 `Answer: 1eb7b02e18f67420f42b1d94e74f3b6289d92672a0fb1786c30c03d68e81d798`
 
 **Q4. What is the malware family label based on Alibaba?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795059300309-8b3cc6.png)
+
 `Answer: asyncrat`
 
 **Q5. What is the PE header compile (Creation Time) timestamp of the malware?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795059373449-44be21.png)
 
 `Answer: 2023-10-30 15:08`
 
