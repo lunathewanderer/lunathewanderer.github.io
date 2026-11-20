@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-20T07:54:21.675Z
+lastmod: 2026-11-20T09:13:15.593Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -18,6 +18,10 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 # Endpoint Forensics
 
 ## 1. Insider
+- **Date**: Nov 20, 2026
+- **Category**: Endpoint > Disk Forensics
+
+## 2. Silent Breach
 - **Date**: Nov 20, 2026
 - **Category**: Endpoint > Disk Forensics
 
@@ -36,6 +40,36 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
 - **Category**: Endpoint > Disk Forensics
 
+## 4. AzurePot
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
+- **Category**: Endpoint > Disk Forensics
+
+## 5. Sysinternals
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
+- **Category**: Endpoint > Disk Forensics
+
+## 5. Eli
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
+- **Category**: Endpoint > Disk Forensics
+
+## 5. MrGamer
+- **Date**: Nov xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
+- **Category**: Endpoint > Disk Forensics
+
+## 8. Ramnit
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 9. The Crime
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
 ## 5. Hunter
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
@@ -51,22 +85,32 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
 - **Category**: Endpoint > Memory Forensics
 
-## 8. BlackEnergy
+## 9. BlackEnergy
 - **Date**: Dec xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
 - **Category**: Endpoint > Memory Forensics
 
-## 9. Brave
+## 10. Brave
 - **Date**: Dec xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 10. BankingTroubles
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 3
 - **Category**: Endpoint > Memory Forensics
 
 ## 11. Ulysses
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 11. l337 S4uc3
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 11. Seized
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Endpoint > Memory Forensics
+
+## 11. MrRobot
 - **Date**: Dec xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
 - **Category**: Endpoint > Memory Forensics
@@ -76,7 +120,12 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 2
 - **Category**: Endpoint > Memory Forensics
 
-## 13. NintendoHunt
+## 13. BankingTroubles
+- **Date**: Dec xx, 2026
+- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 3
+- **Category**: Endpoint > Memory Forensics
+
+## 14. NintendoHunt
 - **Date**: Dec xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 2
 - **Category**: Endpoint > Memory Forensics
@@ -1266,13 +1315,22 @@ Note that `$hexString_bbb` is the executable, while `$hexString_pe` is the loade
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
 - **Category**: Network Forensics
 
+## 12. Lockdown
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
+## 13. OpenWire
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
 # Threat Intel
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795010946351-6a4a06.png)
 
 ## 1. GrabThePhisher
 - **Date**: Oct 30, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Difficulty**: Easy
+- **Track**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Threat Intel
 
 We are presented with the filesystem of a webpage.
@@ -1416,7 +1474,8 @@ We can see their names in the comment/message.
 
 ## 2. Yellow RAT
 - **Date**: Oct 30, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Difficulty**: Easy
+- **Track**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Threat Intel
 
 We are presented with a malware hash `30E527E45F50D2BA82865C5679A6FA998EE0A1755361AB01673950810D071C85`, and we are prompted to gather intel on this malware using online platforms.
@@ -1473,7 +1532,8 @@ You can also find the server in VirusTotal (*Behavior > Activity Summary*)
 
 ## 3. IcedID
 - **Date**: Oct 30, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+- **Difficulty**: Easy
+- **Track**: CyberDefenders - SOC Analyst Tier 1 - Level 2
 - **Category**: Threat Intel
 
 We are presented with a malware hash `191eda0c539d284b29efe556abb05cd75a9077a0`, and we are prompted to gather intel on this malware using online platforms.
@@ -1524,7 +1584,8 @@ The malware is distributed on Microsoft Excel, Windows. On Windows, `URLDownload
 
 ## 4. Red Stealer
 - **Date**: Nov 10, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+- **Difficulty**: Easy
+- **Track**: CyberDefenders - SOC Analyst Tier 1 - Level 3
 - **Category**: Threat Intel
 
 We are presented with a malware hash `248FCC901AFF4E4B4C48C91E4D78A939BF681C9A1BC24ADDC3551B32768F907B`, and we are prompted to gather intel on this malware using online platforms.
@@ -1669,7 +1730,8 @@ There is a 5-second timeout in the deletion.
 
 ## 6. 3CX Supply Chain
 - **Date**: Nov 12, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
+- **Difficulty**: Easy
+- **Track**: CyberDefenders - SOC Analyst Tier 1 - Level 4
 - **Category**: Threat Intel
 
 We are presented with a Windows Installer package `.msi`
@@ -1759,6 +1821,135 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1794468874543-884af4.png)
 
 `Answer: Lazarus`
+
+## 7. Tusk Infostealer
+- **Date**: Nov xx, 2026
+- **Difficulty**: Easy
+- **Category**: Threat Intel
+
+## 8. Lespion
+- **Date**: Nov xx, 2026
+- **Difficulty**: Easy
+- **Category**: Threat Intel
+
+## 9. BRabbit
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Threat Intel
+
+## 10. PhishStrike
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Track**: CyberDefenders - SOC Analyst Tier 2 - Level 2
+- **Category**: Threat Intel
+
+## 11. Intel101
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Track**: CyberDefenders - SOC Analyst Tier 2 - Level 8
+- **Category**: Threat Intel
+
+# Malware Analysis
+
+## 1. FakeGPT
+- **Date**: Nov xx, 2026
+- **Difficulty**: Easy
+- **Category**: Malware Analysis
+
+## 2. XWorm
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 3. GetPDF
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 4. Obfuscated
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 5. Emprisa Maldoc
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 6. XLM Macros
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 7. MalDoc101
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 8. RE101
+- **Date**: Nov xx, 2026
+- **Difficulty**: Medium
+- **Category**: Malware Analysis
+
+## 9. RotaJakiro
+- **Date**: Nov xx, 2026
+- **Difficulty**: Hard
+- **Category**: Malware Analysis
+
+## 10. Ransomed
+- **Date**: Nov xx, 2026
+- **Difficulty**: Hard
+- **Category**: Malware Analysis
+
+## 11. Flareon 4
+- **Date**: Nov xx, 2026
+- **Difficulty**: Hard
+- **Category**: Malware Analysis
+
+## 12. Phobos
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 13. UnPackMe
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 14. $tealer
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 15. Flareon 6
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 16. Flareon 7
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 17. Flareon 3
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 18. Flareon 5
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 19. Flareon 1
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
+
+## 20. Flareon 2
+- **Date**: Nov xx, 2026
+- **Difficulty**: Insane
+- **Category**: Malware Analysis
 
 
 
