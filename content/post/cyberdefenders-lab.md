@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-21T07:21:59.371Z
+lastmod: 2026-11-21T07:29:10.878Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -16,6 +16,8 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 ![sea cat](/images/posts/cyberdefenders-lab-2f7e08/sea-cat-1795011086043-53ac82.jpg)
 
 # Endpoint Forensics (1/36)
+
+![violetslep](/images/posts/cyberdefenders-lab-2f7e08/violetslep-1795246107188-1309ea.jpg)
 
 ## 1. Insider
 - **Date**: Nov 20, 2026
@@ -1949,6 +1951,8 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 - **Category**: Threat Intel
 
 # Malware Analysis (0/20)
+
+![banner-2](/images/posts/cyberdefenders-lab-2f7e08/banner-2-1795246145802-bd6696.jpg)
 
 ## 1. FakeGPT
 - **Date**: Nov xx, 2026
