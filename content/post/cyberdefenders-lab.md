@@ -4,7 +4,7 @@ draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-20T09:13:15.593Z
+lastmod: 2026-11-21T07:21:59.371Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -15,122 +15,189 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 
 ![sea cat](/images/posts/cyberdefenders-lab-2f7e08/sea-cat-1795011086043-53ac82.jpg)
 
-# Endpoint Forensics
+# Endpoint Forensics (1/36)
 
 ## 1. Insider
 - **Date**: Nov 20, 2026
 - **Category**: Endpoint > Disk Forensics
+- **Tools used**: FTK Imager
 
-## 2. Silent Breach
-- **Date**: Nov 20, 2026
+## 2. The Crime
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Mobile Forensics (Android)
+- **Tools used**: DB Browser for SQLite, ALEAPP
+
+## 3. RedLine
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility, Strings
+
+## 4. Ramnit
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 3, VirusTotal
+
+## 5. Reveal
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 3
+
+## 6. Silent Breach
+- **Date**: xxx xx, 2026
 - **Category**: Endpoint > Disk Forensics
+- **Tools used**: FTK Imager, SQLite Viewer, Strings, CyberChef
 
-## 2. AfricanFalls 
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 7
+## 7. KrakenKeylogger
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Windows Artifact and Log Analysis
+- **Tools used**: DB Browser for SQLite, LECmd, Timeline Explorer
+
+## 8. AzurePot
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk, Memory, and Log Forensics (Linux)
+- **Tools used**: FTK Imager, `grep`, `awk`
+
+## 9. Sysinternals
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and Registry Forensics
+- **Tools used**: Registry Explorer, Event Log Explorer, VirusTotal, FTK Imager, Autopsy
+
+## 10. BlackEnergy
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility
+
+## 11. Eli
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > ChromeOS and Browser Forensics
+- **Tools used**: CyberChef, DCode, DB Browser for SQLite, Unfurl, CLEAPP, RLEAPP
+
+## 12. MrGamer
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and User Artifact Forensics
+- **Tools used**: CyberChef, DCode, DB Browser for SQLite, Unfurl, Arsenal Image Mounter, Autopsy
+
+## 13. Seized
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics (Linux)
+- **Tools used**: Volatility, CyberChef, `grep`
+
+## 14. MrRobot
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 2, Volatility 3
+
+## 15. l337 S4uc3
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory and Network Forensics
+- **Tools used**: Volatility, Wireshark, NetworkMiner, Brim
+
+## 16. Hacked
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk Forensics (Linux)
+- **Tools used**: FTK Imager, `last`
+
+## 17. LGDroid
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Mobile Forensics (Android)
+- **Tools used**: DB Browser for SQLite
+
+## 18. Brave
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 3, HxD
+
+## 19. AfricanFalls
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and Browser Forensics
+- **Tools used**: FTK Imager, Autopsy
+
+## 20. DumpMe
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 2
+
+## 21. HireMe
+- **Date**: xxx xx, 2026
 - **Category**: Endpoint > Disk Forensics
+- **Tools used**: FTK Imager, Autopsy, Registry Explorer, LECmd, RegRipper
 
-## 3. Hammered
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
+## 22. Phishy
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and Browser Forensics
+- **Tools used**: FTK Imager, Autopsy, Registry Explorer, DB Browser for SQLite, VirusTotal
+
+## 23. Injector
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and Memory Forensics
+- **Tools used**: FTK Imager, Autopsy, Volatility, Registry Explorer, RegRipper
+
+## 24. Hammered
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Log Analysis (Linux)
+- **Tools used**: `grep`, `awk`, `sed`
+
+## 25. Ulysses
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory and Log Forensics (Linux)
+- **Tools used**: Volatility, 010 Editor, Autopsy, FTK Imager
+
+## 26. Spotlight
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk Forensics (macOS)
+- **Tools used**: Autopsy, `mac_apt`, SQLite
+
+## 27. Jailbroken
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Mobile Forensics (iOS)
+- **Tools used**: iLEAPP, Autopsy, `mac_apt`, DB Browser for SQLite
+
+## 28. CorporateSecrets
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and Event Log Forensics
+- **Tools used**: FTK Imager, Registry Explorer, RegRipper, HxD, DB Browser for SQLite, Event Log Explorer
+
+## 29. Szechuan Sauce
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk, Memory, Network, and Log Forensics
+- **Tools used**: Registry Explorer, Brim, Wireshark, FTK Imager, Volatility 3, Event Log Explorer, VirusTotal
+
+## 30. Hunter
+- **Date**: xxx xx, 2026
 - **Category**: Endpoint > Disk Forensics
+- **Tools used**: FTK Imager, Registry Explorer, RECmd, RegRipper, DCode, DB Browser for SQLite, 010 Editor, Autopsy, Arsenal Image Mounter
 
-## 4. KrakenKeylogger
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
-- **Category**: Endpoint > Disk Forensics
+## 31. SpottedInTheWild
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Disk and Event Log Forensics
+- **Tools used**: Arsenal Image Mounter, SQLite Viewer, Registry Explorer, Event Log Explorer, Strings, CyberChef
 
-## 4. AzurePot
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
-- **Category**: Endpoint > Disk Forensics
-
-## 5. Sysinternals
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
-- **Category**: Endpoint > Disk Forensics
-
-## 5. Eli
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
-- **Category**: Endpoint > Disk Forensics
-
-## 5. MrGamer
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 5
-- **Category**: Endpoint > Disk Forensics
-
-## 8. Ramnit
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+## 32. NintendoHunt
+- **Date**: xxx xx, 2026
 - **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 2, Volatility 3
 
-## 9. The Crime
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 2
+## 33. Patrick
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Mobile Forensics (iOS)
+- **Tools used**: CyberChef, iLEAPP, DCode, DB Browser for SQLite, Unfurl, `ios_apt`
+
+## 34. TeamSpy
+- **Date**: xxx xx, 2026
+- **Category**: Endpoint > Memory Forensics and Document Analysis
+- **Tools used**: Volatility 2.6, OfficeMalScanner, VirusTotal
+
+## 35. DeepDive
+- **Date**: xxx xx, 2026
 - **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility 2
 
-## 5. Hunter
-- **Date**: Nov xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
-- **Category**: Endpoint > Disk Forensics
-
-## 6. RedLine
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 3
+## 36. BankingTroubles
+- **Date**: xxx xx, 2026
 - **Category**: Endpoint > Memory Forensics
+- **Tools used**: Volatility, Strings
 
-## 7. Reveal
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 1 - Level 4
-- **Category**: Endpoint > Memory Forensics
-
-## 9. BlackEnergy
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 10. Brave
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 11. Ulysses
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 11. l337 S4uc3
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 11. Seized
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 11. MrRobot
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 12. TeamSpy
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-## 13. BankingTroubles
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 3
-- **Category**: Endpoint > Memory Forensics
-
-## 14. NintendoHunt
-- **Date**: Dec xx, 2026
-- **Difficulty**: CyberDefenders - SOC Analyst Tier 3 - Level 2
-- **Category**: Endpoint > Memory Forensics
-
-# Network Forensics
+# Network Forensics (10/17)
 
 ![japane](/images/posts/cyberdefenders-lab-2f7e08/japane-1795011209053-7824a3.jpg)
 
@@ -1254,9 +1321,25 @@ Note that `$hexString_bbb` is the executable, while `$hexString_pe` is the loade
 
 **Q6. Which LOLBin is leveraged for stealthy process execution in this script? Provide the full path.**
 
+> `LOLBin` stands for Living Off the Land Binary. It refers to a legitimate, pre-installed, trusted executable file that comes built into an operating system (such as Windows, macOS, or Linux). Because the program is trusted and used for everyday tasks, the attacker’s activity can blend in.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795186250659-764e7e.png)
+
+The stealthy process can be seen in the image. Visibly, the script is embedded with "#" characters, and at the end of the line, substituting "#" with "", revealing the true payload.
+
+After removing the "#", we can see that the attacker is trying to load and invoke (leveraging) the LOLBin with the path `C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegSvcs.exe`
+
+> [Regsvcs.exe](https://learn.microsoft.com/en-us/dotnet/framework/tools/regsvcs-exe-net-services-installation-tool) is a Microsoft setup tool. It takes a piece of a `.NET` Framework program, usually packaged as a `.dll` file, and registers it with `COM+`, a Windows feature that helps applications use software components. Here, register means telling Windows what the component is and how to make it available.
+
 `Answer: C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegSvcs.exe`
 
 **Q7. The script is designed to drop several files. List the names of the files dropped by the script.**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795242773401-e6676d.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795242814097-ffe25e.png)
+
+We can see the files that are written down the roads.
 
 `Answer: Conted.vbs,Conted.ps1,Conted.bat`
 
@@ -1310,20 +1393,36 @@ Note that `$hexString_bbb` is the executable, while `$hexString_pe` is the loade
 
 **Q14. The shellcode used a specific technique to determine its location in memory. What is the OS file being queried during this process?**
 
-## 11. EscapeRoom
+## 11. Lockdown
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
+## 12. OpenWire
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
+## 13. PacketMaze
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
+## 14. Acoustic
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
+## 15. WireDive
+- **Date**: Nov xx, 2026
+- **Category**: Network Forensics
+
+## 16. EscapeRoom
 - **Date**: Nov xx, 2026
 - **Difficulty**: CyberDefenders - SOC Analyst Tier 2 - Level 8
 - **Category**: Network Forensics
 
-## 12. Lockdown
+## 17. NukeTheBrowser
 - **Date**: Nov xx, 2026
 - **Category**: Network Forensics
 
-## 13. OpenWire
-- **Date**: Nov xx, 2026
-- **Category**: Network Forensics
-
-# Threat Intel
+# Threat Intel (6/11)
 
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795010946351-6a4a06.png)
 
@@ -1849,7 +1948,7 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 - **Track**: CyberDefenders - SOC Analyst Tier 2 - Level 8
 - **Category**: Threat Intel
 
-# Malware Analysis
+# Malware Analysis (0/20)
 
 ## 1. FakeGPT
 - **Date**: Nov xx, 2026
