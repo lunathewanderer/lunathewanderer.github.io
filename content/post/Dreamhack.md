@@ -5,8 +5,7 @@ draft: false
 date: 2026-10-01
 tags:
   - Network Forensics
-  - Disk Forensics
-  - Memory Forensics
+  - Endpoint Forensics
   - Steganography
 categories:
   - Writeup
