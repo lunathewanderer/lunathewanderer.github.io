@@ -2,6 +2,9 @@
 title: "CyberDefenders' Labs: Network Forensics & Threat Intel"
 draft: false
 date: 2026-10-30T03:16:38.930Z
+tags:
+  - Network Forensics
+  - Threat Intel
 categories:
   - Writeup
 lastmod: 2026-11-22T13:15:24.693Z
