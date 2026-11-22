@@ -1,5 +1,6 @@
 ---
 title: "CyberDefenders' Labs: Endpoint Forensics"
+description: "https://youtu.be/VFUos9sYbHs"
 draft: false
 date: 2026-11-22T13:12:54.976Z
 tags:
