@@ -17,6 +17,8 @@ banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/violetslep-1
 - **Category**: Endpoint > Disk Forensics
 - **Tools used**: FTK Imager
 
+We are presented with an `.AD1` file.
+
 # 2. The Crime
 - **Date**: xxx xx, 2026
 - **Category**: Endpoint > Mobile Forensics (Android)
