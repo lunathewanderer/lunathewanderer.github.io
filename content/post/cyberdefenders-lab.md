@@ -1,10 +1,10 @@
 ---
-title: "CyberDefenders' Labs"
+title: "CyberDefenders' Labs: Network Forensics & Threat Intel"
 draft: false
 date: 2026-10-30T03:16:38.930Z
 categories:
   - Writeup
-lastmod: 2026-11-21T07:29:10.878Z
+lastmod: 2026-11-22T13:15:24.693Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 tags:
@@ -15,193 +15,7 @@ banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 
 ![sea cat](/images/posts/cyberdefenders-lab-2f7e08/sea-cat-1795011086043-53ac82.jpg)
 
-# Endpoint Forensics (1/36)
-
-![violetslep](/images/posts/cyberdefenders-lab-2f7e08/violetslep-1795246107188-1309ea.jpg)
-
-## 1. Insider
-- **Date**: Nov 20, 2026
-- **Category**: Endpoint > Disk Forensics
-- **Tools used**: FTK Imager
-
-## 2. The Crime
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Mobile Forensics (Android)
-- **Tools used**: DB Browser for SQLite, ALEAPP
-
-## 3. RedLine
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility, Strings
-
-## 4. Ramnit
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 3, VirusTotal
-
-## 5. Reveal
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 3
-
-## 6. Silent Breach
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk Forensics
-- **Tools used**: FTK Imager, SQLite Viewer, Strings, CyberChef
-
-## 7. KrakenKeylogger
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Windows Artifact and Log Analysis
-- **Tools used**: DB Browser for SQLite, LECmd, Timeline Explorer
-
-## 8. AzurePot
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk, Memory, and Log Forensics (Linux)
-- **Tools used**: FTK Imager, `grep`, `awk`
-
-## 9. Sysinternals
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and Registry Forensics
-- **Tools used**: Registry Explorer, Event Log Explorer, VirusTotal, FTK Imager, Autopsy
-
-## 10. BlackEnergy
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility
-
-## 11. Eli
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > ChromeOS and Browser Forensics
-- **Tools used**: CyberChef, DCode, DB Browser for SQLite, Unfurl, CLEAPP, RLEAPP
-
-## 12. MrGamer
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and User Artifact Forensics
-- **Tools used**: CyberChef, DCode, DB Browser for SQLite, Unfurl, Arsenal Image Mounter, Autopsy
-
-## 13. Seized
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics (Linux)
-- **Tools used**: Volatility, CyberChef, `grep`
-
-## 14. MrRobot
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 2, Volatility 3
-
-## 15. l337 S4uc3
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory and Network Forensics
-- **Tools used**: Volatility, Wireshark, NetworkMiner, Brim
-
-## 16. Hacked
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk Forensics (Linux)
-- **Tools used**: FTK Imager, `last`
-
-## 17. LGDroid
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Mobile Forensics (Android)
-- **Tools used**: DB Browser for SQLite
-
-## 18. Brave
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 3, HxD
-
-## 19. AfricanFalls
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and Browser Forensics
-- **Tools used**: FTK Imager, Autopsy
-
-## 20. DumpMe
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 2
-
-## 21. HireMe
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk Forensics
-- **Tools used**: FTK Imager, Autopsy, Registry Explorer, LECmd, RegRipper
-
-## 22. Phishy
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and Browser Forensics
-- **Tools used**: FTK Imager, Autopsy, Registry Explorer, DB Browser for SQLite, VirusTotal
-
-## 23. Injector
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and Memory Forensics
-- **Tools used**: FTK Imager, Autopsy, Volatility, Registry Explorer, RegRipper
-
-## 24. Hammered
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Log Analysis (Linux)
-- **Tools used**: `grep`, `awk`, `sed`
-
-## 25. Ulysses
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory and Log Forensics (Linux)
-- **Tools used**: Volatility, 010 Editor, Autopsy, FTK Imager
-
-## 26. Spotlight
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk Forensics (macOS)
-- **Tools used**: Autopsy, `mac_apt`, SQLite
-
-## 27. Jailbroken
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Mobile Forensics (iOS)
-- **Tools used**: iLEAPP, Autopsy, `mac_apt`, DB Browser for SQLite
-
-## 28. CorporateSecrets
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and Event Log Forensics
-- **Tools used**: FTK Imager, Registry Explorer, RegRipper, HxD, DB Browser for SQLite, Event Log Explorer
-
-## 29. Szechuan Sauce
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk, Memory, Network, and Log Forensics
-- **Tools used**: Registry Explorer, Brim, Wireshark, FTK Imager, Volatility 3, Event Log Explorer, VirusTotal
-
-## 30. Hunter
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk Forensics
-- **Tools used**: FTK Imager, Registry Explorer, RECmd, RegRipper, DCode, DB Browser for SQLite, 010 Editor, Autopsy, Arsenal Image Mounter
-
-## 31. SpottedInTheWild
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Disk and Event Log Forensics
-- **Tools used**: Arsenal Image Mounter, SQLite Viewer, Registry Explorer, Event Log Explorer, Strings, CyberChef
-
-## 32. NintendoHunt
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 2, Volatility 3
-
-## 33. Patrick
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Mobile Forensics (iOS)
-- **Tools used**: CyberChef, iLEAPP, DCode, DB Browser for SQLite, Unfurl, `ios_apt`
-
-## 34. TeamSpy
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics and Document Analysis
-- **Tools used**: Volatility 2.6, OfficeMalScanner, VirusTotal
-
-## 35. DeepDive
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility 2
-
-## 36. BankingTroubles
-- **Date**: xxx xx, 2026
-- **Category**: Endpoint > Memory Forensics
-- **Tools used**: Volatility, Strings
-
 # Network Forensics (10/17)
-
-![japane](/images/posts/cyberdefenders-lab-2f7e08/japane-1795011209053-7824a3.jpg)
 
 ## 1. Jetbrains
 
@@ -1352,6 +1166,8 @@ We can see the files that are written down the roads.
 
 **Q1. What is the attacker's IP address?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795250614015-2e6eff.png)
+
 `Answer: 98.114.205.102`
 
 **Q2. What is the target's IP address?**
@@ -1360,30 +1176,51 @@ We can see the files that are written down the roads.
 
 **Q3. Provide the country code for the attacker's IP address (a.k.a geo-location).**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795250656363-75e843.png)
+
 `Answer: US`
 
 **Q4. How many TCP sessions are present in the captured traffic?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795250695401-07ce31.png)
+
+We can see that there are 5 TCP sessions present.
 
 `Answer: 5`
 
 **Q5. How long did it take to perform the attack (in seconds)?**
 
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795250738830-86f5b6.png)
+
+The last packet ends at approximately the 16th second, thus the duration of the attack.
+
 `Answer: 16`
 
 **Q6. Provide the CVE number of the exploited vulnerability.**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795253478639-abe7bf.png)
+
+Inspecting the abnormal SMB traffic, we can see the keyword `DsRoleUpgradeDownlevelServer`
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795252502407-8b1040.png)
 
 `Answer: CVE-2003-0533`
 
 **Q7. Which protocol was used to carry over the exploit?**
 
+The attacker delivered the CVE-2003-0533 exploit payload inside an SMB session over port 445.
+
 `Answer: SMB`
 
 **Q8. Which protocol did the attacker use to download additional malicious files to the target system?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795255104006-93aa16.png)
 
 `Answer: FTP`
 
 **Q9. What is the name of the downloaded malware?**
 
+`Answer: smss.exe`
 
 **Q10. The attacker's server was listening on a specific port. Provide the port number.**
 
@@ -1425,8 +1262,6 @@ We can see the files that are written down the roads.
 - **Category**: Network Forensics
 
 # Threat Intel (6/11)
-
-![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795010946351-6a4a06.png)
 
 ## 1. GrabThePhisher
 - **Date**: Oct 30, 2026
@@ -1951,8 +1786,6 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 - **Category**: Threat Intel
 
 # Malware Analysis (0/20)
-
-![banner-2](/images/posts/cyberdefenders-lab-2f7e08/banner-2-1795246145802-bd6696.jpg)
 
 ## 1. FakeGPT
 - **Date**: Nov xx, 2026
