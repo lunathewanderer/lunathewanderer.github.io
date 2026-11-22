@@ -2,6 +2,8 @@
 title: "CyberDefenders' Labs: Endpoint Forensics"
 draft: false
 date: 2026-11-22T13:12:54.976Z
+tags:
+  - Endpoint Forensics
 categories:
   - Learning
 lastmod: 2026-11-22T13:20:11.898Z
