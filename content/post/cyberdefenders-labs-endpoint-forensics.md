@@ -6,7 +6,7 @@ date: 2026-11-22T13:12:54.976Z
 tags:
   - Endpoint Forensics
 categories:
-  - Learning
+  - Writeup
 lastmod: 2026-11-22T13:20:11.898Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/violetslep-1795353534633-fd6418.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/violetslep-1795353534633-fd6418.jpg
