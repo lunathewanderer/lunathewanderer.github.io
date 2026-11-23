@@ -7,9 +7,9 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-23T14:17:06.012Z
-cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale-1795443419797-b354bb.jpg
-banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale-1795443419797-b354bb.jpg
+lastmod: 2026-11-23T14:25:13.054Z
+cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
+banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
 
 # 1. Insider
@@ -24,6 +24,8 @@ Q1. Hello
 Q2. Hi
 
 Q3. Bye
+
+...
 
 # 2. The Crime
 - **Date**: xxx xx, 2026
