@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-23T16:48:51.013Z
+lastmod: 2026-11-23T17:19:12.592Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ. I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -63,20 +63,37 @@ Optional fields of the metadata section may include `version`, `license`, `autho
 
 - **Markdown Body (instruction)**
 
-This is the core operational instructions loaded into context only when the skill is actively triggered.
+This is the core operational instructions loaded into context only when the skill is actively triggered. 
 > - Overview / Purpose: Explains what the skill accomplishes.
 > - When to Use: Triggers or conditions for the agent to invoke the workflow.
 > - Step-by-Step Instructions: Sequential execution rules, checklists, or validation loops.
-- Output Format: Expected structure, templates, or response styling.
-- File References: Relative links to external docs in references/ or scripts in scripts/ (kept one level deep)
+> - Output Format: Expected structure, templates, or response styling.
+> - File References: Relative links to external docs in references/ or scripts in scripts/ (kept one level deep)
 
 At startup, the agent only sees the name and the description, but when it selects a skill, that's when it actually reads the rest.
 
-The agent now knows what to do, **but doing things also means reaching outside the box**. As a matter of course, agents need to reach all kinds of external variables, such as APIs, databases, developer tools, SaaS platforms, so on and so forth, all of which with different variants of interfaces and methodologies for connection. This is where `MCP` comes in handy.
+
+
+# III. Appendix
+
+## MCP & A2A
+
+With `AGENTS.md` and `SKILL.md` in hand, the agent now knows what to do, **but doing things also means reaching outside the box**. As a matter of course, agents need to reach all kinds of external variables, such as APIs, databases, developer tools, SaaS platforms, so on and so forth, all of which with different variants of interfaces and methodologies for connection. This is where `MCP` comes in handy.
 
 > `Model Context Protocol (MCP)` is an open standard that lets AI applications connect to external data sources, tools, and software systems in a uniform manner. It comes with something called an MCP server, which wraps up an external tool or data source in a standard interface; and now any agent (that can speak MCP) can now communicate with that tool.
 
-`MCP` covers agents talking to tools and data, but what about agents talking to other agents? Introducing `Agent2Agent (A2A)`, an open standard that lets independent AI agents discover each other, negotiate tasks, and collaborate across different frameworks and vendors. 
+`MCP` covers agents talking to tools and data, **but what about agents talking to other agents?** Introducing `Agent2Agent (A2A)`, an open standard that lets independent AI agents discover each other, negotiate tasks, and collaborate across different frameworks and vendors. 
 
 For example, we have two agents: one handling procurement and one finance. The procurement agent needs to negotiate a contract, and it needs the finance agent's approval. With A2A, they establish something called "Agent Card" - basically a description of what the agent does and how to talk to it, via with the agents can communicate with each other.
+
+
+
+
+
+
+
+
+
+
+
 
