@@ -1,15 +1,15 @@
 ---
 title: "CyberDefenders' Labs: Endpoint Forensics"
-description: "https://youtu.be/VFUos9sYbHs"
+description: "「月が綺麗ですね」"
 draft: false
 date: 2026-11-22T13:12:54.976Z
 tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-22T13:20:11.898Z
-cover: https://i.pinimg.com/1200x/46/aa/4e/46aa4e5375137ffc4cd0f463d8076a15.jpg
-banner: https://i.pinimg.com/1200x/46/aa/4e/46aa4e5375137ffc4cd0f463d8076a15.jpg
+lastmod: 2026-11-23T14:17:06.012Z
+cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale-1795443419797-b354bb.jpg
+banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale-1795443419797-b354bb.jpg
 ---
 
 # 1. Insider
@@ -17,7 +17,13 @@ banner: https://i.pinimg.com/1200x/46/aa/4e/46aa4e5375137ffc4cd0f463d8076a15.jpg
 - **Category**: Endpoint > Disk Forensics
 - **Tools used**: FTK Imager
 
-We are presented with an `.AD1` file.
+We are presented with an `.AD1` file. 
+
+Q1. Hello
+
+Q2. Hi
+
+Q3. Bye
 
 # 2. The Crime
 - **Date**: xxx xx, 2026
