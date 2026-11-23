@@ -8,8 +8,8 @@ tags:
 categories:
   - Writeup
 lastmod: 2026-11-22T13:20:11.898Z
-cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/violetslep-1795353534633-fd6418.jpg
-banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/violetslep-1795353534633-fd6418.jpg
+cover: https://i.pinimg.com/1200x/46/aa/4e/46aa4e5375137ffc4cd0f463d8076a15.jpg
+banner: https://i.pinimg.com/1200x/46/aa/4e/46aa4e5375137ffc4cd0f463d8076a15.jpg
 ---
 
 # 1. Insider
