@@ -7,7 +7,7 @@ tags:
   - Threat Intel
 categories:
   - Writeup
-lastmod: 2026-11-22T13:15:24.693Z
+lastmod: 2026-11-23T13:00:22.391Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
@@ -1208,13 +1208,23 @@ Inspecting the abnormal SMB traffic, we can see the keyword `DsRoleUpgradeDownle
 
 **Q7. Which protocol was used to carry over the exploit?**
 
-The attacker delivered the CVE-2003-0533 exploit payload inside an SMB session over port 445.
+It is apparent that the attacker delivered the CVE-2003-0533 exploit payload inside an SMB session over port 445.
 
 `Answer: SMB`
 
 **Q8. Which protocol did the attacker use to download additional malicious files to the target system?**
 
+Following the TCP stream. In this packet, there is only 4 TCP frames.
+
 ![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795255104006-93aa16.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795362470265-c0a062.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795362488818-fd3e63.png)
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795362500905-1a7eac.png)
+
+The download of the malware was listened in the second frame, where the protocol, filename, and the port number is recorded.
 
 `Answer: FTP`
 
@@ -1223,6 +1233,8 @@ The attacker delivered the CVE-2003-0533 exploit payload inside an SMB session o
 `Answer: smss.exe`
 
 **Q10. The attacker's server was listening on a specific port. Provide the port number.**
+
+`Answer: 8884`
 
 **Q11. When was the involved malware first submitted to VirusTotal for analysis? Format: YYYY-MM-DD**
 
