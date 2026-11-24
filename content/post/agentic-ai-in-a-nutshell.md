@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-24T06:37:51.903Z
+lastmod: 2026-11-24T08:14:41.734Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -65,13 +65,19 @@ Optional fields of the metadata section may include `version`, `license`, `autho
 
 This is the core operational instructions loaded into context only when the skill is actively triggered, written in plain human languages. 
 
-However, this is where a lot of skills go sideways, because the temptation is to just have the LLM write the skills for you. What you get in so doing is merely a generic mush, since those are **what the model already knew. At the end of the day, the whole point of a skill is your specific way of doing a specific job. Therefore, the content has to come from somewhere the model can't get to on its own.**
+However, this is where a lot of skills go sideways, because the temptation is to just have the LLM write the skills for you. What you get in so doing is merely a generic mush, since those are **what the model already knew. At the end of the day, the whole point of a skill is your specific way of doing a specific job. Therefore, the content has to come from somewhere the model can't get to on its own.** In order to achieve that, you can apply "Trial-and-error" & "Artifact Synthesis":
+- Trial-and-Error: Write down what really worked (after you've walked through the task, including the corrections you made along the way). To draw out the best of a workflow, envrionment-specific facts can even defy the most reasonable assumptions.
+- Artifact Synthesis: Utilize external references such as old papers, reports, books, comments.
 
-Here are some good practices in writing an instruction
+Moreover, in the same spirit of writing an IELTS essay (talking from experience btw), a good instruction body should:
+- Be specific
+- Include relevant examples
+- Use numbered steps for procedures
+- Set boundaries
 
+And last but not least, I want to emphasize on "Divide-and-conquer", or in other words, keep the skill focused: A skill should do one thing well. A 2,000-word skill that covers code review, testing, deployment, and documentation will underperform four separate 500-word skills.
 
 At startup, the agent only sees the name and the description, but when it selects a skill, that's when it actually reads the rest.
-
 
 
 # III. Appendix
