@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-24T10:05:17.662Z
+lastmod: 2026-11-24T10:39:50.793Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -91,14 +91,23 @@ Moreover, in the same spirit of writing an IELTS essay (talking from experience 
 
 > A skill should do one thing well. A 2,000-word skill that covers code review, testing, deployment, and documentation would underperform four separate 500-word skills.
 
-Nevertheless, the art of writing `SKILL.md` goes beyond those simple tips and tricks. At startup, the agent only sees the name and the description, but when it selects and activates a skill, that's when it actually reads the rest. And the instrctuion body would then be shared with everything else already in the context window. Or in other words, **every single word in the skill body is now competing for the model's attention. Therefore, the less you write, the better.** 
+Nevertheless, the art of writing `SKILL.md` goes beyond those simple tips and tricks. 
+
+At startup, the agent only sees the name and the description, but when it selects and activates a skill, that's when it actually reads the rest. And the instruction body would then be shared with everything else already in the context window. Or in other words, **every single word in the skill body is now competing for the model's attention. Therefore, the less you write, the better.** 
 
 It might seem counterintuitive, since you'd naturally assume a more detailed skill description yields better results. In reality, the AI is already highly capable on its own, and in this context, "Writing less" simply means only including context the model wouldn't inherently know from its training data. It is recommended that the instruction body of `SKILL.md` file should be under 500 lines, or roughly 5,000 tokens. But what if you really need to write down more than that? Well, remind that Agent Skills is a folder, and you can split the content out into subfolders like `/references`, and the agents will open them only when it actually needs to. 
 
-In the same vein, you can make use of deterministic scripts with the folder `/scripts`. Being way too concise may run the risk of rendering the model generate its "guessy" logic on the fly in according with fragile and ambiguous requests. Simply put, it is more reliable to just tell the model to "run this script in this step". Moreover, this perfectly aligns with the "progressive disclosure" spirit above.
+In the same vein, you can make use of deterministic scripts with the folder `/scripts`. Being way too concise may run the risk of rendering the model generate its "guessy" logic on the fly in according with fragile and ambiguous requests. Simply put, it is more reliable to just tell the model to "run this script in this step" rather than having it to make probabilistic decisions. Moreover, this perfectly aligns with the "progressive disclosure" spirit above.
+
 
 
 This is just a part of a pattern called **Progressive Disclosure**, which is to say, disclose additional information like this only when it is needed.
+
+
+Subagents
+
+More often than not, just one agent is not enough. Maybe the task is too big for one context window, let's say, the agent is reviewing a code base with thousands of files.
+
 
 
 # III. Appendix
@@ -113,7 +122,9 @@ With `AGENTS.md` and `SKILL.md` in hand, the agent now knows what to do, **but d
 
 For example, we have two agents: one handling procurement and one finance. The procurement agent needs to negotiate a contract, and it needs the finance agent's approval. With A2A, they establish something called "Agent Card" - basically a description of what the agent does and how to talk to it, via with the agents can communicate with each other.
 
+## Can You Trust This Skill?
 
+More often than not, you may stumble upon such Agent Skills on the Internet. They can contain and run executable, as well as access stuff. Indeed, they are powerful. However, they can be flawed security-wise, or just straight up containing prompt injection or malware. The tidbits of "AI poisoning" would be delved into in future posts, but for now, the moral of the story is, treat an Agent Skill like any other dependency, which is to say, don't give it the benefit of the doubt right away, but to read what it does and check what it reaches out to.
 
 
 # References
