@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-24T10:39:50.793Z
+lastmod: 2026-11-24T16:52:38.680Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -26,7 +26,7 @@ But there is more than meets the eye. And that is the very purpose of this blog.
 
 # II. Context Engineering
 
-Inside every agents, there is a `Large Language Model (LLM)`, which kinda shapes how the agent behaves. 
+Inside every agents, there is a `Model, or Large Language Model (LLM)`, which kinda shapes how the agent behaves. 
 
 `LLM` does the actual text generation, the reasoning, and by itself, it's our conversational partner. What turns it into an agent is the instruction layer that's wrapped around the model. This brings us to our first terminology: `AGENTS.md`
 
@@ -36,7 +36,13 @@ The agent, therefore, execute commands it finds in `AGENTS.md` whenever they are
 
 It is also of noted that `AGENTS.md` can be nested, meaning that there can be multiple of them. For example, we can have one at the root, and then multiple other ones for sub-projects with its own set of rules. Importantly, files that are closer to the working directory override the earlier ones, because they apppear later.
 
-Indeed, `AGENTS.md` is centralized, comprehensive, and persistent. **But what about the knowledge that the agent only needs sometimes and is not neccessarily project-specific?** Like, for example, the agent needs to know how to build a PowerPoint deck, but throughout the whole project, it only need to do it only once or twice. Loading all of that context every single time to agent starts would really clog up the context window for no real reason if the task at hand has nothing to do with PowerPoint slides. This brings us to **Agent Skills**.
+Indeed, `AGENTS.md` is centralized, comprehensive, and persistent. **But what about the knowledge that the agent only needs sometimes and is not neccessarily project-specific?** Like, for example, the agent needs to know how to build a PowerPoint deck, but throughout the whole project, it only need to do it only once or twice. Loading all of that context every single time to agent starts would really clog up the context window for no real reason if the task at hand has nothing to do with PowerPoint slides. 
+
+AI excels at declarative knowledge (knowing facts and descriptions about the world), it struggles with procedural knowledge (knowing how to execute, adapt, and refine actions in real time). When encounting a task that requires a 67-steps workflow to polish a PowerPoint report for example, it basically has two options: 
+- Either somebody needs to prompt it with every single step, all 67 of them, every single time.
+- Or the agent would take a guess at it, which can really go astray from the desired result.
+
+This brings us to **Agent Skills**, the medium via which you add that **Procedural Knowledge** into the agent.
 
 Intrinsically, an **Agent Skill** is a folder (named after the skill), and inside that folder, there is a file called `SKILL.md` acts as an entry point, along with whatever scripts , references, assets, or resources the task needs.
 
@@ -72,45 +78,30 @@ However, this is where a lot of skills go sideways, because the temptation is to
 Moreover, in the same spirit of writing an IELTS essay (talking from experience btw), a good instruction body should also:
 
 - Be specific, rather than be generic
-
-> For example, "check for SQL injection" is better than "check for security issues."
-
 - Include relevant examples
-
-> One concrete example is better than three paragraphs of explanation. For example, show input and expected output.
-
 - Use numbered steps for procedures
-
-> Agents follow numbered sequences more reliably than unstructured prose.
-
 - Set boundaries
-
-> It is crucial to tell the skill what NOT to do if need be.
-
 - Keep it focused
-
-> A skill should do one thing well. A 2,000-word skill that covers code review, testing, deployment, and documentation would underperform four separate 500-word skills.
 
 Nevertheless, the art of writing `SKILL.md` goes beyond those simple tips and tricks. 
 
-At startup, the agent only sees the name and the description, but when it selects and activates a skill, that's when it actually reads the rest. And the instruction body would then be shared with everything else already in the context window. Or in other words, **every single word in the skill body is now competing for the model's attention. Therefore, the less you write, the better.** 
+Let's say, you have hundreds of **Agent Skills**. Loading all of them into the LLM context window at startup would blow through the token budget before anyone even gets to ask a question, thereby defeating their very meaning in the first place: load a skill only when it deems necessary. 
 
-It might seem counterintuitive, since you'd naturally assume a more detailed skill description yields better results. In reality, the AI is already highly capable on its own, and in this context, "Writing less" simply means only including context the model wouldn't inherently know from its training data. It is recommended that the instruction body of `SKILL.md` file should be under 500 lines, or roughly 5,000 tokens. But what if you really need to write down more than that? Well, remind that Agent Skills is a folder, and you can split the content out into subfolders like `/references`, and the agents will open them only when it actually needs to. 
+Therefore, **Agent Skills** use something called **Progressive Disclosure**. Simply put, it discloses additional information only when it is needed. And this concept works in three layers.
+- The first layer lies in the metadata. At startup, the agent only sees the name and the description of those skills. Even if you have configured many Skills, it only burn a handful of tokens, like reading the Table of Contents.
+- The second layer lies in the instruction body. Only when it selects and aptly activates a skill, that's when it actually reads the rest.
+- The third layer lies in the resources folders, like `/references`, `/scripts`, or `/assets`. They are also touched upon only when the instruction says so.
 
-In the same vein, you can make use of deterministic scripts with the folder `/scripts`. Being way too concise may run the risk of rendering the model generate its "guessy" logic on the fly in according with fragile and ambiguous requests. Simply put, it is more reliable to just tell the model to "run this script in this step" rather than having it to make probabilistic decisions. Moreover, this perfectly aligns with the "progressive disclosure" spirit above.
+So, when the agent finally decide to read a Skill, the instruction body would then be shared with everything else already in the context window. Or in other words, **every single word in the skill body is now competing for the model's attention. Therefore, the less you write, the better.** 
+
+It might seem counterintuitive, since you'd naturally assume a more detailed skill description yields better results. In reality, the AI is already highly capable on its own, and in this context, "writing less" simply means only including context the model wouldn't inherently know from its training data. 
+
+It is recommended that the instruction body of `SKILL.md` file should be under 500 lines, or roughly 5,000 tokens. But what if you really need to write down more than that? Well, remind that Agent Skills is a folder, and you can split the content out into subfolders like `/references`, and the agents will open them only when it actually needs to. This refers to the third layer of **Progressive Disclosure**.
+
+In the same vein, you can make use of deterministic scripts with the folder `/scripts`. Being way too concise may run the risk of rendering the model generate its "guessy" logic on the fly in according with fragile and ambiguous requests. Simply put, it is more reliable to just tell the model to "run this script in this step" rather than having it to make probabilistic decisions. Moreover, this perfectly aligns with that **Progressive Disclosure** spirit right above.
 
 
 
-This is just a part of a pattern called **Progressive Disclosure**, which is to say, disclose additional information like this only when it is needed.
-
-
-Subagents
-
-More often than not, just one agent is not enough. Maybe the task is too big for one context window, let's say, the agent is reviewing a code base with thousands of files.
-
-
-
-# III. Appendix
 
 ## MCP & A2A
 
@@ -122,7 +113,7 @@ With `AGENTS.md` and `SKILL.md` in hand, the agent now knows what to do, **but d
 
 For example, we have two agents: one handling procurement and one finance. The procurement agent needs to negotiate a contract, and it needs the finance agent's approval. With A2A, they establish something called "Agent Card" - basically a description of what the agent does and how to talk to it, via with the agents can communicate with each other.
 
-## Can You Trust This Skill?
+# III. Appendix: Can You Trust This Skill?
 
 More often than not, you may stumble upon such Agent Skills on the Internet. They can contain and run executable, as well as access stuff. Indeed, they are powerful. However, they can be flawed security-wise, or just straight up containing prompt injection or malware. The tidbits of "AI poisoning" would be delved into in future posts, but for now, the moral of the story is, treat an Agent Skill like any other dependency, which is to say, don't give it the benefit of the doubt right away, but to read what it does and check what it reaches out to.
 
@@ -134,5 +125,14 @@ More often than not, you may stumble upon such Agent Skills on the Internet. The
 
 
 
+
+
+
+
+More often than not, just one agent is not enough, especially when the task is
+- too big, that would blow out one's context on its own, like reviewing a code base with thousands of files
+- too parallel, like checking on 20 different functions where each check is independent, and doing them all at once would be 20 times faster
+
+With a view to augment efficiency, the parent agent spawns multiple child agents to do a specific piece of work, each of which has its own fresh context window. They do their given job and they return a result when it is done, which their parent carries on with its context intact.
 
 
