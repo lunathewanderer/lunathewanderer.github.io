@@ -4,8 +4,8 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-23T17:19:12.592Z
-description: "♫⋆｡♪ ₊˚♬ ﾟ. I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
+lastmod: 2026-11-24T06:37:51.903Z
+description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
 cover: /images/posts/agentic-ai-in-a-nutshell-c48f71/violetslep-1795439293492-5632c1.jpg
@@ -63,12 +63,12 @@ Optional fields of the metadata section may include `version`, `license`, `autho
 
 - **Markdown Body (instruction)**
 
-This is the core operational instructions loaded into context only when the skill is actively triggered. 
-> - Overview / Purpose: Explains what the skill accomplishes.
-> - When to Use: Triggers or conditions for the agent to invoke the workflow.
-> - Step-by-Step Instructions: Sequential execution rules, checklists, or validation loops.
-> - Output Format: Expected structure, templates, or response styling.
-> - File References: Relative links to external docs in references/ or scripts in scripts/ (kept one level deep)
+This is the core operational instructions loaded into context only when the skill is actively triggered, written in plain human languages. 
+
+However, this is where a lot of skills go sideways, because the temptation is to just have the LLM write the skills for you. What you get in so doing is merely a generic mush, since those are **what the model already knew. At the end of the day, the whole point of a skill is your specific way of doing a specific job. Therefore, the content has to come from somewhere the model can't get to on its own.**
+
+Here are some good practices in writing an instruction
+
 
 At startup, the agent only sees the name and the description, but when it selects a skill, that's when it actually reads the rest.
 
@@ -89,7 +89,8 @@ For example, we have two agents: one handling procurement and one finance. The p
 
 
 
-
+# References
+- IBM Technology
 
 
 
