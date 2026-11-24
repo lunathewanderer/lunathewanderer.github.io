@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-24T08:14:41.734Z
+lastmod: 2026-11-24T10:05:17.662Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -24,7 +24,7 @@ However, to understand them is a different thing. Like, what really differs Agen
 
 But there is more than meets the eye. And that is the very purpose of this blog.
 
-# II. Anatomy of the Agentic AI
+# II. Context Engineering
 
 Inside every agents, there is a `Large Language Model (LLM)`, which kinda shapes how the agent behaves. 
 
@@ -36,9 +36,9 @@ The agent, therefore, execute commands it finds in `AGENTS.md` whenever they are
 
 It is also of noted that `AGENTS.md` can be nested, meaning that there can be multiple of them. For example, we can have one at the root, and then multiple other ones for sub-projects with its own set of rules. Importantly, files that are closer to the working directory override the earlier ones, because they apppear later.
 
-Indeed, `AGENTS.md` is centralized, comprehensive, and persistent. **But what about the knowledge that the agent only needs sometimes and is not neccessarily project-specific?** Like, for example, the agent needs to know how to build a PowerPoint deck, but throughout the whole project, it only need to do it only once or twice. Loading all of that context every single time to agent starts would really clog up the context window for no real reason if the task at hand has nothing to do with PowerPoint slides. This brings us to term number two: **"Agent Skills"**
+Indeed, `AGENTS.md` is centralized, comprehensive, and persistent. **But what about the knowledge that the agent only needs sometimes and is not neccessarily project-specific?** Like, for example, the agent needs to know how to build a PowerPoint deck, but throughout the whole project, it only need to do it only once or twice. Loading all of that context every single time to agent starts would really clog up the context window for no real reason if the task at hand has nothing to do with PowerPoint slides. This brings us to **Agent Skills**.
 
-Intrinsically, an Agent Skill is a folder (named after the skill), and inside that folder, there is a file called `SKILL.md` acts as an entry point, along with whatever scripts , references, assets, or resources the task needs.
+Intrinsically, an **Agent Skill** is a folder (named after the skill), and inside that folder, there is a file called `SKILL.md` acts as an entry point, along with whatever scripts , references, assets, or resources the task needs.
 
 ```
 skill-name/
@@ -66,18 +66,39 @@ Optional fields of the metadata section may include `version`, `license`, `autho
 This is the core operational instructions loaded into context only when the skill is actively triggered, written in plain human languages. 
 
 However, this is where a lot of skills go sideways, because the temptation is to just have the LLM write the skills for you. What you get in so doing is merely a generic mush, since those are **what the model already knew. At the end of the day, the whole point of a skill is your specific way of doing a specific job. Therefore, the content has to come from somewhere the model can't get to on its own.** In order to achieve that, you can apply "Trial-and-error" & "Artifact Synthesis":
-- Trial-and-Error: Write down what really worked (after you've walked through the task, including the corrections you made along the way). To draw out the best of a workflow, envrionment-specific facts can even defy the most reasonable assumptions.
+- Trial-and-error: Write down what really worked (after you've walked through the task, including the corrections you made along the way). To draw out the best of a workflow, envrionment-specific facts can even defy the most reasonable assumptions.
 - Artifact Synthesis: Utilize external references such as old papers, reports, books, comments.
 
-Moreover, in the same spirit of writing an IELTS essay (talking from experience btw), a good instruction body should:
-- Be specific
+Moreover, in the same spirit of writing an IELTS essay (talking from experience btw), a good instruction body should also:
+
+- Be specific, rather than be generic
+
+> For example, "check for SQL injection" is better than "check for security issues."
+
 - Include relevant examples
+
+> One concrete example is better than three paragraphs of explanation. For example, show input and expected output.
+
 - Use numbered steps for procedures
+
+> Agents follow numbered sequences more reliably than unstructured prose.
+
 - Set boundaries
 
-And last but not least, I want to emphasize on "Divide-and-conquer", or in other words, keep the skill focused: A skill should do one thing well. A 2,000-word skill that covers code review, testing, deployment, and documentation will underperform four separate 500-word skills.
+> It is crucial to tell the skill what NOT to do if need be.
 
-At startup, the agent only sees the name and the description, but when it selects a skill, that's when it actually reads the rest.
+- Keep it focused
+
+> A skill should do one thing well. A 2,000-word skill that covers code review, testing, deployment, and documentation would underperform four separate 500-word skills.
+
+Nevertheless, the art of writing `SKILL.md` goes beyond those simple tips and tricks. At startup, the agent only sees the name and the description, but when it selects and activates a skill, that's when it actually reads the rest. And the instrctuion body would then be shared with everything else already in the context window. Or in other words, **every single word in the skill body is now competing for the model's attention. Therefore, the less you write, the better.** 
+
+It might seem counterintuitive, since you'd naturally assume a more detailed skill description yields better results. In reality, the AI is already highly capable on its own, and in this context, "Writing less" simply means only including context the model wouldn't inherently know from its training data. It is recommended that the instruction body of `SKILL.md` file should be under 500 lines, or roughly 5,000 tokens. But what if you really need to write down more than that? Well, remind that Agent Skills is a folder, and you can split the content out into subfolders like `/references`, and the agents will open them only when it actually needs to. 
+
+In the same vein, you can make use of deterministic scripts with the folder `/scripts`. Being way too concise may run the risk of rendering the model generate its "guessy" logic on the fly in according with fragile and ambiguous requests. Simply put, it is more reliable to just tell the model to "run this script in this step". Moreover, this perfectly aligns with the "progressive disclosure" spirit above.
+
+
+This is just a part of a pattern called **Progressive Disclosure**, which is to say, disclose additional information like this only when it is needed.
 
 
 # III. Appendix
