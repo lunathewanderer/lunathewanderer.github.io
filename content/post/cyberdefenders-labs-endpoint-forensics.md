@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-23T14:25:13.054Z
+lastmod: 2026-11-25T13:53:54.313Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -19,13 +19,59 @@ banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale
 
 We are presented with an `.AD1` file. 
 
-Q1. Hello
+**Q1. Which Linux distribution is being used on this machine?**
 
-Q2. Hi
+`/boot` is a directory in the Linux filesystem that contains essential files needed to start the operating system. When you turn on your computer, these files help load the Linux kernel into RAM and begin system initialization.
 
-Q3. Bye
+**Common contents of `/boot`**
 
-...
+| File or directory | Purpose |
+|---|---|
+| `vmlinuz` | The compressed Linux kernel |
+| `initrd.img` or `initramfs.img` | A temporary filesystem containing drivers and tools needed during early startup |
+| `grub/` | GRUB bootloader configuration and supporting files |
+| `System.map` | A mapping between kernel symbols and their memory addresses |
+| `config-*` | Configuration options used when compiling the kernel |
+| `efi/` | A common mount point for the EFI System Partition on UEFI systems |
+
+> **GNU GRUB (GRand Unified Bootloader)** is the standard boot loader package from the **GNU Project** used by most Linux distributions to load the operating system kernel into memory after firmware **(BIOS or UEFI)** initialization. It presents a boot menu so you can choose between operating systems or kernel versions, and supports features like disk encryption, network booting, and command-line rescue tools.
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795611223301-da7326.png)
+
+Go to `/boot` and it is visible that the distro used is `kali`.
+
+`Answer: kali`
+
+**Q2. What is the MD5 hash of the Apache access.log file?**
+
+Apache `access.log` is a log file maintained by the Apache HTTP Server that records the HTTP requests received by a web server. Whenever a user visits a webpage, searches for a product, submits a form, or downloads a file, their browser sends HTTP requests to the server. Apache can record information about each of these requests in `access.log`.
+
+Kali Linux is a Debian-based distro. The default path of that file in Debian is `/var/log/apache2/access.log`.
+
+**Apache's Combined Log Format**
+
+| Field | Value | Meaning |
+|---|---|---|
+| Client IP | `192.168.1.100` | IP address of the requesting client |
+| Remote identity | `-` | Identity information is unavailable |
+| Authenticated user | `-` | No HTTP authentication username recorded |
+| Timestamp | `25/Nov/2026:10:30:45 +0700` | Date, time and timezone of the request |
+| HTTP method | `GET` | Method used to request a resource |
+| Request URI | `/search.php?search=book` | Requested resource and query string |
+| HTTP version | `HTTP/1.1` | HTTP protocol version |
+| Status code | `200` | Result of the HTTP request |
+| Response size | `1450` | Response body size in bytes |
+| Referer | `-` | No referring page recorded |
+| User-Agent | `Mozilla/5.0` | Client-reported browser or software information |
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795614710125-36abdf.png)
+
+However, the log is an empty file. At first, I thought this could be a mistake, but this is intended. The MD5 hash of an empty (0-byte) file is `d41d8cd98f00b204e9800998ecf8427e`
+
+`Answer: d41d8cd98f00b204e9800998ecf8427e`
+
+
+
 
 # 2. The Crime
 - **Date**: xxx xx, 2026
