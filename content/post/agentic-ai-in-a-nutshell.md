@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-25T09:24:50.663Z
+lastmod: 2026-11-25T10:17:52.677Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -22,7 +22,7 @@ However, to understand them is a different thing. Like, what really differs Agen
 > 
 > On the other hand, Agentic AI refers to autonomous AI systems that plan, make decisions, use tools, receive real-emvironment feedback, and execute multi-step reasoning and workflows to pursue open-ended goals with minimal human intervention.
 
-But there is more than meets the eye. And that is the very purpose of this blog.
+But there is more than meets the eye. And that is the very purpose of this blog. To be specific, this blog will only mainly delve into the two concepts: **Context Engineering** and **Harness Engineering**.
 
 # 2. Context Engineering
 
@@ -89,7 +89,7 @@ Nevertheless, the art of writing `SKILL.md` goes beyond those simple tips and tr
 
 Let's say, you have hundreds of **Agent Skills**. Loading all of them into the LLM context window at startup would blow through the token budget before anyone even gets to ask a question, thereby defeating their very meaning in the first place: load a skill only when it deems necessary. 
 
-Therefore, **Agent Skills** use something called **Progressive Disclosure**. Simply put, it discloses additional information only when it is needed. And this concept works in three layers.
+Therefore, **Agent Skills** use something called **Progressive Disclosure**. Simply put, it discloses additional information only when it is needed, and it is what keeps the context clear. This concept works in three layers.
 - The first layer lies in the metadata. At startup, the agent only sees the name and the description of those skills. Even if you have configured many Skills, it only burn a handful of tokens, like reading the Table of Contents.
 - The second layer lies in the instruction body. Only when it selects and aptly activates a skill, that's when it actually reads the rest.
 - The third layer lies in the resources folders, like `/references`, `/scripts`, or `/assets`. They are also touched upon only when the instruction says so.
@@ -125,31 +125,54 @@ Human us possess three types of memory:
 - Episodic Memory, which are experiences *(like that time when you hold your crush's hand for once)*
 - and Procedural Memory, which are skills *(like the muscle memory in how you ride a bike)*
 
-And Agent Architectures are starting to mirror this:
-- Semantic Memory is mapped to knowledge-based RAG
+And at the end of the day, agent architectures are none other than mirrors to us human beings:
+- Semantic Memory is mapped to the abovementioned knowledge-based RAG
 - Episodic Memory is mapped to conversational logs and interaction history, or the context window
-- Procedural Memory is mapped to those `SKILL.md`
+- and Procedural Memory is mapped to those `SKILL.md`
 
-# III. Appendix: Can You Trust This Skill?
+Moreover, they can be interconnected as well as complementary. Considering this architecture:
+- MCP servers connect agents to the outside world (data, APIs).
+- Skills teach agents how to use MCP tools effectively.
+- Agent reasoning enables the selection of appropriate skills and tools.
 
-More often than not, you may stumble upon such Agent Skills on the Internet. They can contain and run executable, as well as access stuff, all of which makes them powerful. But that is also what makes trust so important. Skills, however omnipotent they are, can be flawed security-wise, or just straight up containing prompt injection or malware. Those tidbits of "tool poisoning" or "prompt injection" would be delved into in future posts, but for now, the moral of the story is, treat an Agent Skill like any other dependency, which is to say, don't give it the benefit of the doubt right away, but to read what it does and check what it reaches out to.
+Possibilities abound if you think about it this way.
 
+## 2.3. Can You Trust This Skill?
 
-# References
-- IBM Technology
+More often than not, you may stumble upon such Agent Skills on the Internet. They can contain and run executable, as well as the ability to access stuff, all of which makes them powerful. But, that is also what makes trust so important. Skills, however omnipotent they are, can be flawed security-wise, or just straight up containing prompt injection or malware. Those tidbits of "tool poisoning" or "prompt injection" would be delved into in future posts, but for now, the moral of the story is, treat an Agent Skill like any other dependency, which is to say, don't give it the benefit of the doubt right away, but to read what it does and check what it reaches out to.
 
+# 3. Harness Engineering
 
+## 3.1. A brief history of Agentic Engineering
 
+Flashback to the release of ChatGPT, where the context window is merely about 4000 tokens. Such limited amount of context really stymies us from achieving anything substantial, so we started to emerge on how to recycle that bits of memory, do more with less, and quickly expanded to **Context Engineering** via various techniques such as MCP, RAG, Agent Skills, for the purpose of managing the context window more effectively.
 
+**Context Engineering** has been a major update from the primordial **Prompt Engineering**. But with the advent of technology, it is just the underlying for what to come: **Harness Engineering**
 
+## 3.2. The problem with Context Engineering
 
+## 3.3. Subagents
 
-
-
-More often than not, just one agent is not enough, especially when the task is
+The scope and complexity of modern projects is getting bigger and bigger. And more often than not, just one agent is not enough, especially when the task is
 - too big, that would blow out one's context on its own, like reviewing a code base with thousands of files
 - too parallel, like checking on 20 different functions where each check is independent, and doing them all at once would be 20 times faster
 
 With a view to augment efficiency, the parent agent spawns multiple child agents to do a specific piece of work, each of which has its own fresh context window. They do their given job and they return a result when it is done, which their parent carries on with its context intact.
+
+## 3.4. Loops
+
+## 3.5. Agent Harness
+
+# References
+- [@IBMTechnology](https://www.youtube.com/@IBMTechnology)
+- [SoK: Agentic Skills - Beyond Tool Use in LLM Agents](https://arxiv.org/html/2602.20867v1#S1)
+- [SecRespond: Benchmarking AI Agents for Real-World Post-Compromise Incident Response](https://arxiv.org/html/2607.26791v1#S3)
+
+
+
+
+
+
+
 
 
