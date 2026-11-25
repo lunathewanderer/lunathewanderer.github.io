@@ -4,7 +4,7 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-24T16:52:38.680Z
+lastmod: 2026-11-25T09:24:50.663Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -12,7 +12,7 @@ cover: /images/posts/agentic-ai-in-a-nutshell-c48f71/violetslep-1795439293492-56
 banner: /images/posts/agentic-ai-in-a-nutshell-c48f71/violetslep-1795439293492-5632c1.jpg
 ---
 
-# I. Introduction
+# 1. Introduction
 
 There is no gainsaying the influence of Agentic AI. 
 
@@ -24,7 +24,9 @@ However, to understand them is a different thing. Like, what really differs Agen
 
 But there is more than meets the eye. And that is the very purpose of this blog.
 
-# II. Context Engineering
+# 2. Context Engineering
+
+## 2.1. `AGENTS.md` & `SKILL.md`
 
 Inside every agents, there is a `Model, or Large Language Model (LLM)`, which kinda shapes how the agent behaves. 
 
@@ -38,11 +40,11 @@ It is also of noted that `AGENTS.md` can be nested, meaning that there can be mu
 
 Indeed, `AGENTS.md` is centralized, comprehensive, and persistent. **But what about the knowledge that the agent only needs sometimes and is not neccessarily project-specific?** Like, for example, the agent needs to know how to build a PowerPoint deck, but throughout the whole project, it only need to do it only once or twice. Loading all of that context every single time to agent starts would really clog up the context window for no real reason if the task at hand has nothing to do with PowerPoint slides. 
 
-AI excels at declarative knowledge (knowing facts and descriptions about the world), it struggles with procedural knowledge (knowing how to execute, adapt, and refine actions in real time). When encounting a task that requires a 67-steps workflow to polish a PowerPoint report for example, it basically has two options: 
+While AI excels at **declarative knowledge** (knowing facts and descriptions about the world), it struggles with **procedural knowledge** (knowing how to execute, adapt, and refine actions in real time). When encounting a task that requires a 67-steps workflow to polish a PowerPoint report for example, it basically has two options: 
 - Either somebody needs to prompt it with every single step, all 67 of them, every single time.
 - Or the agent would take a guess at it, which can really go astray from the desired result.
 
-This brings us to **Agent Skills**, the medium via which you add that **Procedural Knowledge** into the agent.
+This brings us to **[Agent Skills](https://agentskills.io/home)**, the medium via which you add that **Procedural Knowledge** into the agent.
 
 Intrinsically, an **Agent Skill** is a folder (named after the skill), and inside that folder, there is a file called `SKILL.md` acts as an entry point, along with whatever scripts , references, assets, or resources the task needs.
 
@@ -100,22 +102,37 @@ It is recommended that the instruction body of `SKILL.md` file should be under 5
 
 In the same vein, you can make use of deterministic scripts with the folder `/scripts`. Being way too concise may run the risk of rendering the model generate its "guessy" logic on the fly in according with fragile and ambiguous requests. Simply put, it is more reliable to just tell the model to "run this script in this step" rather than having it to make probabilistic decisions. Moreover, this perfectly aligns with that **Progressive Disclosure** spirit right above.
 
-
-
-
-## MCP & A2A
+## 2.2. Beyond Agent Skills
 
 With `AGENTS.md` and `SKILL.md` in hand, the agent now knows what to do, **but doing things also means reaching outside the box**. As a matter of course, agents need to reach all kinds of external variables, such as APIs, databases, developer tools, SaaS platforms, so on and so forth, all of which with different variants of interfaces and methodologies for connection. This is where `MCP` comes in handy.
 
 > `Model Context Protocol (MCP)` is an open standard that lets AI applications connect to external data sources, tools, and software systems in a uniform manner. It comes with something called an MCP server, which wraps up an external tool or data source in a standard interface; and now any agent (that can speak MCP) can now communicate with that tool.
 
-`MCP` covers agents talking to tools and data, **but what about agents talking to other agents?** Introducing `Agent2Agent (A2A)`, an open standard that lets independent AI agents discover each other, negotiate tasks, and collaborate across different frameworks and vendors. 
+`MCP` covers agents talking to tools and data, **but what about agents talking to other agents?** 
 
-For example, we have two agents: one handling procurement and one finance. The procurement agent needs to negotiate a contract, and it needs the finance agent's approval. With A2A, they establish something called "Agent Card" - basically a description of what the agent does and how to talk to it, via with the agents can communicate with each other.
+> `Agent2Agent (A2A)` is an open protocol that enables independently developed AI agents to communicate and collaborate across different platforms and frameworks. An agent can publish an *Agent Card* that describes its capabilities, how to contact it, and what authentication it requires. A requesting agent can use this information to delegate work. The receiving agent can reply directly or create a task whose progress can be tracked and whose outputs, such as documents or structured data, can be returned as artifacts. This common interface allows agents to coordinate without sharing their underlying models, tools, or internal state.
+
+Another technique to provide knowledge to AI Agents is through ` Retrieval-Augmented Generation (RAG)`, an AI framework that connects large language models (LLMs) to **external, declarative knowledge** sources so they can pull relevant facts before generating an answer. 
+
+When a user submits a query, the system searches an external knowledge source by performing a semantic search. Those matching chunks are returned to the language model as additional context. The model uses this context to generate its response without updating its parameters. 
+
+As a result, `RAG` can improve factual accuracy and give the model access to **declarative knowledge** that was unavailable during training, though its effectiveness depends on the relevance and reliability of the retrieved material.
+
+This brings us to the last point I want to make in this section: **context engineering is analogous to cognitive science**. 
+
+Human us possess three types of memory: 
+- Semantic Memory, which are facts *(like I'll definitely be lonely this autumn)*
+- Episodic Memory, which are experiences *(like that time when you hold your crush's hand for once)*
+- and Procedural Memory, which are skills *(like the muscle memory in how you ride a bike)*
+
+And Agent Architectures are starting to mirror this:
+- Semantic Memory is mapped to knowledge-based RAG
+- Episodic Memory is mapped to conversational logs and interaction history, or the context window
+- Procedural Memory is mapped to those `SKILL.md`
 
 # III. Appendix: Can You Trust This Skill?
 
-More often than not, you may stumble upon such Agent Skills on the Internet. They can contain and run executable, as well as access stuff. Indeed, they are powerful. However, they can be flawed security-wise, or just straight up containing prompt injection or malware. The tidbits of "AI poisoning" would be delved into in future posts, but for now, the moral of the story is, treat an Agent Skill like any other dependency, which is to say, don't give it the benefit of the doubt right away, but to read what it does and check what it reaches out to.
+More often than not, you may stumble upon such Agent Skills on the Internet. They can contain and run executable, as well as access stuff, all of which makes them powerful. But that is also what makes trust so important. Skills, however omnipotent they are, can be flawed security-wise, or just straight up containing prompt injection or malware. Those tidbits of "tool poisoning" or "prompt injection" would be delved into in future posts, but for now, the moral of the story is, treat an Agent Skill like any other dependency, which is to say, don't give it the benefit of the doubt right away, but to read what it does and check what it reaches out to.
 
 
 # References
