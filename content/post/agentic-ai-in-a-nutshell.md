@@ -1,10 +1,10 @@
 ---
-title: Agentic AI, in a nutshell
+title: Context Engineering vs. Harness Engineering, in a nutshell
 draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-25T10:17:52.677Z
+lastmod: 2026-11-25T10:20:37.302Z
 description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
@@ -22,7 +22,9 @@ However, to understand them is a different thing. Like, what really differs Agen
 > 
 > On the other hand, Agentic AI refers to autonomous AI systems that plan, make decisions, use tools, receive real-emvironment feedback, and execute multi-step reasoning and workflows to pursue open-ended goals with minimal human intervention.
 
-But there is more than meets the eye. And that is the very purpose of this blog. To be specific, this blog will only mainly delve into the two concepts: **Context Engineering** and **Harness Engineering**.
+But there is more than meets the eye. And that is the very purpose of this blog. 
+
+To be specific, this blog will only mainly delve into the two concepts: **Context Engineering** and **Harness Engineering**.
 
 # 2. Context Engineering
 
@@ -163,7 +165,7 @@ With a view to augment efficiency, the parent agent spawns multiple child agents
 
 ## 3.5. Agent Harness
 
-# References
+# 4. References
 - [@IBMTechnology](https://www.youtube.com/@IBMTechnology)
 - [SoK: Agentic Skills - Beyond Tool Use in LLM Agents](https://arxiv.org/html/2602.20867v1#S1)
 - [SecRespond: Benchmarking AI Agents for Real-World Post-Compromise Incident Response](https://arxiv.org/html/2607.26791v1#S3)
