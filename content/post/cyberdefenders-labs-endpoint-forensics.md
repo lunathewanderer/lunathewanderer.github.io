@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-25T13:53:54.313Z
+lastmod: 2026-11-25T14:00:59.619Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -64,12 +64,21 @@ Kali Linux is a Debian-based distro. The default path of that file in Debian is 
 | Referer | `-` | No referring page recorded |
 | User-Agent | `Mozilla/5.0` | Client-reported browser or software information |
 
+**`access.log` vs. `error.log`**
+
+| Feature | `access.log` | `error.log` |
+|---|---|---|
+| Purpose | Records HTTP request activity | Records server errors and diagnostic messages |
+| Evidence | IP addresses, URIs, timestamps, status codes | Errors, warnings, configuration problems |
+| Forensic value | Reconstructing web activity | Understanding server behavior and failures |
+
 ![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795614710125-36abdf.png)
 
 However, the log is an empty file. At first, I thought this could be a mistake, but this is intended. The MD5 hash of an empty (0-byte) file is `d41d8cd98f00b204e9800998ecf8427e`
 
 `Answer: d41d8cd98f00b204e9800998ecf8427e`
 
+**Q3. It is suspected that a credential dumping tool was downloaded. What is the name of the downloaded file?**
 
 
 
