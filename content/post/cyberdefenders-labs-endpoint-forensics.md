@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-25T16:00:22.241Z
+lastmod: 2026-11-25T16:15:44.128Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -201,6 +201,9 @@ Nov 25 10:35:12 ubuntu sudo: alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; C
 > - Timelines of user sessions.
 
 ![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795621520589-f868db.png)
+
+daemon
+ad1
 
 `Answer: postgres`
 
