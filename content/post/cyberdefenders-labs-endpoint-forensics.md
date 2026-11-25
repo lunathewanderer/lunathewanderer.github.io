@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-25T14:00:59.619Z
+lastmod: 2026-11-25T15:56:56.623Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -74,13 +74,143 @@ Kali Linux is a Debian-based distro. The default path of that file in Debian is 
 
 ![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795614710125-36abdf.png)
 
-However, the log is an empty file. At first, I thought this could be a mistake, but this is intended. The MD5 hash of an empty (0-byte) file is `d41d8cd98f00b204e9800998ecf8427e`
+However, the log is an empty file. At first, I thought this could be a mistake, but this is actually intended and pretty much normal (and may suggest that Apache was never run on this system). It turns out that an empty (0-byte) file can have the MD5 hash, which is `d41d8cd98f00b204e9800998ecf8427e`
 
 `Answer: d41d8cd98f00b204e9800998ecf8427e`
 
 **Q3. It is suspected that a credential dumping tool was downloaded. What is the name of the downloaded file?**
 
+Downloads are often stored in the user's default download directory, which is `/root/Downloads`
 
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795616222381-ab299d.png)
+
+`Answer: mimikatz_trunk.zip`
+
+**Q4. A super-secret file was created. What is the absolute path to this file?**
+
+`.bash_history` is a hidden file in Linux that stores the history of commands entered by a user through the Bash shell (Bourne Again Shell). When a user executes commands to navigate directories, install software, download files, or modify system configurations, those commands may be recorded in `.bash_history`
+
+| User | Location |
+|---|---|
+| Current user | `~/.bash_history` |
+| Regular user (e.g., alice) | `/home/alice/.bash_history` |
+| Root user | `/root/.bash_history` |
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795616625950-8aaea2.png)
+
+`Answer: /root/Desktop/SuperSecretFile.txt`
+
+**Q5. What program used the file `didyouthinkwedmakeiteasy.jpg` during its execution?**
+
+Keep on checking the bash history
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795616668782-553e77.png)
+
+`Answer: binwalk`
+
+**Q6. What is the third goal from the checklist Karen created?**
+
+Users often store checklists and notes on their desktop, so `/root/Desktop` should be a good starting point
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795617457139-bb90bb.png)
+
+`Answer: profit`
+
+**Q7. How many times was Apache run?**
+
+The log files in /var/log/apache2/ will show evidence of Apache's activity. Since the files are empty, it might indicate that Apache was not used.
+
+`Answer: 0`
+
+**Q8. This machine was used to launch an attack on another. Which file contains the evidence for this?**
+
+There is an unusual image in `/root`. The image shows a command prompt with elevated privileges, likely pointing to an attack scenario.
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795618856052-d04af8.png)
+
+`Answer: irZLAohL.jpeg`
+
+**Q9. It is believed that Karen was taunting a fellow computer expert through a bash script within the Documents directory. Who was the expert that Karen was taunting?**
+
+Wandering around, `/root/Documents/myfirsthack/firstscript_fixed` contains the information in the question.
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795621282434-b9e98f.png)
+
+`Answer: Young`
+
+**Q10. A user executed the su command to gain root access multiple times at 11:26. Who was the user?**
+
+To find out who switched to root, we should examine the system's authentication logs. 
+
+> `/var/log/auth.log` is a Debian Linux log file that records authentication and authorization-related activities.
+
+**What does `auth.log` record?**
+
+| Activity | Information recorded |
+|---|---|
+| SSH authentication | Successful and failed remote login attempts |
+| `sudo` | Commands requested with elevated privileges |
+| `su` | Attempts to switch user accounts |
+| PAM | Authentication events and session activities |
+| User management | Account creation and modification events |
+| Session management | Opening and closing user sessions |
+| Password changes | Events associated with password modifications |
+
+> **PAM (Pluggable Authentication Modules)** is a Linux framework that manages authentication for applications such as SSH, sudo, and su.
+
+**SSH Log Format**
+
+```
+Nov 25 10:30:45 ubuntu sshd[2145]: Failed password for root from 192.168.1.50 port 48216 ssh2
+Nov 25 10:31:02 ubuntu sshd[2145]: Accepted password for alice from 192.168.1.50 port 48216 ssh2
+```
+
+| Field | Meaning |
+|---|---|
+| `Nov 25 10:30:45` | Timestamp |
+| `ubuntu` | Hostname |
+| `sshd` | SSH server process |
+| `2145` | Process ID (PID) |
+| `Failed password` | Unsuccessful authentication |
+| `root` | Target username |
+| `192.168.1.50` | Source IP address |
+| `48216` | Client's source port |
+| `ssh2` | SSH protocol version |
+
+**`sudo` Log Format**
+
+```
+Nov 25 10:35:12 ubuntu sudo: alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; COMMAND=/usr/bin/whoami
+```
+
+| Field | Meaning |
+|---|---|
+| `alice` | User who invoked `sudo` |
+| `TTY=pts/0` | Terminal associated with the activity |
+| `PWD=/home/alice` | Working directory |
+| `USER=root` | Account under which the command is requested |
+| `COMMAND=/usr/bin/whoami` | Requested command |
+
+> That said, we can analyze `auth.log` to identify:
+> - SSH brute-force attempts.
+> - Unauthorized successful authentication.
+> - Suspicious account creation.
+> - Privilege escalation attempts.
+> - Suspicious use of `sudo`.
+> - Source IP addresses associated with login attempts.
+> - Timelines of user sessions.
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795621520589-f868db.png)
+
+`Answer: postgres`
+
+**Q11. Based on the bash history, what is the current working directory?**
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795621446145-38223b.png)
+
+The last `cd` was directed to `/root/Documents/myfirsthack/`
+
+`Answer: /root/Documents/myfirsthack/`
 
 # 2. The Crime
 - **Date**: xxx xx, 2026
