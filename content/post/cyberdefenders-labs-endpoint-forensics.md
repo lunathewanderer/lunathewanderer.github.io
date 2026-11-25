@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-25T15:56:56.623Z
+lastmod: 2026-11-25T16:00:22.241Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
