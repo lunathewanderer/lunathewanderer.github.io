@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-25T16:15:44.128Z
+lastmod: 2026-11-26T09:37:43.265Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -48,7 +48,7 @@ Apache `access.log` is a log file maintained by the Apache HTTP Server that reco
 
 Kali Linux is a Debian-based distro. The default path of that file in Debian is `/var/log/apache2/access.log`.
 
-**Apache's Combined Log Format**
+**Apache's Combined Log Format Example**
 
 | Field | Value | Meaning |
 |---|---|---|
@@ -146,52 +146,6 @@ To find out who switched to root, we should examine the system's authentication 
 
 **What does `auth.log` record?**
 
-| Activity | Information recorded |
-|---|---|
-| SSH authentication | Successful and failed remote login attempts |
-| `sudo` | Commands requested with elevated privileges |
-| `su` | Attempts to switch user accounts |
-| PAM | Authentication events and session activities |
-| User management | Account creation and modification events |
-| Session management | Opening and closing user sessions |
-| Password changes | Events associated with password modifications |
-
-> **PAM (Pluggable Authentication Modules)** is a Linux framework that manages authentication for applications such as SSH, sudo, and su.
-
-**SSH Log Format**
-
-```
-Nov 25 10:30:45 ubuntu sshd[2145]: Failed password for root from 192.168.1.50 port 48216 ssh2
-Nov 25 10:31:02 ubuntu sshd[2145]: Accepted password for alice from 192.168.1.50 port 48216 ssh2
-```
-
-| Field | Meaning |
-|---|---|
-| `Nov 25 10:30:45` | Timestamp |
-| `ubuntu` | Hostname |
-| `sshd` | SSH server process |
-| `2145` | Process ID (PID) |
-| `Failed password` | Unsuccessful authentication |
-| `root` | Target username |
-| `192.168.1.50` | Source IP address |
-| `48216` | Client's source port |
-| `ssh2` | SSH protocol version |
-
-**`sudo` Log Format**
-
-```
-Nov 25 10:35:12 ubuntu sudo: alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; COMMAND=/usr/bin/whoami
-```
-
-| Field | Meaning |
-|---|---|
-| `alice` | User who invoked `sudo` |
-| `TTY=pts/0` | Terminal associated with the activity |
-| `PWD=/home/alice` | Working directory |
-| `USER=root` | Account under which the command is requested |
-| `COMMAND=/usr/bin/whoami` | Requested command |
-
-> That said, we can analyze `auth.log` to identify:
 > - SSH brute-force attempts.
 > - Unauthorized successful authentication.
 > - Suspicious account creation.
@@ -202,8 +156,11 @@ Nov 25 10:35:12 ubuntu sudo: alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; C
 
 ![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795621520589-f868db.png)
 
-daemon
-ad1
+In `auth.log`, there are messages around 11:26 about "successful `su` for `postgres` by `root`"
+
+**Sidenote**
+> - `daemon.log` records the activity, status, and errors of background services (daemons) that run without direct user interaction.
+> - `dpkg.log` records a chronological history of every low-level package action - including installations, upgrades, configurations, and removals (whether triggered via apt, apt-get, dpkg, or GUI software centers).
 
 `Answer: postgres`
 
