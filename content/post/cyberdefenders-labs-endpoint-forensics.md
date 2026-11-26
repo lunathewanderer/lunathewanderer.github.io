@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-26T09:37:43.265Z
+lastmod: 2026-11-26T10:22:02.012Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -196,6 +196,10 @@ The last `cd` was directed to `/root/Documents/myfirsthack/`
 - **Date**: xxx xx, 2026
 - **Category**: Endpoint > Disk Forensics
 - **Tools used**: FTK Imager, SQLite Viewer, Strings, CyberChef
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795688431877-3b1d93.png)
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795688466630-c5c8fb.png)
 
 # 7. KrakenKeylogger
 - **Date**: xxx xx, 2026
