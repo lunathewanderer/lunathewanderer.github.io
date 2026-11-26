@@ -7,7 +7,7 @@ tags:
   - Endpoint Forensics
 categories:
   - Writeup
-lastmod: 2026-11-26T10:22:02.012Z
+lastmod: 2026-11-26T16:38:18.522Z
 cover: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 banner: /images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/emilia-scale2-1795443901781-2c6fe3.jpg
 ---
@@ -197,9 +197,24 @@ The last `cd` was directed to `/root/Documents/myfirsthack/`
 - **Category**: Endpoint > Disk Forensics
 - **Tools used**: FTK Imager, SQLite Viewer, Strings, CyberChef
 
+**Q1. What is the MD5 hash of the potentially malicious EXE file the user downloaded?**
+
+Navigate to `/Downloads`
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795705481382-615299.png)
+
+
+
 ![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795688431877-3b1d93.png)
 
 ![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795688466630-c5c8fb.png)
+
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795699521295-15d038.png)
+
+![image](/images/posts/cyberdefenders-labs-endpoint-forensics-2a10be/image-1795711014996-5a0f89.png)
+
+
 
 # 7. KrakenKeylogger
 - **Date**: xxx xx, 2026
