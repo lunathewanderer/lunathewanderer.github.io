@@ -7,7 +7,7 @@ tags:
   - Threat Intel
 categories:
   - Writeup
-lastmod: 2026-11-27T04:37:02.801Z
+lastmod: 2026-11-27T07:58:52.666Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
@@ -1795,9 +1795,49 @@ The question asks for the threat actor, so I naturally went to `Malpedia`.
 `Answer: Lazarus`
 
 ## 7. Tusk Infostealer
-- **Date**: Nov xx, 2026
+- **Date**: Nov 27, 2026
 - **Difficulty**: Easy
 - **Category**: Threat Intel
+
+**Q1. In KB, what is the size of the malicious file?**
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795766064610-05eef7.png)
+
+`Answer: 921.36`
+
+From the **Q2.** to **Q9.**, the answer can not be found in VirusTotal, bur rather on a [Kaspersky Report](https://securelist.com/tusk-infostealers-campaign/113367/) about the Tusk Infostealer campaign. Simply read to comprehend the article and you can answer the question easily.
+
+**Q2. What word do the threat actors use in log messages to describe their victims, based on the name of an ancient hunted creature?**
+
+`Answer: Mammoth`
+
+**Q3. The threat actor set up a malicious website to mimic a platform designed for creating and managing decentralized autonomous organizations (DAOs) on the MultiversX blockchain `xxxxme.io`. What is the name of the malicious website the attacker created to simulate this platform?**
+
+`Answer: xxxxme.io`
+
+**Q4. Which cloud storage service did the campaign operators use to host malware samples for both macOS and Windows OS versions?**
+
+`Answer: dropbox`
+
+**Q5. The malicious executable contains a configuration file that includes base64-encoded URLs and a password used for archived data decompression, enabling the download of second-stage payloads. What is the password for decompression found in this configuration file?**
+
+`Answer: newfile2024`
+
+**Q6. What is the name of the function responsible for retrieving the field archive from the configuration file?**
+
+`Answer: downloadAndExtractArchive`
+
+**Q7. In the third sub-campaign carried out by the operators, the attacker mimicked an AI translator project. What is the name of the legitimate translator, and what is the name of the malicious translator created by the attackers?**
+
+`Answer: yoxx.ai, voxxx.io`
+
+**Q8. The downloader is tasked with delivering additional malware samples to the victim’s machine, primarily infostealers like StealC and Danabot. What are the IP addresses of the StealC C2 servers used in the campaign?**
+
+`Answer: 46.8.xxx.xxx, 23.94.xxx.xxx`
+
+**Q9. What is the address of the Ethereum cryptocurrency wallet used in this campaign?**
+
+`Answer: 0xaf0362e215Ff4e004F3xxxxxxxxxxxxxxxxxxxxx`
 
 ## 8. Lespion
 - **Date**: Nov xx, 2026
