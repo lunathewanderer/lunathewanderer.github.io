@@ -4,8 +4,8 @@ draft: false
 date: 2026-11-23T13:04:38.420Z
 categories:
   - Learning
-lastmod: 2026-11-25T10:20:37.302Z
-description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero, and hide from the sun / I'll love you forever where we'll have some fun ♫⋆｡♪ ₊˚♬ ﾟ."
+lastmod: 2026-11-27T15:49:02.428Z
+description: "♫⋆｡♪ ₊˚♬ ﾟ Let's go below zero and hide from the sun ♫⋆｡♪ ₊˚♬ ﾟ."
 tags:
   - AI/ML
 cover: /images/posts/agentic-ai-in-a-nutshell-c48f71/violetslep-1795439293492-5632c1.jpg
@@ -153,6 +153,10 @@ Flashback to the release of ChatGPT, where the context window is merely about 40
 
 ## 3.2. The problem with Context Engineering
 
+Context engineering helps an AI agent work within a limited context window by replacing older conversation history and tool outputs with shorter summaries. This process, known as context compaction, can omit details that seem minor at the time but become important later, such as an exception to a requirement or the reason an earlier approach failed. Repeated compaction can make those details increasingly difficult to recover, and the result ends up going astray from the intended.
+
+Harness engineering addresses this risk by designing the software around the model to preserve important information outside the context window. For example, the harness can save decisions, exact requirements, and test results in persistent records and retrieve them when needed. This lets the agent keep its working context compact while retaining access to the evidence it needs to continue reliably.
+
 ## 3.3. Subagents
 
 The scope and complexity of modern projects is getting bigger and bigger. And more often than not, just one agent is not enough, especially when the task is
@@ -169,7 +173,7 @@ With a view to augment efficiency, the parent agent spawns multiple child agents
 - [@IBMTechnology](https://www.youtube.com/@IBMTechnology)
 - [SoK: Agentic Skills - Beyond Tool Use in LLM Agents](https://arxiv.org/html/2602.20867v1#S1)
 - [SecRespond: Benchmarking AI Agents for Real-World Post-Compromise Incident Response](https://arxiv.org/html/2607.26791v1#S3)
-
+- [Harness design for long-running application development](https://www.anthropic.com/research/harness-design-long-running-apps)
 
 
 
