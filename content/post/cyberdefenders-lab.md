@@ -7,7 +7,7 @@ tags:
   - Threat Intel
 categories:
   - Writeup
-lastmod: 2026-11-23T13:00:22.391Z
+lastmod: 2026-11-27T04:37:02.801Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
@@ -1238,11 +1238,35 @@ The download of the malware was listened in the second frame, where the protocol
 
 **Q11. When was the involved malware first submitted to VirusTotal for analysis? Format: YYYY-MM-DD**
 
+As we can see, the TCP stream 4 is [the malware](https://en.wikipedia.org/wiki/DOS_MZ_executable) which the attacker sent to the victim.
+
+We can Save as > Raw and `md5sum` the file to get the hash `14a09a48ad23fe0ea5a180bee8cb750a` for VirusTotal
+
+`Answer: 2007-06-27`
+
 **Q12. What is the key used to encode the shellcode?**
+
+In TCP stream 1, when display the shellcode as Raw, we can see a large chunk of `9090909090...` This may be an indication of `XOR encoding`
+
+Disassemble the shellcode with `scdbg` or `sctest` reveals that `0x99` is the XOR key.
+
+`Answer: 0x99`
 
 **Q13. What is the port number the shellcode binds to?**
 
+The bound port can also be analyzed using `scdbg`.
+
+`Answer: 1957`
+
 **Q14. The shellcode used a specific technique to determine its location in memory. What is the OS file being queried during this process?**
+
+Disassembling the shellcode reveals that it uses multiple calls of `GetProcAddress()`
+
+> [GetProcAddress](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress) is a core Windows API function exported by `kernel32.dll` that retrieves the memory address of an exported function or variable from a specified Dynamic-Link Library (DLL) at runtime.
+
+It points to the very `kernel32.dll`, and by proxy exposing the address of the shellcode
+
+`Answer: kernel32.dll`
 
 ## 11. Lockdown
 - **Date**: Nov xx, 2026
