@@ -4,13 +4,13 @@ draft: false
 date: 2026-11-27T14:45:27.400Z
 categories:
   - Writeup
-lastmod: 2026-11-27T15:02:41.505Z
+lastmod: 2026-11-27T15:22:57.144Z
 description: 'Nỗ lực ở nơi không ai đoái hoài, rồi tỏa sáng ở nơi vạn người chú ý'
 tags:
   - Network Forensics
   - Endpoint Forensics
-cover: /images/posts/fixfixfix-e674c0/frieren-1795791325893-8fe349.jpg
-banner: /images/posts/fixfixfix-e674c0/frieren-1795791325893-8fe349.jpg
+cover: /images/posts/fixfixfix-e674c0/frie2-1795792930520-7cb2c8.jpg
+banner: /images/posts/fixfixfix-e674c0/frie2-1795792930520-7cb2c8.jpg
 ---
 
 > **Author: nh0kt1g3r12**
@@ -26,6 +26,8 @@ banner: /images/posts/fixfixfix-e674c0/frieren-1795791325893-8fe349.jpg
 > *The device is isolated. Please investigate:*
 
 **Q1: What initial access technique was used to lure the user to deploy the malware?**
+
+`Answer: ClickFix`
 
 **Q2: What is the exact date and time of initial compromise?**
 
