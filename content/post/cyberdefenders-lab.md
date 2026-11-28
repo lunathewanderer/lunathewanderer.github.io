@@ -7,7 +7,7 @@ tags:
   - Threat Intel
 categories:
   - Writeup
-lastmod: 2026-11-28T03:35:06.650Z
+lastmod: 2026-11-28T04:23:38.064Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
@@ -1880,13 +1880,33 @@ We are presented with a `Github.txt`, `office.jpg`, and `Webcam.png`
 
 **Q1. What API key did the insider add to his GitHub repositories?**
 
+Navigating to his repositories, you can notice that all of them are forked from well-known libraries. Except for one, which is his "Custom Login Page".
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795838958508-397600.png)
+
+Within it, there are two files: `Login Page.js` and `fsociety.js`. The latter is only filler, but the former is more informative.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795839190213-51ca46.png)
+
+In the very first line is the API key.
+
 `Answer: aJFRaLHjMXvYZgxxxxxxxxxxxxxxxx`
 
 **Q2. What plaintext password did the insider add to his GitHub repositories?**
 
+Scrolling down a little bit, you can see he stores his password in a Base64.
+
 `Answer: PicassoBaguette99`
 
 **Q3. What cryptocurrency mining tool did the insider use?**
+
+Back to his forked repositories, we can see that he has forked a tool called `XMRig` with a description: "RandomX, CryptoNight, AstroBWT and Argon2 CPU/GPU miner" - indeed seemingly pertaining to a cryptocurrency mining tool.
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795839273554-b66735.png)
+
+And according to Malpedia,
+
+![image](/images/posts/cyberdefenders-lab-2f7e08/image-1795839773592-9b78a6.png)
 
 `Answer: XMRig`
 
