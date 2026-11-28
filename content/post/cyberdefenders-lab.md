@@ -7,7 +7,7 @@ tags:
   - Threat Intel
 categories:
   - Writeup
-lastmod: 2026-11-27T07:58:52.666Z
+lastmod: 2026-11-28T03:35:06.650Z
 description: Nothing is that serious, so please choose peace.
 cover: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
 banner: https://i.pinimg.com/1200x/a3/8c/bd/a38cbd1d6d6a1c4519f204926e5eca9d.jpg
@@ -1276,6 +1276,38 @@ It points to the very `kernel32.dll`, and by proxy exposing the address of the s
 - **Date**: Nov xx, 2026
 - **Category**: Network Forensics
 
+**Q1. By identifying the C2 IP, we can block traffic to and from this IP, helping to contain the breach and prevent further data exfiltration or command execution. Can you provide the IP of the C2 server that communicated with our server?**
+
+`Answer: 146.190.21.92`
+
+**Q2. Initial entry points are critical to trace the attack vector back. What is the port number of the service the adversary exploited?**
+
+`Answer: 61616`
+
+**Q3. Following up on the previous question, what is the name of the service found to be vulnerable?**
+
+`Answer: Apache ActiveMQ`
+
+**Q4. The attacker's infrastructure often involves multiple components. What is the IP of the second C2 server?**
+
+`Answer: 128.199.52.72`
+
+**Q5. Attackers usually leave traces on the disk. What is the name of the reverse shell executable dropped on the server?**
+
+`Answer: docker`
+
+**Q6. What Java class was invoked by the XML file to run the exploit?**
+
+`Answer: java.lang.ProcessBuilder`
+
+**Q7. To better understand the specific security flaw exploited, can you identify the CVE identifier associated with this vulnerability?**
+
+`Answer: CVE-2023-46604`
+
+**Q8. The vendor addressed the vulnerability by adding a validation step to ensure that only valid Throwable classes can be instantiated, preventing exploitation. In which Java class and method was this validation step added?**
+
+`Answer: BaseDataStreamMarshaller.createThrowable`
+
 ## 13. PacketMaze
 - **Date**: Nov xx, 2026
 - **Category**: Network Forensics
@@ -1843,6 +1875,44 @@ From the **Q2.** to **Q9.**, the answer can not be found in VirusTotal, bur rath
 - **Date**: Nov xx, 2026
 - **Difficulty**: Easy
 - **Category**: Threat Intel
+
+We are presented with a `Github.txt`, `office.jpg`, and `Webcam.png`
+
+**Q1. What API key did the insider add to his GitHub repositories?**
+
+`Answer: aJFRaLHjMXvYZgxxxxxxxxxxxxxxxx`
+
+**Q2. What plaintext password did the insider add to his GitHub repositories?**
+
+`Answer: PicassoBaguette99`
+
+**Q3. What cryptocurrency mining tool did the insider use?**
+
+`Answer: XMRig`
+
+**Q4. On which gaming website did the insider have an account?**
+
+`Answer: Steam`
+
+**Q5. What is the link to the insider Instagram profile?**
+
+`Answer: https://www.instagram.com/emarseille99/`
+
+**Q6. Which country did the insider visit on her holiday?**
+
+`Answer: Singapore`
+
+**Q7. Which city does the insider family live in?**
+
+`Answer: Dubai`
+
+**Q8. You have been provided with a picture of the building in which the company has an office. Which city is the company located in?**
+
+`Answer: Birmingham`
+
+**Q9. With the intel, you have provided, our ground surveillance unit is now overlooking the person of interest suspected address. They saw them leaving their apartment and followed them to the airport. Their plane took off and landed in another country. Our intelligence team spotted the target with this IP camera. Which state is this camera in?**
+
+`Answer: Indiana`
 
 ## 9. BRabbit
 - **Date**: Nov xx, 2026
